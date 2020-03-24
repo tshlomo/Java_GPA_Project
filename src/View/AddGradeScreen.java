@@ -16,12 +16,13 @@ public class AddGradeScreen extends JFrame {
     public static void addGradeScreen() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-
                 new AddGradeScreen();
-
+                //Linking data to ComboBoxes
+                String[] year = {"A","B","C"};
+                String[] semester ={"A","B","C"};
                 //Setting the screen properties
                 addGradeScreen.setLayout(null);
-                addGradeScreen.setSize(900,400);
+                addGradeScreen.setSize(400,400);
                 addGradeScreen.setLocationRelativeTo(null);
                 addGradeScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 addGradeScreen.setVisible(true);
@@ -33,40 +34,50 @@ public class AddGradeScreen extends JFrame {
                 JLabel creditsLabel = new JLabel("Credits");
                 JLabel precentageLabel1 = new JLabel("%");
                 JLabel precentageLabel2 = new JLabel("%");
+                JLabel yearLabel = new JLabel("Year");
+                JLabel semesterLabel = new JLabel("Semester");
 
                 //Creating ComboBox
                 JComboBox courseComboBox = new JComboBox();
+                JComboBox yearComboBox = new JComboBox(year);
+                JComboBox semesterComboBox = new JComboBox(semester);
 
                 //creating text fields
                 JTextField textQuiz = new JTextField();
                 JTextField textFinalTest = new JTextField();
                 JTextField textCredits = new JTextField();
-                JTextField textPrecentage1 = new JTextField();
-                JTextField textPrecentage2 = new JTextField();
+                JTextField textPercentage1 = new JTextField();
+                JTextField textPercentage2 = new JTextField();
 
                 //creating buttons
                 JButton btnAdd = new JButton("Add");
                 JButton btnDelete = new JButton("Delete");
 
                 //labels dimensions
-                courseLabel.setBounds(20,20,100,25);
-                quizLabel.setBounds(20,50,100,25);
-                finalTestLabel.setBounds(20,80,100,25);
-                creditsLabel.setBounds(20,110,100,25);
-                precentageLabel1.setBounds(280,50,40,25);
-                precentageLabel2.setBounds(280,80,40,25);
+                yearLabel.setBounds(20,20,100,25);
+                semesterLabel.setBounds(20,50,100,25);
+                courseLabel.setBounds(20,80,100,25);
+                quizLabel.setBounds(20,110,100,25);
+                finalTestLabel.setBounds(20,140,100,25);
+                creditsLabel.setBounds(20,170,100,25);
+                precentageLabel1.setBounds(280,110,40,25);
+                precentageLabel2.setBounds(280,140,40,25);
 
                 //text fields dimensions
-                courseComboBox.setBounds(120,20,100,25);
-                textQuiz.setBounds(120,50,100,25);
-                textFinalTest.setBounds(120,80,100,25);
-                textCredits.setBounds(120,110,100,25);
-                textPrecentage1.setBounds(240,50,40,25);
-                textPrecentage2.setBounds(240,80,40,25);
+                courseComboBox.setBounds(120,80,100,25);
+                textQuiz.setBounds(120,110,100,25);
+                textFinalTest.setBounds(120,140,100,25);
+                textCredits.setBounds(120,170,100,25);
+                textPercentage1.setBounds(240,110,40,25);
+                textPercentage2.setBounds(240,140,40,25);
 
                 //buttons dimensions
-                btnAdd.setBounds(20,150,100,25);
-                btnDelete.setBounds(130,150,100,25);
+                btnAdd.setBounds(20,210,100,25);
+                btnDelete.setBounds(130,210,100,25);
+
+                //ComboBox dimensions
+                yearComboBox.setBounds(120,20,100,25);
+                semesterComboBox.setBounds(120,50,100,25);
 
                 //Adding components to the frame
                 addGradeScreen.add(courseLabel);
@@ -81,8 +92,12 @@ public class AddGradeScreen extends JFrame {
                 addGradeScreen.add(btnDelete);
                 addGradeScreen.add(precentageLabel1);
                 addGradeScreen.add(precentageLabel2);
-                addGradeScreen.add(textPrecentage1);
-                addGradeScreen.add(textPrecentage2);
+                addGradeScreen.add(textPercentage1);
+                addGradeScreen.add(textPercentage2);
+                addGradeScreen.add(yearComboBox);
+                addGradeScreen.add(semesterComboBox);
+                addGradeScreen.add(yearLabel);
+                addGradeScreen.add(semesterLabel);
             }
         });
     }
