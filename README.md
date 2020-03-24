@@ -1,1 +1,1 @@
-# GPA Ignore "out/production/GPA" IDK why it pushed it
+# Ignore "out/production/GPA" IDK why it pushed it
