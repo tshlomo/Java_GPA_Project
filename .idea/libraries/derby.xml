@@ -1,10 +1,13 @@
 <component name="libraryTable">
   <library name="derby">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/db-derby-10.15.2.0-bin/lib" />
+      <root url="jar://C:/Program Files/Java/jdk-14/db/lib/derbyclient.jar!/" />
+      <root url="jar://C:/Program Files/Java/jdk-14/db/lib/derbytools.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-api-2.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-core-2.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-1.2-api-2.13.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/db-derby-10.15.2.0-bin/lib" recursive="false" />
   </library>
 </component>
