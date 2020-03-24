@@ -73,7 +73,6 @@ public class AddGradeScreen extends JFrame {
 
                 //buttons dimensions
                 btnAdd.setBounds(20,210,100,25);
-                btnDelete.setBounds(130,210,100,25);
 
                 //ComboBox dimensions
                 yearComboBox.setBounds(120,20,100,25);
@@ -89,7 +88,6 @@ public class AddGradeScreen extends JFrame {
                 addGradeScreen.add(textFinalTest);
                 addGradeScreen.add(textCredits);
                 addGradeScreen.add(btnAdd);
-                addGradeScreen.add(btnDelete);
                 addGradeScreen.add(precentageLabel1);
                 addGradeScreen.add(precentageLabel2);
                 addGradeScreen.add(textPercentage1);
