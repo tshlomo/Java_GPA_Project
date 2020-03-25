@@ -7,28 +7,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
+import org.apache.logging.log4j.core.appender.FileAppender;
 
 public class Table {
-    static Logger logger = Logger.getLogger("Table");
+    protected static Logger logger = Logger.getLogger("Table");
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
 
         JFrame frame = new JFrame();
         JTable table = new JTable();
-
-
-        //was trying to check logger console messages... seems i cant see them
-
-//        for (int i=0;i<10;i++)
-//        {
-//            System.out.println("i = "+ i);
-//            logger.info("i equals " + i);
-//        }
-//
-//        System.out.println("yooyo");
+        AddGradeScreen screen = new AddGradeScreen();
 
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
         logger.info("setting table");
@@ -40,7 +34,7 @@ public class Table {
         logger.info("setting background color for table white");
         table.setForeground(Color.red);
         logger.info("setting background color for table red");
-        Font font = new Font("", 1, 16);
+        Font font = new Font("", Font.BOLD, 16);
         table.setFont(font);
         table.setRowHeight(30);
 
@@ -100,13 +94,9 @@ public class Table {
 
         Object[] row = new Object[100];
 
-        btnAddGrade.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddGradeScreen screen = new AddGradeScreen();
-                screen.addGradeScreen();
-                logger.info("action has been performed - button has been pressed");
-            }
+        btnAddGrade.addActionListener(e -> {
+            AddGradeScreen.addGradeScreen();
+            logger.info("action has been performed - button has been pressed");
         });
     }
 }
