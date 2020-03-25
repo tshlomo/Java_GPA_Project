@@ -30,8 +30,17 @@ public class DBconnection {
                 conn = DriverManager.getConnection(protocol);
             }
             statement = conn.createStatement();
-            statement.execute("create table gpa(course varchar(255),semester varchar(255),testGrade int,credit double,finalGrade int)");
-            statement.executeUpdate("insert into gpa values ('infi','a',85,3.5,90)");
+            rs= statement.executeQuery("select * from gpa");
+            if(rs.next()==false) {
+                String quary="create table gpa(course varchar(255),semester, varchar(255),testGrade int,credits double,finalGrade int)";
+                statement.execute(quary);
+                statement.executeUpdate("insert into gpa values ('infi','a',85,3.5,90)");
+            }
+            rs = statement.executeQuery("SELECT * from gpa");
+            while (rs.next())
+            {
+                System.out.println("course= " + rs.getString("course") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credit= " + rs.getDouble("credit") + " finalGrade= " + rs.getInt("finalGrade"));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

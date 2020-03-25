@@ -11,13 +11,13 @@ import java.util.logging.ConsoleHandler;
 
 public class UserActions  {
 
-    public static void add_grade(String course, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
+    public static void add_grade(String course1, String semester1, int testGrade1, double credit1, int finalGrade1) throws SQLException {
         Connection conn = DBconnection.GetDBConnection();
         Statement statement = null;
         try {
 
             statement = conn.createStatement();
-            statement.execute("insert into gpa values(course,semester,testGrade,credit,finalGrade)");
+            statement.execute("insert into gpa (course,semester,testGrade,credit,finalGrade) values ('course1','semester1',testGrade1,credit1,finalGrade1)");
 
 
         } catch (Exception e) {
