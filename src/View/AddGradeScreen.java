@@ -14,7 +14,7 @@ public class AddGradeScreen extends JFrame {
     public AddGradeScreen(){ }
 
     public static void addGradeScreen() {
-        EventQueue.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new AddGradeScreen();
                 //Linking data to ComboBoxes
@@ -24,8 +24,8 @@ public class AddGradeScreen extends JFrame {
                 addGradeScreen.setLayout(null);
                 addGradeScreen.setSize(400,400);
                 addGradeScreen.setLocationRelativeTo(null);
-                addGradeScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 addGradeScreen.setVisible(true);
+                addGradeScreen.setResizable(false);
 
                 //creating labels
                 JLabel courseLabel = new JLabel("Course");
