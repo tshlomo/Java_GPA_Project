@@ -13,8 +13,9 @@ public class UserActions  {
 
     public static void add_grade(String course, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
         Connection conn = DBconnection.GetDBConnection();
+        Statement statement = null;
         try {
-            Statement statement = null;
+
             statement = conn.createStatement();
             statement.execute("insert into gpa values(course,semester,testGrade,credit,finalGrade)");
 
@@ -23,12 +24,20 @@ public class UserActions  {
             e.printStackTrace();
         }
 
-            statement.close();
+        finally {
 
-        try {
-            conn.close();
-        } catch (Exception e) {
-            System.out.println("connection not closed");
+            try {
+                statement.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+                System.out.println("connection not closed");
+            }
+
+
         }
     }
 
