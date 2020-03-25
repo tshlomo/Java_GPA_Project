@@ -70,6 +70,7 @@ public class Table extends JTable {
         frame.setSize(900, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,18));
