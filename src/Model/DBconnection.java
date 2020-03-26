@@ -19,40 +19,45 @@ public class DBconnection {
     public static Connection GetDBConnection() throws SQLException {
 
         Statement statement = null;
-        ResultSet rs=null;
+        ResultSet rs = null;
         try {
-                //Instantiating the dirver class will indirectly register
-                //this driver as an available driver for DriverManager
-            if(conn==null) {
+            //Instantiating the dirver class will indirectly register
+            //this driver as an available driver for DriverManager
+            if (conn == null) {
                 Class.forName(driver);
                 //Getting a connection by calling getConnection
                 conn = DriverManager.getConnection(protocol);
             }
+
             statement = conn.createStatement();
-            rs= statement.executeQuery("select * from gpa");
-            if(rs.next()==false) {
-                String quary="create table gpa(course varchar(255),year varchar(255),semester varchar(255), varchar(255),testGrade int,credits double,finalGrade int)";
+            rs = statement.executeQuery("select * from gpa");
+            if (!rs.next()) {
+                String quary = "create table gpa(course varchar(255),years varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
                 statement.execute(quary);
-                statement.executeUpdate("insert into gpa values ('infi','a','a',85,3.5,90)");
-
+                //statement.executeUpdate("insert into gpa values ('infi','a','a',85,3,90)");
             }
-
+            //statement.execute("drop table gpa");
 
             rs = statement.executeQuery("SELECT * from gpa");
-            while (rs.next())
-            {
-                System.out.println("course= " + rs.getString("course") + " semester= " + rs.getString("semester")+"year= "+ rs.getInt("year") + " testGrade= " + rs.getInt("testGrade") + " credit= " + rs.getDouble("credit") + " finalGrade= " + rs.getInt("finalGrade"));
+            while (rs.next()) {
+                System.out.println("course= " + rs.getString("course") + " years= " + rs.getString("years") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (statement != null) try {
-            statement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
+        } finally {
+            if (statement != null) try {
+                statement.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (rs != null) try {
+                rs.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return conn;
 
+        }
     }
 }

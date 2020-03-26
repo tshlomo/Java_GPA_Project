@@ -46,7 +46,7 @@ public class UserActions  {
         try {
             Statement statement = conn.createStatement();
             // need to check if this quary works!!!//
-            statement.executeUpdate("delete from gpa where course=coursename");
+            statement.executeUpdate("delete from gpa where course ='&[coursename]'");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +87,7 @@ public class UserActions  {
             statement = conn.createStatement();
             rs = statement.executeQuery("SELECT * from gpa");
             while (rs.next()) {
-                System.out.println("course= " + rs.getString("course") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credit= " + rs.getDouble("credit") + " finalGrade= " + rs.getInt("finalGrade"));
+                System.out.println("course= " + rs.getString("course") +"years= "+rs.getString("years")+ " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
             }
         }catch (Exception e){
             e.printStackTrace();
