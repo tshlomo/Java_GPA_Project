@@ -29,18 +29,20 @@ public class Caluclations {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
-            try {
+            if (statement != null) try {
                 statement.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            try {
+            if (rs != null) try {
+                rs.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (conn != null) try {
                 conn.close();
             } catch (Exception e) {
-                System.out.println("connection not closed");
-
-
+                e.printStackTrace();
             }
 
         }
