@@ -1,29 +1,29 @@
 package View;
-import java.awt.Graphics2D;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Line2D;
+
 
 public class Table extends JTable {
     public Table() {
 
+        String[] year = {"First Year","Second Year","Third Year"};
+        String[] semester ={"First Semester","Second Semester","Third Semester"};
         //Objects
         JFrame frame = new JFrame();
         JTable table = new JTable();
-//        JPanel panel = new JPanel();
-//        GridBagLayout gridBagLayout = new GridBagLayout();
-//        GridBagConstraints constraints = new GridBagConstraints();
         JComboBox courseComboBox = new JComboBox();
-        JLabel GPALabel = new JLabel("GPA");
+        JComboBox yearComboBox = new JComboBox(year);
+        JComboBox semesterComboBox = new JComboBox(semester);
+        JLabel GPALabel = new JLabel("Current GPA");
         JLabel desiredGradeLabel = new JLabel("Desired Grade");
         JLabel courseLabel = new JLabel("Course");
         JLabel improvingGradesLabel = new JLabel("Fill the details below to see the updated GPA after course final grade improvement");
         JLabel updatedGPA = new JLabel("Updated GPA");
+        JLabel yearLabel = new JLabel("Year");
+        JLabel semesterLabel = new JLabel("Semester");
         JTextField textGPA = new JTextField();
         JTextField textDesiredGrade = new JTextField();
         JTextField textUpdatedGrade = new JTextField();
@@ -31,7 +31,6 @@ public class Table extends JTable {
         JButton btnDeleteGrade = new JButton("Delete Grade");
         JButton btnDesiredGradeUpdate = new JButton("Update GPA");
         JScrollPane pane = new JScrollPane(table);
-
 
         //table properties
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
@@ -50,19 +49,25 @@ public class Table extends JTable {
         btnDeleteGrade.setBounds(1, 330, 125, 25);
         btnDesiredGradeUpdate.setBounds(89,510,120,25);
         //labels dimensions
-        GPALabel.setBounds(750, 300, 100, 25);
+        GPALabel.setBounds(700, 300, 150, 25);
         courseLabel.setBounds(5,450,100,25);
-        improvingGradesLabel.setBounds(5,400,1000,25);
+        improvingGradesLabel.setBounds(5,370,1000,25);
+        improvingGradesLabel.setForeground(Color.red);
         desiredGradeLabel.setBounds(5,480,100,25);
-        updatedGPA.setBounds(700,330,100,25);
+        updatedGPA.setBounds(700,530,100,25);
+        yearLabel.setBounds(5,400,100,25);
+        semesterLabel.setBounds(5,425,100,25);
         //text fields dimensions
         textGPA.setBounds(780, 300, 100, 25);
         textDesiredGrade.setBounds(110,480,100,25);
-        textUpdatedGrade.setBounds(780,330,100,25);
+        textUpdatedGrade.setBounds(780,530,100,25);
         //scroll pane dimensions
         pane.setBounds(0, 0, 880, 300);
         //combo box dimensions
         courseComboBox.setBounds(59,450,150,25);
+        semesterComboBox.setBounds(59,425,150,25);
+        yearComboBox.setBounds(59,400,150,25);
+
 
         //frame properties
         frame.setTitle("GPA");
@@ -78,6 +83,8 @@ public class Table extends JTable {
         //Adding pane
         frame.add(pane);
         //Adding ComboBox
+        frame.add(yearComboBox);
+        frame.add(semesterComboBox);
         frame.add(courseComboBox);
         //Adding text fields
         frame.add(textGPA);
@@ -90,11 +97,12 @@ public class Table extends JTable {
         frame.add(courseLabel);
         frame.add(improvingGradesLabel);
         frame.add(updatedGPA);
+        frame.add(yearLabel);
+        frame.add(semesterLabel);
         //Adding buttons
         frame.add(btnAddGrade);
         frame.add(btnDeleteGrade);
         frame.add(btnDesiredGradeUpdate);
-//        frame.add(new DrawLine());
 
 
         //listener for add grade button
@@ -106,17 +114,6 @@ public class Table extends JTable {
             }
         });
     }
-
-//    public class DrawLine extends JComponent {
-//        @Override
-//        public void paint(Graphics g) {
-//            // Draw a simple line using the Graphics2D draw() method.
-//            Graphics2D g2 = (Graphics2D) g;
-//            g2.setStroke(new BasicStroke(2f));
-//            g2.setColor(Color.RED);
-//            g2.draw(new Line2D.Double(20, 400, 200, 400));
-//        }
-//    }
 }
 
 
