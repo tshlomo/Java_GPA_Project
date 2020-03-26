@@ -54,13 +54,13 @@ public class Table extends JTable {
         improvingGradesLabel.setBounds(5,370,1000,25);
         improvingGradesLabel.setForeground(Color.red);
         desiredGradeLabel.setBounds(5,480,100,25);
-        updatedGPA.setBounds(700,530,100,25);
+        updatedGPA.setBounds(700,500,100,25);
         yearLabel.setBounds(5,400,100,25);
         semesterLabel.setBounds(5,425,100,25);
         //text fields dimensions
         textGPA.setBounds(780, 300, 100, 25);
         textDesiredGrade.setBounds(110,480,100,25);
-        textUpdatedGrade.setBounds(780,530,100,25);
+        textUpdatedGrade.setBounds(780,500,100,25);
         //scroll pane dimensions
         pane.setBounds(0, 0, 880, 300);
         //combo box dimensions
