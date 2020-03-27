@@ -10,24 +10,27 @@ import java.util.List;
 public class Caluclations {
 
     //func calculates and returns final grade based on final test score and percentage + hw score and percentage
-    public static int calcu_final_grade(int testGrade,int testPercent,int hwGrade,int hwPercent){
+    public int calculate_Final_Grades(int testGrade, int testPercent, int hwGrade, int hwPercent){
         int score= testGrade*(testPercent/100)+hwGrade*(hwPercent/100);
         return score;
     }
 
 
     //func receives grades array + correspondent credits array and calculates gpa
-public static int calcu_gpa() throws SQLException {
-        double credits_sum=0;
-        double grades_sum=0;
-        int i=0;
-    List<Integer> grades = DBActions.getFinalGrades();
-    List<Double>credits=DBActions.getCredits();
+    public Integer calculate_GPA() throws SQLException {
+    Double credits_sum=0.0;
+    Double grades_sum=0.0;
+    Integer i=0;
+    DBActions dbActions = new DBActions();
+    List<Integer> grades = dbActions.getFinalGrades();
+    List<Double>credits=dbActions.getCredits();
+
     for (Integer x:grades) {
         grades_sum+=x*credits.get(i);
         credits_sum+=credits.get(i);
+        i++;
     }
-    return (int)(grades_sum/credits_sum);
+    return (int) (grades_sum/credits_sum);
 }
     }
 

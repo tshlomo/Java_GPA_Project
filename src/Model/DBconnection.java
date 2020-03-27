@@ -11,7 +11,7 @@ public class DBconnection {
     static String protocol = "jdbc:derby:gagadb;create=true";
 
     //eager-instantiating conn var which will connect with the db
-    static Connection conn = null;
+    private static Connection conn = null;
 
     //the getDBConnection function is basically the getInstance function for regular singleton pattern.
     //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
@@ -31,15 +31,12 @@ public class DBconnection {
                         Class.forName(driver);
                         //Getting a connection by calling getConnection
                         conn = DriverManager.getConnection(protocol);
-
                         statement = conn.createStatement();
-                        rs = statement.executeQuery("select * from gpa");
+                        rs = conn.getMetaData().getTables(null, "APP", "%", null);
                         if(!rs.next()){
-                            String query = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
-                            statement.execute(query);
-
-
+                            statement.execute("CREATE TABLE GPA(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)");
                         }
+
                     } catch (Exception e) {
                        e.printStackTrace();
                    } finally {
