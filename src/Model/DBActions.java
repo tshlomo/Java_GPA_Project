@@ -76,7 +76,7 @@ public class DBActions {
                 resetStatementAndRS();
             }
         }
-        //func closes all the conn/query params(we use it at he end of any method which connects to the db)
+        //func closes all the connection params(we use it at the end of any method which int this class)
         public static void resetStatementAndRS() {
             if (statement != null) try {
                 statement.close();

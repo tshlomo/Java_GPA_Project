@@ -35,8 +35,8 @@ public class DBconnection {
                         statement = conn.createStatement();
                         rs = statement.executeQuery("select * from gpa");
                         if(!rs.next()){
-                            String quary = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
-                            statement.execute(quary);
+                            String query = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
+                            statement.execute(query);
 
 
                         }
