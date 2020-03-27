@@ -32,24 +32,21 @@ public class DBconnection {
                         //Getting a connection by calling getConnection
                         conn = DriverManager.getConnection(protocol);
 
-
-                        //why do we need to create statement and RS while getting each connection?
-
-
                         statement = conn.createStatement();
-                        //rs = statement.executeQuery("select * from gpa");
-                        //if(!rs.next()){
+                        rs = statement.executeQuery("select * from gpa");
+                        if(!rs.next()){
                             String quary = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
                             statement.execute(quary);
 
 
-                        //}
+                        }
                     } catch (Exception e) {
                        e.printStackTrace();
                    } finally {
                        if (statement != null) try {
                             statement.close();
-                       } catch (Exception e) {                            e.printStackTrace();
+                       } catch (Exception e) {
+                           e.printStackTrace();
                         }
                        if (rs != null) try {
                             rs.close();

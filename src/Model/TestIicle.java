@@ -6,10 +6,11 @@ import java.sql.SQLException;
 public class TestIicle {
 
     public static void main(String[] args) throws SQLException {
-        //DBActions.addGrade("math","c","a",76,2.5,92);
+        //DBActions.addGrade("bdida","c","b",76,2.5,79);
         //DBActions.deleteGrade("infi");
-        //DBActions.printTable();
-        //System.out.println("gpa is: "+Caluclations.calcu_gpa());
+         //DBActions.printTable();
         //Connection x=DBconnection.GetDBConnection();
+        //int x=Caluclations.calcu_gpa();
+        //System.out.println(x);
     }
 }
