@@ -3,14 +3,22 @@ package Model;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.ConsoleHandler;
 
 public class UserActions {
 
-    public static void add_grade(String course, String year, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
-        Connection conn = DBconnection.GetDBConnection();
-        Statement statement = null;
+    protected static Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
+    protected static ResultSet rs;//same as statement
+    private static Connection conn;
+
+    private UserActions()
+    {
+        statement = null;
+        rs = null;
+        conn = null;
+    }
+
+    public static void addGrade(String course, String year, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
+        conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
@@ -20,25 +28,12 @@ public class UserActions {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
-            try {
-                statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (Exception e) {
-                System.out.println("connection not closed");
-            }
-
-
+            resetStatementAndRS();
         }
     }
 
     public static void deleteGrade(String coursename) throws SQLException {
-        Connection conn = DBconnection.GetDBConnection();
-        Statement statement = null;
+        conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
             // need to check if this quary works!!!//
@@ -46,62 +41,32 @@ public class UserActions {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
-            try {
-                statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (Exception e) {
-                System.out.println("connection not closed");
-            }
-
-
+            resetStatementAndRS();
         }
     }
 
-    public static int[] getAllGrades() throws SQLException {
-         int[]grades={0};
-        Statement statement = null;
-        ResultSet rs = null;
-        Connection conn = DBconnection.GetDBConnection();
+    public static ArrayList getAllGrades() throws SQLException {
+        ArrayList grades = new ArrayList();
+        conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
             rs=statement.executeQuery("SELECT COUNT(*) FROM gpa");
             rs = statement.executeQuery("select finalGrade from gpa");
             int i = 0;
             while (rs.next()) {
-                grades[i]=rs.getInt("finalGrade");
+                grades.add(rs.getInt("finalGrade"));
+                //maybe need to add i++ sagi???
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (statement != null) try {
-                statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (rs != null) try {
-                rs.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (conn != null) try {
-                conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            resetStatementAndRS();
         }
         return grades;
     }
 
     public static void printTable() throws SQLException {
-        Connection conn = DBconnection.GetDBConnection();
-        Statement statement = null;
-        ResultSet rs = null;
+        conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
             rs = statement.executeQuery("SELECT * from gpa");
@@ -111,22 +76,26 @@ public class UserActions {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (statement != null) try {
-                statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (rs != null) try {
-                rs.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (conn != null) try {
-                conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            resetStatementAndRS();
+        }
+    }
 
+    public static void resetStatementAndRS()
+    {
+        if (statement != null) try {
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (rs != null) try {
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (conn != null) try {
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

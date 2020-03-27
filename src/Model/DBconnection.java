@@ -1,5 +1,4 @@
 package Model;
-import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,45 +7,68 @@ import java.sql.ResultSet;
 
 
 public class DBconnection {
-    public static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    public static String protocol = "jdbc:derby:gpaDB;create=true";
+    static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+    static String protocol = "jdbc:derby:gpaDB;create=true";
 
+    //eager-instantiating conn var which will connect with the db
+    static Connection conn = null;
 
-    public static Connection GetDBConnection() throws SQLException {
-        Connection conn = null;
+    //the getDBConnection function is basically the getInstance function for regular singleton pattern.
+    //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
+    public static Connection getDBConnection() throws SQLException {
         Statement statement = null;
         ResultSet rs = null;
 
-        try {
-            //Instantiating the dirver class will indirectly register
-            //this driver as an available driver for DriverManager
-                Class.forName(driver);
-                //Getting a connection by calling getConnection
-                conn = DriverManager.getConnection(protocol);
+        if(conn==null) {
 
-            statement = conn.createStatement();
-            rs = statement.executeQuery("select * from gpa");
-            if (!rs.next()) {
-                String quary = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
-                statement.execute(quary);
+            synchronized (DBconnection.class)
+            {
+                if(conn == null)
+                {
+                    try {
+                        //Instantiating the dirver class will indirectly register
+                        //this driver as an available driver for DriverManager
+                        Class.forName(driver);
+                        //Getting a connection by calling getConnection
+                        conn = DriverManager.getConnection(protocol);
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+
+                        //why do we need to create statement and RS while getting each connection?
+
+
+//                        statement = conn.createStatement();
+//                        rs = statement.executeQuery("select * from gpa");
+//                        if (!rs.next()) {
+//                            String quary = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
+//                            statement.execute(quary);
+//
+//                        }
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    } finally {
+//                        if (statement != null) try {
+//                            statement.close();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        if (rs != null) try {
+//                            rs.close();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+
+
+                    }
+                }//the second IF statement ends here
+                else{
+                    //SOMEHOW 2 threads managed to get into the synchronized part and one of them couldn't see conn as null since the other thread instantiated it.
+                    //TODO log commands
+                }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) try {
-                statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (rs != null) try {
-                rs.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
         }
         return conn;
     }

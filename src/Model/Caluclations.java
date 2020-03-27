@@ -17,7 +17,7 @@ public class Caluclations {
         ResultSet rs = null;
         double credits_sum = 0;
         double grades_sum = 0;
-        Connection conn = DBconnection.GetDBConnection();
+        Connection conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
             rs = statement.executeQuery("SELECT finalGrade,credits FROM gpa");
