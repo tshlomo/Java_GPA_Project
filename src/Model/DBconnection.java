@@ -23,17 +23,17 @@ public class DBconnection {
                 Class.forName(driver);
                 //Getting a connection by calling getConnection
                 conn = DriverManager.getConnection(protocol);
-
             statement = conn.createStatement();
             rs = statement.executeQuery("select * from gpa");
             if (!rs.next()) {
                 String quary = "create table gpa(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)";
                 statement.execute(quary);
+                //statement.executeUpdate("insert into gpa values('infi','c','a',76,3.5,98)");
 
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("table gpa does not exist");;
         } finally {
             if (statement != null) try {
                 statement.close();

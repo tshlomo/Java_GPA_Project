@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
 
-public class UserActions {
+public class DBActions {
 
     public static void add_grade(String course, String year, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
         Connection conn = DBconnection.GetDBConnection();
