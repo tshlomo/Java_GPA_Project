@@ -10,7 +10,7 @@ public class DBActions {
     protected static ResultSet rs;//same as statement
     private static Connection conn;
 
-    private UserActions()
+    private DBActions()
     {
         statement = null;
         rs = null;
@@ -36,7 +36,6 @@ public class DBActions {
         conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
-            // need to check if this quary works!!!//
             statement.executeUpdate("delete from gpa where course =('"+coursename+"')");
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +103,7 @@ public class DBActions {
         ResultSet rs = null;
         double credits_sum = 0;
         double grades_sum = 0;
-        Connection conn = DBconnection.GetDBConnection();
+        Connection conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
             rs = statement.executeQuery("SELECT finalGrade,credits FROM gpa");
