@@ -4,12 +4,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.logging.Logger;
 
 
 public class DBconnection {
     static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     static String protocol = "jdbc:derby:gagadb;create=true";
-
+    private static Logger logger=Logger.getLogger(DBconnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;
 
@@ -23,6 +24,7 @@ public class DBconnection {
 
             synchronized (DBconnection.class)
             {
+
                 if(conn == null)
                 {
                     try {
@@ -30,10 +32,13 @@ public class DBconnection {
                         //this driver as an available driver for DriverManager
                         Class.forName(driver);
                         //Getting a connection by calling getConnection
+                        logger.info("connecting to database...");
                         conn = DriverManager.getConnection(protocol);
                         statement = conn.createStatement();
+                        logger.info("searching for GPA table...");
                         rs = conn.getMetaData().getTables(null, "APP", "%", null);
                         if(!rs.next()){
+                            logger.info("it seems that GPA table does not exist. don't worry we are making a new one right now...");
                             statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Semester VARCHAR(255),TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
                         }
 
