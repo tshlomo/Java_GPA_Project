@@ -6,40 +6,75 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Table extends JTable {
-    public Table() {
+public class TableHomeFrame extends JTable {
+    private JFrame frame;
+    private JTable table;
+    private JComboBox courseComboBox;
+    private JComboBox yearComboBox;
+    private JComboBox semesterComboBox;
+    private JLabel GPALabel;
+    private JLabel desiredGradeLabel;
+    private JLabel courseLabel;
+    private JLabel improvingGradesLabel;
+    private JLabel updatedGPA;
+    private JLabel yearLabel;
+    private JLabel semesterLabel;
+    private JTextField textGPA;
+    private JTextField textDesiredGrade;
+    private JTextField textUpdatedGrade;
+    private JButton btnAddGrade;
+    private JButton btnDeleteGrade;
+    private JButton btnDesiredGradeUpdate;
+    private JScrollPane pane;
+    private DefaultTableModel model;
+    private JSeparator topSeparator;
+    private JSeparator bottomSeperator;
+
+    public TableHomeFrame() {
 
         String[] year = {"First Year","Second Year","Third Year"};
         String[] semester ={"First Semester","Second Semester","Third Semester"};
-        //Objects
-        JFrame frame = new JFrame();
-        JTable table = new JTable();
-        JComboBox courseComboBox = new JComboBox();
-        JComboBox yearComboBox = new JComboBox(year);
-        JComboBox semesterComboBox = new JComboBox(semester);
-        JLabel GPALabel = new JLabel("Current GPA");
-        JLabel desiredGradeLabel = new JLabel("Desired Grade");
-        JLabel courseLabel = new JLabel("Course");
-        JLabel improvingGradesLabel = new JLabel("Fill the details below to see the updated GPA after course final grade improvement");
-        JLabel updatedGPA = new JLabel("Updated GPA");
-        JLabel yearLabel = new JLabel("Year");
-        JLabel semesterLabel = new JLabel("Semester");
-        JTextField textGPA = new JTextField();
-        JTextField textDesiredGrade = new JTextField();
-        JTextField textUpdatedGrade = new JTextField();
-        JButton btnAddGrade = new JButton("Add New Grade");
-        JButton btnDeleteGrade = new JButton("Delete Grade");
-        JButton btnDesiredGradeUpdate = new JButton("Update GPA");
-        JScrollPane pane = new JScrollPane(table);
+
+        //Objects instantiation
+
+        //Frame
+        frame = new JFrame();
+        //Table
+        table = new JTable();
+        //ComboBox
+        courseComboBox = new JComboBox();
+        yearComboBox = new JComboBox(year);
+        semesterComboBox = new JComboBox(semester);
+        //Labels
+        GPALabel = new JLabel("Current GPA");
+        desiredGradeLabel = new JLabel("Desired Grade");
+        courseLabel = new JLabel("Course");
+        improvingGradesLabel = new JLabel("Fill the details below to see the updated GPA after course final grade improvement");
+        updatedGPA = new JLabel("Updated GPA");
+        yearLabel = new JLabel("Year");
+        semesterLabel = new JLabel("Semester");
+        //TextFields
+        textGPA = new JTextField();
+        textDesiredGrade = new JTextField();
+        textUpdatedGrade = new JTextField();
+        //Buttons
+        btnAddGrade = new JButton("Add New Grade");
+        btnDeleteGrade = new JButton("Delete Grade");
+        btnDesiredGradeUpdate = new JButton("Update GPA");
+        //ScrollPane
+        pane = new JScrollPane(table);
+        //Separators
+        topSeparator = new JSeparator();
+        bottomSeperator = new JSeparator();
 
         //table properties
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
-        DefaultTableModel model = new DefaultTableModel();
+        Font font = new Font("", 1, 16);
+        model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
         table.setModel(model);
         table.setBackground(Color.white);
         table.setForeground(Color.red);
-        Font font = new Font("", 1, 16);
         table.setFont(font);
         table.setRowHeight(30);
         Object[] row = new Object[100];
@@ -47,26 +82,29 @@ public class Table extends JTable {
         //buttons dimensions
         btnAddGrade.setBounds(1, 300, 125, 25);
         btnDeleteGrade.setBounds(1, 330, 125, 25);
-        btnDesiredGradeUpdate.setBounds(89,510,120,25);
+        btnDesiredGradeUpdate.setBounds(89,530,120,25);
         //labels dimensions
         GPALabel.setBounds(700, 300, 150, 25);
-        courseLabel.setBounds(5,450,100,25);
-        improvingGradesLabel.setBounds(5,370,1000,25);
+        courseLabel.setBounds(5,465,100,25);
+        improvingGradesLabel.setBounds(5,365,1000,25);
         improvingGradesLabel.setForeground(Color.red);
-        desiredGradeLabel.setBounds(5,480,100,25);
-        updatedGPA.setBounds(700,500,100,25);
+        desiredGradeLabel.setBounds(5,500,100,25);
+        updatedGPA.setBounds(700,530,100,25);
         yearLabel.setBounds(5,400,100,25);
-        semesterLabel.setBounds(5,425,100,25);
+        semesterLabel.setBounds(3,432,100,25);
         //text fields dimensions
         textGPA.setBounds(780, 300, 100, 25);
-        textDesiredGrade.setBounds(110,480,100,25);
-        textUpdatedGrade.setBounds(780,500,100,25);
+        textDesiredGrade.setBounds(110,500,100,25);
+        textUpdatedGrade.setBounds(780,530,100,25);
         //scroll pane dimensions
         pane.setBounds(0, 0, 880, 300);
         //combo box dimensions
-        courseComboBox.setBounds(59,450,150,25);
-        semesterComboBox.setBounds(59,425,150,25);
+        courseComboBox.setBounds(59,465,150,25);
+        semesterComboBox.setBounds(59,432,150,25);
         yearComboBox.setBounds(59,400,150,25);
+        //Separators
+        topSeparator.setBounds(5,360,875,1);
+        bottomSeperator.setBounds(5,390,875,1);
 
 
         //frame properties
@@ -79,6 +117,9 @@ public class Table extends JTable {
         frame.setResizable(false);
 
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,18));
+        textGPA.setEditable(false);
+        textUpdatedGrade.setEditable(false);
+
 
         //Adding pane
         frame.add(pane);
@@ -103,6 +144,9 @@ public class Table extends JTable {
         frame.add(btnAddGrade);
         frame.add(btnDeleteGrade);
         frame.add(btnDesiredGradeUpdate);
+        //Separators
+        frame.add(topSeparator);
+        frame.add(bottomSeperator);
 
 
         //listener for add grade button

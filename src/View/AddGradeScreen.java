@@ -9,14 +9,33 @@ import java.awt.event.MouseEvent;
 
 public class AddGradeScreen extends JFrame {
 
+    private static JLabel courseLabel;
+    private static JLabel quizLabel;
+    private static JLabel finalTestLabel;
+    private static JLabel creditsLabel;
+    private static JLabel percentageLabel1;
+    private static JLabel percentageLabel2;
+    private static JLabel yearLabel;
+    private static JLabel semesterLabel;
+    private static JComboBox courseComboBox;
+    private static JComboBox yearComboBox;
+    private static JComboBox semesterComboBox;
+    private static JTextField textQuiz;
+    private static JTextField textFinalTest;
+    private static JTextField textCredits;
+    private static JTextField textPercentage1;
+    private static JTextField textPercentage2;
+    private static JButton btnAdd;
+
+
     private static AddGradeScreen addGradeScreen = new AddGradeScreen();
 
-    public AddGradeScreen(){ }
+    public AddGradeScreen(){
+    }
 
     public static void addGradeScreen() {
         SwingUtilities.invokeLater(() -> {
             new AddGradeScreen();
-            //Linking data to ComboBoxes
             String[] year = {"First Year","Second Year","Third Year"};
             String[] semester ={"First Semester","Second Semester","Third Semester"};
             //Setting the screen properties
@@ -27,29 +46,29 @@ public class AddGradeScreen extends JFrame {
             addGradeScreen.setResizable(false);
 
             //creating labels
-            JLabel courseLabel = new JLabel("Course");
-            JLabel quizLabel = new JLabel("HW/Quiz grade");
-            JLabel finalTestLabel = new JLabel("Final Test");
-            JLabel creditsLabel = new JLabel("Credits");
-            JLabel percentageLabel1 = new JLabel("%");
-            JLabel percentageLabel2 = new JLabel("%");
-            JLabel yearLabel = new JLabel("Year");
-            JLabel semesterLabel = new JLabel("Semester");
+            courseLabel = new JLabel("Course");
+            quizLabel = new JLabel("HW/Quiz grade");
+            finalTestLabel = new JLabel("Final Test");
+            creditsLabel = new JLabel("Credits");
+            percentageLabel1 = new JLabel("%");
+            percentageLabel2 = new JLabel("%");
+            yearLabel = new JLabel("Year");
+            semesterLabel = new JLabel("Semester");
 
             //Creating ComboBox
-            JComboBox courseComboBox = new JComboBox();
-            JComboBox yearComboBox = new JComboBox(year);
-            JComboBox semesterComboBox = new JComboBox(semester);
+            courseComboBox = new JComboBox();
+            yearComboBox = new JComboBox(year);
+            semesterComboBox = new JComboBox(semester);
 
             //creating text fields
-            JTextField textQuiz = new JTextField();
-            JTextField textFinalTest = new JTextField();
-            JTextField textCredits = new JTextField();
-            JTextField textPercentage1 = new JTextField();
-            JTextField textPercentage2 = new JTextField();
+            textQuiz = new JTextField();
+            textFinalTest = new JTextField();
+            textCredits = new JTextField();
+            textPercentage1 = new JTextField();
+            textPercentage2 = new JTextField();
 
             //creating buttons
-            JButton btnAdd = new JButton("Add");
+            btnAdd = new JButton("Add");
 
             //labels dimensions
             yearLabel.setBounds(20,20,100,25);
