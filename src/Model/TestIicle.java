@@ -7,16 +7,15 @@ public class TestIicle {
 
     public static void main(String[] args) throws SQLException {
         //DBconnection.getDBConnection();
-        DBActions dbact = new DBActions();
-        dbact.addGrade("bdida","b",76,2.5,79);
-        dbact.printTable();
+        //DBActions dbact = new DBActions();
+        //Caluclations cal=new Caluclations();
+        //int x=cal.calculate_GPA();
+        //System.out.println(x);
+        //dbact.addGrade("infi","a",70,3.0,81);
+
 //        System.out.println("now deleting bdida--------------------------------------------------------------------------------------------------");
 //        dbact.deleteGrade("bdida");
-//        dbact.printTable();
-//        for (Double d :
-//                dbact.getCredits()) {
-//            System.out.println(d);
-//        }
+        //dbact.printTable();
         //Connection x=DBconnection.GetDBConnection();
         //System.out.println(x);
     }

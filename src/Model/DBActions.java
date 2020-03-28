@@ -27,7 +27,7 @@ public class DBActions {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             resetStatementAndRS();
         }
@@ -75,7 +75,7 @@ public class DBActions {
                 resetStatementAndRS();
             }
         }
-        //func closes all the connection params(we use it at the end of any method which int this class)
+        //func closes all the connection params(we use it at the end of any method which is in this class)
         public void resetStatementAndRS() {
             if (statement != null) try {
                 statement.close();
@@ -91,7 +91,7 @@ public class DBActions {
             rs = null;
             statement = null;
         }
-        //func retrieves the values of the column finalGrade from the db and returns it via Arraylist(for gpa calculation)
+        //func retrieves the values of the column finalGrade from the db and returns it in an array(for gpa calculation)
         public List<Integer> getFinalGrades() throws SQLException {
             List testGrades = new ArrayList();
             conn = DBconnection.getDBConnection();
@@ -109,7 +109,7 @@ public class DBActions {
             }
             return testGrades;
         }
-    //func retrieves the values of the column credits from the db and returns it via Arraylist(for gpa calculation)
+    //func retrieves the values of the column credits from the db and returns it in an array(for gpa calculation)
     public List<Double> getCredits() throws SQLException {
         List credits = new ArrayList();
         Connection conn = DBconnection.getDBConnection();
