@@ -17,16 +17,13 @@ public class DBActions {
         conn = null;
     }
     //this func receives all of the params of the db table and and updates it with insert statement
-    public void addGrade(String course, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
+    public void addGrade(String course, String semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
-            statement.execute("MERGE INTO GPA as g1" +
-                    "USING GPA as g2" +
-                    " ON g1.Course = g2.Course " +
-                    "WHEN NOT MATCHED THEN INSERT VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
-            //statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
+
+            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
 
 
         } catch (Exception e) {
@@ -50,7 +47,7 @@ public class DBActions {
     }
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
-    public void editGrade(String course, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
+    public void editGrade(String course, String semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
