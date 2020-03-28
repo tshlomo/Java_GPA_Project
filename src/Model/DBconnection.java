@@ -34,7 +34,7 @@ public class DBconnection {
                         statement = conn.createStatement();
                         rs = conn.getMetaData().getTables(null, "APP", "%", null);
                         if(!rs.next()){
-                            statement.execute("CREATE TABLE GPA(course varchar(255),year1 varchar(255),semester varchar(255),testGrade int,credits double,finalGrade int)");
+                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Semester VARCHAR(255),TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
                         }
 
                     } catch (Exception e) {

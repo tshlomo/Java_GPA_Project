@@ -8,7 +8,7 @@ public class TestIicle {
     public static void main(String[] args) throws SQLException {
         //DBconnection.getDBConnection();
         DBActions dbact = new DBActions();
-        dbact.addGrade("bdida","c","b",76,2.5,79);
+        dbact.addGrade("bdida","b",76,2.5,79);
         dbact.printTable();
 //        System.out.println("now deleting bdida--------------------------------------------------------------------------------------------------");
 //        dbact.deleteGrade("bdida");

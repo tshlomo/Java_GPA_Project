@@ -17,12 +17,16 @@ public class DBActions {
         conn = null;
     }
     //this func receives all of the params of the db table and and updates it with insert statement
-    public void addGrade(String course, String year, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
+    public void addGrade(String course, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
-            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + year + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
+            statement.execute("MERGE INTO GPA as g1" +
+                    "USING GPA as g2" +
+                    " ON g1.Course = g2.Course " +
+                    "WHEN NOT MATCHED THEN INSERT VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
+            //statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
 
 
         } catch (Exception e) {
@@ -46,12 +50,12 @@ public class DBActions {
     }
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
-    public void editGrade(String course, String year, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
+    public void editGrade(String course, String semester, int testGrade, double credit, int finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
-            statement.executeUpdate("UPDATE GPA SET (year1='" + year + "',semester= '" + semester + "' ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
+            statement.executeUpdate("UPDATE GPA SET (semester= '" + semester + "' ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -66,7 +70,7 @@ public class DBActions {
                 statement = conn.createStatement();
                 rs = statement.executeQuery("SELECT * FROM gpa");
                 while (rs.next()) {
-                    System.out.println("course= " + rs.getString("course") + " year= " + rs.getString("year1") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
+                    System.out.println("course= " + rs.getString("course") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
