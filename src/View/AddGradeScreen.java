@@ -65,7 +65,9 @@ public class AddGradeScreen extends JFrame {
             textFinalTest = new JTextField();
             textCredits = new JTextField();
             textPercentage1 = new JTextField();
+            textPercentage1.setEditable(false);
             textPercentage2 = new JTextField();
+            textPercentage2.setEditable(false);
 
             //creating buttons
             btnAdd = new JButton("Add");
@@ -84,6 +86,7 @@ public class AddGradeScreen extends JFrame {
             textQuiz.setBounds(120,110,100,25);
             textFinalTest.setBounds(120,140,100,25);
             textCredits.setBounds(120,170,100,25);
+            textCredits.setEditable(false);
             textPercentage1.setBounds(222,110,40,25);
             textPercentage2.setBounds(222,140,40,25);
 
