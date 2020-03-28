@@ -1,10 +1,10 @@
 package View;
 
-import java.awt.*;
+import javax.swing.*;
 
 public class Driver {
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> {
             try {
                 TableHomeFrame window = new TableHomeFrame();
                 window.setVisible(true);

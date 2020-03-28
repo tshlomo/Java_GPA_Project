@@ -7,8 +7,27 @@ import java.awt.event.ActionListener;
 
 
 public class TableHomeFrame extends JTable {
+
+    private static final String[] courses = {"Linear algebra","Infinitesimal calculus 1","Computer science Introduction","Introduction to discrete math"
+            ,"Probability","Infinitesimal calculus 2","Computer structure and switching theory","Data Structures","Advanced Programming Workshop"
+            ,"Computer organization and threshold language","Database systems","Computer communication networks","Graph theory","Object oriented programming"
+            ,"Automatic and formal languages","Software engineering","Operating systems","Algorithm design and analysis"
+            ,"Computational and Computational Algorithms","Mathematical tools","Machine learning","Programming in the Web Environment"
+            ,"DevOPS","Development of server side systems in an open source environment","Developing a client side in an Android environment","Compilation Theory"
+            ,"Involvement in Israeli society","Yoga","Basketball team","Football team","Information Society"};
+    private static final Object[] credits = {5,6.5,5,5,
+            3.5,5,4,4,3,
+            2.5,4,3.5,3.5,5,
+            4,4,3.5,4,
+            4,5,3,3,
+            3,3,3.5,3.5,
+            4,1,1,1,2};
+    private static final String[] year = {"First Year","Second Year","Third Year"};
+    private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
+
     private JFrame frame;
     private JTable table;
+    private JPanel panelTop,panelMiddle,panelBottom;
     private JComboBox courseComboBox;
     private JComboBox yearComboBox;
     private JComboBox semesterComboBox;
@@ -31,18 +50,16 @@ public class TableHomeFrame extends JTable {
     private JSeparator bottomSeperator;
 
     public TableHomeFrame() {
-
-        String[] year = {"First Year","Second Year","Third Year"};
-        String[] semester ={"First Semester","Second Semester","Third Semester"};
-
-        //Objects instantiation
-
         //Frame
-        frame = new JFrame();
+        frame = new JFrame("GPA");
         //Table
         table = new JTable();
+        //Panels
+        panelBottom = new JPanel();
+        panelTop = new JPanel();
+        panelMiddle = new JPanel();
         //ComboBox
-        courseComboBox = new JComboBox();
+        courseComboBox = new JComboBox(courses);
         yearComboBox = new JComboBox(year);
         semesterComboBox = new JComboBox(semester);
         //Labels
@@ -61,11 +78,9 @@ public class TableHomeFrame extends JTable {
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
         btnDesiredGradeUpdate = new JButton("Update GPA");
-        //ScrollPane
-        pane = new JScrollPane(table);
         //Separators
-        topSeparator = new JSeparator();
-        bottomSeperator = new JSeparator();
+        //topSeparator = new JSeparator();
+        //bottomSeperator = new JSeparator();
 
         //table properties
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
@@ -77,8 +92,14 @@ public class TableHomeFrame extends JTable {
         table.setForeground(Color.red);
         table.setFont(font);
         table.setRowHeight(30);
+
+        //ScrollPane
+        pane = new JScrollPane(table);
+
+        //why we need this row?>
         Object[] row = new Object[100];
 
+        /*
         //buttons dimensions
         btnAddGrade.setBounds(1, 300, 125, 25);
         btnDeleteGrade.setBounds(1, 330, 125, 25);
@@ -105,56 +126,70 @@ public class TableHomeFrame extends JTable {
         //Separators
         topSeparator.setBounds(5,360,875,1);
         bottomSeperator.setBounds(5,390,875,1);
+        */
+
+
+        //setting layouts
+        panelBottom.setLayout(new FlowLayout());
+        panelTop.setLayout(new FlowLayout());
+        panelMiddle.setLayout(new FlowLayout());
+        //Container container = frame.getContentPane();
+        //container.setLayout(new BorderLayout());
+        frame.setLayout(new BorderLayout());
 
 
         //frame properties
-        frame.setTitle("GPA");
-        frame.setLayout(null);
         frame.setSize(900, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
 
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,18));
         textGPA.setEditable(false);
         textUpdatedGrade.setEditable(false);
 
-
-        //Adding pane
-        frame.add(pane);
-        //Adding ComboBox
-        frame.add(yearComboBox);
-        frame.add(semesterComboBox);
-        frame.add(courseComboBox);
+        //adding the table via pane to the top panel and setting flow layout
+        panelTop.add(pane);
+        //Adding ComboBox to bottom panel
+        panelBottom.add(yearComboBox);
+        panelBottom.add(semesterComboBox);
+        panelBottom.add(courseComboBox);
         //Adding text fields
-        frame.add(textGPA);
-        frame.add(textDesiredGrade);
-        frame.add(textUpdatedGrade);
+        panelBottom.add(textGPA);
+        panelBottom.add(textDesiredGrade);
+        panelBottom.add(textUpdatedGrade);
+        panelBottom.add(desiredGradeLabel);
         //Adding labels
-        frame.add(GPALabel);
-        frame.add(desiredGradeLabel);
-        frame.add(btnDesiredGradeUpdate);
-        frame.add(courseLabel);
-        frame.add(improvingGradesLabel);
-        frame.add(updatedGPA);
-        frame.add(yearLabel);
-        frame.add(semesterLabel);
+        panelMiddle.add(GPALabel);
+        panelBottom.add(btnDesiredGradeUpdate);
+        panelBottom.add(courseLabel);
+        panelBottom.add(improvingGradesLabel);
+        panelBottom.add(updatedGPA);
+        panelBottom.add(yearLabel);
+        panelBottom.add(semesterLabel);
         //Adding buttons
-        frame.add(btnAddGrade);
-        frame.add(btnDeleteGrade);
-        frame.add(btnDesiredGradeUpdate);
+        panelMiddle.add(btnAddGrade);
+        panelMiddle.add(btnDeleteGrade);
+        panelBottom.add(btnDesiredGradeUpdate);
         //Separators
-        frame.add(topSeparator);
-        frame.add(bottomSeperator);
+        //frame.add(topSeparator);
+        //frame.add(bottomSeperator);
 
+        frame.add(panelTop,BorderLayout.NORTH);
+        frame.add(panelMiddle,BorderLayout.CENTER);
+        frame.add(panelBottom,BorderLayout.SOUTH);
+//        container.add("North",panelTop);
+//        container.add("South",panelBottom);
+//        container.add("Center",panelMiddle);
+
+        frame.setVisible(true);
 
         //listener for add grade button
         btnAddGrade.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddGradeScreen screen = new AddGradeScreen();
-                screen.addGradeScreen();
+                //screen.addGradeScreen();
             }
         });
     }
