@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Mar 29 12:21:36 IDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0171-2598-b22b-00000f600000 
+on database directory D:\HiT Computer Science BSc\Internet Course\GPA\gagadb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
+Loaded from file:/C:/Program%20Files/Java/jdk-14/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=14+36-1461
+user.dir=D:\HiT Computer Science BSc\Internet Course\GPA
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
