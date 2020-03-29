@@ -1,12 +1,11 @@
 package View;
 import Model.DBActions;
-import ViewModel.*;
+import ViewModel.CourseDetails;
+import ViewModel.ViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -89,7 +88,7 @@ public class TableHomeFrame extends JTable {
         GPALabel = new JLabel("Current GPA");
         desiredGradeLabel = new JLabel("Desired Grade");
         courseLabel = new JLabel("Course");
-        improvingGradesLabel = new JLabel("Fill the details below to see the updated GPA after course final grade improvement");
+        improvingGradesLabel = new JLabel("Fill the details below to calculate your GPA after course improvement");
         updatedGPA = new JLabel("Updated GPA");
         yearLabel = new JLabel("Year");
         semesterLabel = new JLabel("Semester");
@@ -100,7 +99,7 @@ public class TableHomeFrame extends JTable {
         //Buttons
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
-        btnDesiredGradeUpdate = new JButton("Update GPA");
+        btnDesiredGradeUpdate = new JButton("Calculate new GPA");
 
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
@@ -126,11 +125,11 @@ public class TableHomeFrame extends JTable {
         //setting layouts
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
         //panelBottom.setLayout(new GridLayout(7,1,5,5));
-        panelTop.setLayout(new FlowLayout());
+        panelTop.setLayout(new BorderLayout());
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
         labelPanel.setLayout(new FlowLayout());
-        yearPanel.setLayout(new FlowLayout());
-        semesterPanel.setLayout(new FlowLayout());
+//        yearPanel.setLayout(new FlowLayout());
+//        semesterPanel.setLayout(new FlowLayout());
         coursePanel.setLayout(new FlowLayout());
         desiredGradePanel.setLayout(new FlowLayout());
         btnPanel.setLayout(new FlowLayout());
@@ -139,11 +138,11 @@ public class TableHomeFrame extends JTable {
         currentGpaPanel.setLayout(new FlowLayout());
 
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
-        textGPA.setEditable(false);
-        textUpdatedGrade.setEditable(false);
 
         //adding top panel
         panelTop.add(pane);
+
+        currentGpaPanel.add(addDeleteBtnPanel);
 
         //setting relevant components in the relevant panels for middle panel
         currentGpaPanel.add(GPALabel);
@@ -152,17 +151,17 @@ public class TableHomeFrame extends JTable {
         addDeleteBtnPanel.add(btnDeleteGrade);
         labelPanel.add(improvingGradesLabel);
 
-        currentGpaPanel.add(addDeleteBtnPanel);
+
 
         panelMiddle.add(currentGpaPanel);
         //panelMiddle.add(addDeleteBtnPanel);
         panelMiddle.add(labelPanel);
 
         //setting bottom panel
-        yearPanel.add(yearLabel);
-        yearPanel.add(yearComboBox);
-        semesterPanel.add(semesterLabel);
-        semesterPanel.add(semesterComboBox);
+//        yearPanel.add(yearLabel);
+//        yearPanel.add(yearComboBox);
+//        semesterPanel.add(semesterLabel);
+//        semesterPanel.add(semesterComboBox);
         coursePanel.add(courseLabel);
         coursePanel.add(courseComboBox);
         desiredGradePanel.add(desiredGradeLabel);
@@ -175,8 +174,9 @@ public class TableHomeFrame extends JTable {
         panelBottom.add(semesterPanel);
         panelBottom.add(coursePanel);
         panelBottom.add(desiredGradePanel);
-        panelBottom.add(updatedGpaPanel);
         panelBottom.add(btnPanel);
+        panelBottom.add(updatedGpaPanel);
+
 
         //creating container to handle the frame content pane
         Container container = frame.getContentPane();
@@ -184,7 +184,7 @@ public class TableHomeFrame extends JTable {
         container.setLayout(new BorderLayout());
         //attaching relevant panels to the container
         container.add(panelTop,BorderLayout.NORTH);
-        container.add(panelMiddle,BorderLayout.WEST);
+        container.add(panelMiddle,BorderLayout.CENTER);
         container.add(panelBottom,BorderLayout.SOUTH);
 
         //frame properties

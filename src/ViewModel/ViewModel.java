@@ -5,7 +5,6 @@ import View.TableHomeFrame;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ViewModel {
 
