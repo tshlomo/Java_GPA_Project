@@ -94,7 +94,7 @@ public class AddGradeScreen extends JFrame {
 
             //button action listener
             btnAdd.addActionListener(e -> {
-                        viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), ((char) (semesterComboBox.getSelectedIndex() + 'a' + (yearComboBox.getSelectedIndex() * NUM_OF_SEMESTERS)))
+                        viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), semesterComboBox.getSelectedIndex() + 1 + yearComboBox.getSelectedIndex() * NUM_OF_SEMESTERS
                                 , Integer.valueOf(textQuiz.getText()), Double.parseDouble(textCredits.getText())
                                 , Integer.valueOf(textFinalTest.getText()));
                     }

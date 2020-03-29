@@ -17,10 +17,10 @@ public class ViewModel {
         dbActions = new DBActions();
         this.tableHomeFrame = tableHomeFrame;
     }
-    public void addNewGrade(String courseName, Character semester, Integer testGrade,Double credits, Integer finalGrade)
+    public void addNewGrade(String courseName, Integer semester, Integer testGrade,Double credits, Integer finalGrade)
     {
         try {
-            dbActions.addGrade(courseName,semester.toString(),testGrade,credits,finalGrade);
+            dbActions.addGrade(courseName,semester,testGrade,credits,finalGrade);
         } catch (SQLException e) {
             e.printStackTrace();
         }

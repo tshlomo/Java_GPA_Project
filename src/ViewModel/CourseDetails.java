@@ -8,11 +8,12 @@ public class CourseDetails {
     private static final Integer NUM_OF_SEMESTERS=3;
 
     private String courseName;
-    private String semester;
+    private Integer semester;
     private Integer testGrade;
     private Double credits;
     private Integer finalGrade;
-    public CourseDetails(String courseName, String semester, Integer testGrade, Double credits, Integer finalGrade) {
+
+    public CourseDetails(String courseName, Integer semester, Integer testGrade, Double credits, Integer finalGrade) {
         this.courseName = courseName;
         this.semester = semester;
         this.testGrade = testGrade;
@@ -20,8 +21,8 @@ public class CourseDetails {
         this.finalGrade = finalGrade;
     }
 
-    public String getYear(){
-       return String.valueOf(((semester.charAt(0)-'a')/NUM_OF_SEMESTERS)+1);
+    public Integer getYear(){
+       return (semester/NUM_OF_SEMESTERS)+1;
        //return String.valueOf(((Integer.valueOf(semester.toUpperCase()))-'A')/NUM_OF_SEMESTERS);
     }
 
@@ -29,8 +30,8 @@ public class CourseDetails {
         return courseName;
     }
 
-    public String getSemester() {
-        return String.valueOf(((semester.charAt(0)-'a')%NUM_OF_SEMESTERS));
+    public Integer getSemester() {
+        return semester % NUM_OF_SEMESTERS;
     }
 
     public Integer getTestGrade() {
