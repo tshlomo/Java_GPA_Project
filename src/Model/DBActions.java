@@ -28,6 +28,7 @@ public class DBActions {
             statement = conn.createStatement();
             logger.info("adding new grade...");
             statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
+            logger.info("grade has been successfully added");
 
         } catch (Exception e) {
             logger.warning(e.getMessage());
@@ -43,6 +44,7 @@ public class DBActions {
             statement = conn.createStatement();
             logger.info("deleting grade...");
             statement.executeUpdate("DELETE FROM GPA WHERE course =('" + coursename + "')");
+            logger.info("grade has been successfully deleted");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -58,6 +60,7 @@ public class DBActions {
             statement = conn.createStatement();
             logger.info("updating grade...");
             statement.executeUpdate("UPDATE GPA SET (semester= '" + semester + "' ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
+            logger.info("grade has been successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -84,7 +87,6 @@ public class DBActions {
     }
     //func closes all the connection params(we use it at the end of any method which is in this class)
     private void resetStatementAndRS() {
-    logger.info("closing connection to db...");
         if (statement != null) try {
             statement.close();
         } catch (Exception e) {
@@ -105,6 +107,7 @@ public class DBActions {
     conn=DBconnection.getDBConnection();
     try {
         statement = conn.createStatement();
+        logger.info("retrieving grade...");
         rs = statement.executeQuery("SELECT finalGrade FROM GPA WHERE course=('" + coursename + "')");
         rs.next();
         grade= rs.getInt("finalGrade");
@@ -121,6 +124,7 @@ public class DBActions {
         conn=DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
+            logger.info("retrieving credit...");
             rs = statement.executeQuery("SELECT credits FROM GPA WHERE course=('" + coursename + "')");
             rs.next();
             credit= rs.getDouble("credits");
