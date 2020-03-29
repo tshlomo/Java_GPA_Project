@@ -1,6 +1,8 @@
 
 package Model;
 
+import ViewModel.CourseDetails;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,21 +69,25 @@ public class DBActions {
     }
 
     //func connects and prints db table
-    public void printTable () throws SQLException {
+    public ArrayList<CourseDetails> getGradeTable () throws SQLException {
+        ArrayList<CourseDetails> courseDetails=new ArrayList<>();
         conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
             logger.info("retrieving grades table...");
             rs = statement.executeQuery("SELECT * FROM gpa");
             logger.info("printing grades table...");
+            //rs.next();
             while (rs.next()) {
-                System.out.println("course= " + rs.getString("course") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
+                courseDetails.add(new CourseDetails(rs.getString("course"),rs.getString("semester"),rs.getInt("testGrade")
+                        ,rs.getDouble("credits"),rs.getInt("finalGrade")));
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             resetStatementAndRS();
         }
+        return courseDetails;
     }
     //func closes all the connection params(we use it at the end of any method which is in this class)
     private void resetStatementAndRS() {

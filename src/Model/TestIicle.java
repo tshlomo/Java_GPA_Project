@@ -19,7 +19,7 @@ public class TestIicle {
 
 //        System.out.println("now deleting bdida--------------------------------------------------------------------------------------------------");
 //        dbact.deleteGrade("bdida");
-         dbact.printTable();
+         //dbact.printTable();
         //Connection x=DBconnection.GetDBConnection();
         //System.out.println(x);
     }

@@ -50,8 +50,6 @@ public class AddGradeScreen extends JFrame {
     public AddGradeScreen(){
         //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
-            //creating viewmodel
-            viewModel = new ViewModel();
             //creating labels
             courseLabel = new JLabel("Course");
             quizLabel = new JLabel("HW/Quiz grade");
@@ -95,10 +93,11 @@ public class AddGradeScreen extends JFrame {
             testPrecentage.setEditable(false);
 
             //button action listener
-            btnAdd.addActionListener(e ->
-                viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(),((char)(semesterComboBox.getSelectedIndex()+'A'+(yearComboBox.getSelectedIndex()*NUM_OF_SEMESTERS)))
-                        ,Integer.valueOf(textQuiz.getText()),Double.parseDouble(textCredits.getText())
-                        ,Integer.valueOf(textFinalTest.getText()))
+            btnAdd.addActionListener(e -> {
+                        viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), ((char) (semesterComboBox.getSelectedIndex() + 'a' + (yearComboBox.getSelectedIndex() * NUM_OF_SEMESTERS)))
+                                , Integer.valueOf(textQuiz.getText()), Double.parseDouble(textCredits.getText())
+                                , Integer.valueOf(textFinalTest.getText()));
+                    }
             );
 
 

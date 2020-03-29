@@ -1,11 +1,13 @@
 package View;
 import Model.DBActions;
+import ViewModel.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class TableHomeFrame extends JTable {
@@ -35,6 +37,7 @@ public class TableHomeFrame extends JTable {
     private AddGradeScreen screen;
 
     private DBActions dbActions;
+    private ViewModel viewModel;
 
     private JFrame frame;
     private JTable table;
@@ -59,6 +62,7 @@ public class TableHomeFrame extends JTable {
     private DefaultTableModel model;
 
     public TableHomeFrame() {
+        viewModel = new ViewModel(this);
         dbActions = new DBActions();
         //Frame
         frame = new JFrame("GPA");
@@ -101,21 +105,21 @@ public class TableHomeFrame extends JTable {
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
 
-                dbActions.printTable();
+                dbActions.getGradeTable();
             } catch (Exception q) { q.printStackTrace(); }
         });
 
         //table properties
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
         Font font = new Font("", 1, 16);
-        model = new DefaultTableModel();
+        model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
-        table.setModel(model);
+/*        table.setModel(model);
         table.setBackground(Color.white);
         table.setForeground(Color.red);
         table.setFont(font);
         table.setRowHeight(30);
-
+*/
         //ScrollPane
         pane = new JScrollPane(table);
 
@@ -191,5 +195,20 @@ public class TableHomeFrame extends JTable {
 
         //listener for add grade button
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen());
+
+        viewModel.updateTable();
+    }
+
+    public void updateGradesTable(ArrayList<CourseDetails> courseDetails){
+        Object[] row = new Object[6];
+        courseDetails.forEach((c) -> {
+            row[0] = c.getCourseName();
+            row[1] = c.getYear();
+            row[2] = c.getSemester();
+            row[3] = c.getTestGrade();
+            row[4] = c.getCredits();
+            row[5] = c.getFinalGrade();
+            model.addRow(row);
+        });
     }
 }
