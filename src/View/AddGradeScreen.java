@@ -1,5 +1,7 @@
 package View;
 
+import ViewModel.ViewModel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,6 +23,9 @@ public class AddGradeScreen extends JFrame {
             4,1,1,1,2};
     private static final String[] year = {"First Year","Second Year","Third Year"};
     private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
+    private static final Integer NUM_OF_SEMESTERS = 3;
+
+    private ViewModel viewModel;
 
     private static JFrame frame;
     private static JPanel yearPanel,semesterPanel,coursePanel,quizPanel,testPanel,creditsPanel,addBtnPanel;
@@ -42,46 +47,44 @@ public class AddGradeScreen extends JFrame {
     private static JTextField testPrecentage;
     private static JButton btnAdd;
 
-    static
-    {
-        //creating labels
-        courseLabel = new JLabel("Course");
-        quizLabel = new JLabel("HW/Quiz grade");
-        finalTestLabel = new JLabel("Final Test");
-        creditsLabel = new JLabel("Credits");
-        percentageSign = new JLabel("%");
-        percentageSign2 = new JLabel("%");
-        yearLabel = new JLabel("Year");
-        semesterLabel = new JLabel("Semester");
-
-        //Creating ComboBox
-        courseComboBox = new JComboBox(courses);
-        yearComboBox = new JComboBox(year);
-        semesterComboBox = new JComboBox(semester);
-
-        //creating text fields
-        textQuiz = new JTextField(3);
-        textFinalTest = new JTextField(3);
-        textCredits = new JTextField(3);
-        quizPrecentage = new JTextField(2);
-        testPrecentage = new JTextField(2);
-        //creating buttons
-        btnAdd = new JButton("Add");
-
-        //creating panels
-        yearPanel = new JPanel();
-        semesterPanel = new JPanel();
-        coursePanel = new JPanel();
-        quizPanel = new JPanel();
-        testPanel = new JPanel();
-        creditsPanel = new JPanel();
-        addBtnPanel = new JPanel();
-        frame = new JFrame("Add Grade");
-    }
-
     public AddGradeScreen(){
         //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
+            //creating viewmodel
+            viewModel = new ViewModel();
+            //creating labels
+            courseLabel = new JLabel("Course");
+            quizLabel = new JLabel("HW/Quiz grade");
+            finalTestLabel = new JLabel("Final Test");
+            creditsLabel = new JLabel("Credits");
+            percentageSign = new JLabel("%");
+            percentageSign2 = new JLabel("%");
+            yearLabel = new JLabel("Year");
+            semesterLabel = new JLabel("Semester");
+
+            //Creating ComboBox
+            courseComboBox = new JComboBox(courses);
+            yearComboBox = new JComboBox(year);
+            semesterComboBox = new JComboBox(semester);
+
+            //creating text fields
+            textQuiz = new JTextField(3);
+            textFinalTest = new JTextField(3);
+            textCredits = new JTextField(3);
+            quizPrecentage = new JTextField(2);
+            testPrecentage = new JTextField(2);
+            //creating buttons
+            btnAdd = new JButton("Add");
+
+            //creating panels
+            yearPanel = new JPanel();
+            semesterPanel = new JPanel();
+            coursePanel = new JPanel();
+            quizPanel = new JPanel();
+            testPanel = new JPanel();
+            creditsPanel = new JPanel();
+            addBtnPanel = new JPanel();
+            frame = new JFrame("Add Grade");
 
 
             //Setting the screen properties
@@ -92,9 +95,11 @@ public class AddGradeScreen extends JFrame {
             testPrecentage.setEditable(false);
 
             //button action listener
-            btnAdd.addActionListener(e -> {
-                //ViewModel.addGrade(yearComboBox.getSelectedIndex()+1,semesterComboBox.getSelectedIndex()+1,courseComboBox.getSelectedItem().toString(),textQuiz.toString(),textFinalTest.toString());
-            });
+            btnAdd.addActionListener(e ->
+                viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(),((char)(semesterComboBox.getSelectedIndex()+'A'+(yearComboBox.getSelectedIndex()*NUM_OF_SEMESTERS)))
+                        ,Integer.valueOf(textQuiz.getText()),Double.parseDouble(textCredits.getText())
+                        ,Integer.valueOf(textFinalTest.getText()))
+            );
 
 
             //setting panels layouts

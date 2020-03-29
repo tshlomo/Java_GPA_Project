@@ -34,7 +34,7 @@ public class Caluclations {
     }
 
 
-    public Double GpaByGrade(String coursename,Integer newGrade) throws SQLException {
+    public Double gpaByGrade(String coursename,Integer newGrade) throws SQLException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;
         Integer oldGrade =0;

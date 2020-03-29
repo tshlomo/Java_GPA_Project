@@ -27,7 +27,7 @@ public class DBActions {
 
             statement = conn.createStatement();
             logger.info("adding new grade...");
-            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
+            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + ((int) testGrade) + "," +((double) credit) + "," +((int) finalGrade) + ")");
 
         } catch (Exception e) {
             logger.warning(e.getMessage());
@@ -83,7 +83,7 @@ public class DBActions {
         }
     }
     //func closes all the connection params(we use it at the end of any method which is in this class)
-    public void resetStatementAndRS() {
+    private void resetStatementAndRS() {
     logger.info("closing connection to db...");
         if (statement != null) try {
             statement.close();
