@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class DBconnection {
     static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    static String protocol = "jdbc:derby:gagadb;create=true";
+    static String protocol = "jdbc:derby:gpadb;create=true";
     private static Logger logger=Logger.getLogger(DBconnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;
@@ -39,7 +39,7 @@ public class DBconnection {
                         rs = conn.getMetaData().getTables(null, "APP", "%", null);
                         if(!rs.next()){
                             logger.info("it seems that GPA table does not exist. don't worry we are making a new one right now...");
-                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Semester VARCHAR(255),TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
+                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
                         }
 
                     } catch (Exception e) {
