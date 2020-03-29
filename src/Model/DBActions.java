@@ -30,7 +30,7 @@ public class DBActions {
             statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.warning(e.getMessage());
         } finally {
             resetStatementAndRS();
         }
