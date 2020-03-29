@@ -31,6 +31,7 @@ public class DBActions {
 
         } catch (Exception e) {
             logger.warning(e.getMessage());
+            e.printStackTrace();
         } finally {
             resetStatementAndRS();
         }

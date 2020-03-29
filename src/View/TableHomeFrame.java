@@ -1,4 +1,6 @@
 package View;
+import Model.DBActions;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -32,6 +34,8 @@ public class TableHomeFrame extends JTable {
 
     private AddGradeScreen screen;
 
+    private DBActions dbActions;
+
     private JFrame frame;
     private JTable table;
     private JPanel panelTop,panelMiddle,panelBottom,labelPanel,yearPanel,semesterPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
@@ -55,6 +59,7 @@ public class TableHomeFrame extends JTable {
     private DefaultTableModel model;
 
     public TableHomeFrame() {
+        dbActions = new DBActions();
         //Frame
         frame = new JFrame("GPA");
         //Table
@@ -92,6 +97,13 @@ public class TableHomeFrame extends JTable {
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
         btnDesiredGradeUpdate = new JButton("Update GPA");
+
+        btnDesiredGradeUpdate.addActionListener(e -> {
+            try{
+
+                dbActions.printTable();
+            } catch (Exception q) { q.printStackTrace(); }
+        });
 
         //table properties
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
