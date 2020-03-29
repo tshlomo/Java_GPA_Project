@@ -122,7 +122,7 @@ public class AddGradeScreen extends JFrame {
             //yearComboBox.setBounds(120,20,152,25);
             //semesterComboBox.setBounds(120,50,152,25);
             //courseComboBox.setBounds(120,80,152,25);
-            courseComboBox.setSize(150,25);
+            //courseComboBox.setSize(150,25);
 
             //setting panels and frame layouts
             yearPanel.setLayout(new FlowLayout());
@@ -132,41 +132,50 @@ public class AddGradeScreen extends JFrame {
             testPanel.setLayout(new FlowLayout());
             creditsPanel.setLayout(new FlowLayout());
             addBtnPanel.setLayout(new FlowLayout());
-            frame.setLayout(new GridLayout(8,1));
 
             //Adding components to the frame
             coursePanel.add(courseLabel);
-            quizPanel.add(quizLabel);
-            testPanel.add(finalTestLabel);
-            creditsPanel.add(creditsLabel);
             coursePanel.add(courseComboBox);
+
+            quizPanel.add(quizLabel);
             quizPanel.add(textQuiz);
-            testPanel.add(textFinalTest);
-            creditsPanel.add(textCredits);
-            addBtnPanel.add(btnAdd);
             quizPanel.add(quizPrecentage);
-            testPanel.add(testPrecentage);
             quizPanel.add(percentageSign);
+
+            testPanel.add(finalTestLabel);
+            testPanel.add(textFinalTest);
+            testPanel.add(testPrecentage);
             testPanel.add(percentageSign2);
+
+            creditsPanel.add(creditsLabel);
+            creditsPanel.add(textCredits);
+
+            addBtnPanel.add(btnAdd);
+
             yearPanel.add(yearLabel);
-            semesterPanel.add(semesterLabel);
             yearPanel.add(yearComboBox);
+
+            semesterPanel.add(semesterLabel);
             semesterPanel.add(semesterComboBox);
 
+
+            Container container = frame.getContentPane();
+            //setting container layout
+            container.setLayout(new GridLayout(8,1,5,5));
             //attaching panels to the main frame
-            frame.add(yearPanel);
-            frame.add(semesterPanel);
-            frame.add(coursePanel);
-            frame.add(quizPanel);
-            frame.add(testPanel);
-            frame.add(creditsPanel);
-            frame.add(addBtnPanel);
+            container.add(yearPanel);
+            container.add(semesterPanel);
+            container.add(coursePanel);
+            container.add(quizPanel);
+            container.add(testPanel);
+            container.add(creditsPanel);
+            container.add(addBtnPanel);
 
             //setting combobox action listener to change credits points by the course change
             courseComboBox.addActionListener(e -> textCredits.setText(credits[courseComboBox.getSelectedIndex()].toString()));
 
             //setting the frame visible
-            frame.setSize(400,400);
+            frame.setSize(500,500);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });

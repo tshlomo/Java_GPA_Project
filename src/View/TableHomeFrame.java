@@ -27,7 +27,7 @@ public class TableHomeFrame extends JTable {
 
     private JFrame frame;
     private JTable table;
-    private JPanel panelTop,panelMiddle,panelBottom;
+    private JPanel panelTop,panelMiddle,panelBottom,labelPanel,yearPanel,semesterPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
     private JComboBox courseComboBox;
     private JComboBox yearComboBox;
     private JComboBox semesterComboBox;
@@ -58,6 +58,15 @@ public class TableHomeFrame extends JTable {
         panelBottom = new JPanel();
         panelTop = new JPanel();
         panelMiddle = new JPanel();
+        labelPanel = new JPanel();
+        yearPanel = new JPanel();
+        coursePanel = new JPanel();
+        semesterPanel = new JPanel();
+        desiredGradePanel = new JPanel();
+        updatedGpaPanel = new JPanel();
+        btnPanel = new JPanel();
+        addDeleteBtnPanel = new JPanel();
+        currentGpaPanel = new JPanel();
         //ComboBox
         courseComboBox = new JComboBox(courses);
         yearComboBox = new JComboBox(year);
@@ -130,59 +139,89 @@ public class TableHomeFrame extends JTable {
 
 
         //setting layouts
-        panelBottom.setLayout(new FlowLayout());
+        panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
+        //panelBottom.setLayout(new GridLayout(7,1,5,5));
         panelTop.setLayout(new FlowLayout());
-        panelMiddle.setLayout(new FlowLayout());
+        panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
+        labelPanel.setLayout(new FlowLayout());
+        yearPanel.setLayout(new FlowLayout());
+        semesterPanel.setLayout(new FlowLayout());
+        coursePanel.setLayout(new FlowLayout());
+        desiredGradePanel.setLayout(new FlowLayout());
+        btnPanel.setLayout(new FlowLayout());
+        updatedGpaPanel.setLayout(new FlowLayout());
+        addDeleteBtnPanel.setLayout(new FlowLayout());
+        currentGpaPanel.setLayout(new FlowLayout());
         //Container container = frame.getContentPane();
         //container.setLayout(new BorderLayout());
-        frame.setLayout(new BorderLayout());
 
 
-        //frame properties
-        frame.setSize(900, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
 
-        improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,18));
+
+        improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
         textGPA.setEditable(false);
         textUpdatedGrade.setEditable(false);
 
-        //adding the table via pane to the top panel and setting flow layout
+        //adding top panel
         panelTop.add(pane);
-        //Adding ComboBox to bottom panel
-        panelBottom.add(yearComboBox);
-        panelBottom.add(semesterComboBox);
-        panelBottom.add(courseComboBox);
-        //Adding text fields
-        panelBottom.add(textGPA);
-        panelBottom.add(textDesiredGrade);
-        panelBottom.add(textUpdatedGrade);
-        panelBottom.add(desiredGradeLabel);
-        //Adding labels
-        panelMiddle.add(GPALabel);
-        panelBottom.add(btnDesiredGradeUpdate);
-        panelBottom.add(courseLabel);
-        panelBottom.add(improvingGradesLabel);
-        panelBottom.add(updatedGPA);
-        panelBottom.add(yearLabel);
-        panelBottom.add(semesterLabel);
-        //Adding buttons
-        panelMiddle.add(btnAddGrade);
-        panelMiddle.add(btnDeleteGrade);
-        panelBottom.add(btnDesiredGradeUpdate);
+
+        //setting middle panel + label panel into middle panel
+        currentGpaPanel.add(GPALabel);
+        currentGpaPanel.add(textGPA);
+        addDeleteBtnPanel.add(btnAddGrade);
+        addDeleteBtnPanel.add(btnDeleteGrade);
+        labelPanel.add(improvingGradesLabel);
+
+        currentGpaPanel.add(addDeleteBtnPanel);
+
+        panelMiddle.add(currentGpaPanel);
+        //panelMiddle.add(addDeleteBtnPanel);
+        panelMiddle.add(labelPanel);
+
+        //setting bottom panel
+        yearPanel.add(yearLabel);
+        yearPanel.add(yearComboBox);
+        semesterPanel.add(semesterLabel);
+        semesterPanel.add(semesterComboBox);
+        coursePanel.add(courseLabel);
+        coursePanel.add(courseComboBox);
+        desiredGradePanel.add(desiredGradeLabel);
+        desiredGradePanel.add(textDesiredGrade);
+        updatedGpaPanel.add(updatedGPA);
+        updatedGpaPanel.add(textUpdatedGrade);
+        btnPanel.add(btnDesiredGradeUpdate);
+
+        panelBottom.add(yearPanel);
+        panelBottom.add(semesterPanel);
+        panelBottom.add(coursePanel);
+        panelBottom.add(desiredGradePanel);
+        panelBottom.add(updatedGpaPanel);
+        panelBottom.add(btnPanel);
+
+
+
         //Separators
         //frame.add(topSeparator);
         //frame.add(bottomSeperator);
 
-        frame.add(panelTop,BorderLayout.NORTH);
-        frame.add(panelMiddle,BorderLayout.CENTER);
-        frame.add(panelBottom,BorderLayout.SOUTH);
-//        container.add("North",panelTop);
-//        container.add("South",panelBottom);
-//        container.add("Center",panelMiddle);
 
+//        frame.add(panelTop,BorderLayout.NORTH);
+//        frame.add(panelMiddle,BorderLayout.CENTER);
+//        frame.add(panelBottom,BorderLayout.SOUTH);
+        Container container = frame.getContentPane();
+        //setting container layout
+        container.setLayout(new BorderLayout());
+
+        container.add(panelTop,BorderLayout.NORTH);
+        container.add(panelMiddle,BorderLayout.WEST);
+        container.add(panelBottom,BorderLayout.SOUTH);
+
+        //frame properties
+        //frame.setSize(1400, 1000);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
 
         //listener for add grade button
         btnAddGrade.addActionListener(new ActionListener() {
