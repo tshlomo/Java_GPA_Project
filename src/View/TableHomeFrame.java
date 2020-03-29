@@ -25,6 +25,8 @@ public class TableHomeFrame extends JTable {
     private static final String[] year = {"First Year","Second Year","Third Year"};
     private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
 
+    private AddGradeScreen screen;
+
     private JFrame frame;
     private JTable table;
     private JPanel panelTop,panelMiddle,panelBottom,labelPanel,yearPanel,semesterPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
@@ -80,9 +82,9 @@ public class TableHomeFrame extends JTable {
         yearLabel = new JLabel("Year");
         semesterLabel = new JLabel("Semester");
         //TextFields
-        textGPA = new JTextField();
-        textDesiredGrade = new JTextField();
-        textUpdatedGrade = new JTextField();
+        textGPA = new JTextField(3);
+        textDesiredGrade = new JTextField(3);
+        textUpdatedGrade = new JTextField(3);
         //Buttons
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
@@ -224,13 +226,7 @@ public class TableHomeFrame extends JTable {
         frame.setLocationRelativeTo(null);
 
         //listener for add grade button
-        btnAddGrade.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddGradeScreen screen = new AddGradeScreen();
-                //screen.addGradeScreen();
-            }
-        });
+        btnAddGrade.addActionListener(e -> screen = new AddGradeScreen());
     }
 }
 

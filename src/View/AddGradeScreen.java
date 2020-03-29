@@ -60,11 +60,11 @@ public class AddGradeScreen extends JFrame {
         semesterComboBox = new JComboBox(semester);
 
         //creating text fields
-        textQuiz = new JTextField();
-        textFinalTest = new JTextField();
-        textCredits = new JTextField();
-        quizPrecentage = new JTextField();
-        testPrecentage = new JTextField();
+        textQuiz = new JTextField(3);
+        textFinalTest = new JTextField(3);
+        textCredits = new JTextField(3);
+        quizPrecentage = new JTextField(2);
+        testPrecentage = new JTextField(2);
         //creating buttons
         btnAdd = new JButton("Add");
 
@@ -175,7 +175,8 @@ public class AddGradeScreen extends JFrame {
             courseComboBox.addActionListener(e -> textCredits.setText(credits[courseComboBox.getSelectedIndex()].toString()));
 
             //setting the frame visible
-            frame.setSize(500,500);
+            //frame.setSize(500,500);
+            frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
