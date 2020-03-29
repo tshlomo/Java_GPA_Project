@@ -80,6 +80,7 @@ public class AddGradeScreen extends JFrame {
     }
 
     public AddGradeScreen(){
+        //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
 
 
@@ -90,41 +91,13 @@ public class AddGradeScreen extends JFrame {
             quizPrecentage.setEditable(false);
             testPrecentage.setEditable(false);
 
-/*
-            //labels dimensions
-            yearLabel.setBounds(20,20,100,25);
-            semesterLabel.setBounds(20,50,100,25);
-            courseLabel.setBounds(20,80,100,25);
-            quizLabel.setBounds(20,110,100,25);
-            finalTestLabel.setBounds(20,140,100,25);
-            creditsLabel.setBounds(20,170,100,25);
-            percentageSign.setBounds(262,110,40,25);
-            percentageLabel2.setBounds(262,140,40,25);
-
-
-            //text fields dimensions
-            textQuiz.setBounds(120,110,100,25);
-            textFinalTest.setBounds(120,140,100,25);
-            textCredits.setBounds(120,170,100,25);
-            textCredits.setEditable(false);
-            quizPrecentage.setBounds(222,110,40,25);
-            testPrecentage.setBounds(222,140,40,25);
-
-            //buttons dimensions
-            btnAdd.setBounds(20,210,100,25);
-*/
             //button action listener
             btnAdd.addActionListener(e -> {
                 //ViewModel.addGrade(yearComboBox.getSelectedIndex()+1,semesterComboBox.getSelectedIndex()+1,courseComboBox.getSelectedItem().toString(),textQuiz.toString(),textFinalTest.toString());
             });
 
-            //ComboBox dimensions
-            //yearComboBox.setBounds(120,20,152,25);
-            //semesterComboBox.setBounds(120,50,152,25);
-            //courseComboBox.setBounds(120,80,152,25);
-            //courseComboBox.setSize(150,25);
 
-            //setting panels and frame layouts
+            //setting panels layouts
             yearPanel.setLayout(new FlowLayout());
             semesterPanel.setLayout(new FlowLayout());
             coursePanel.setLayout(new FlowLayout());
@@ -133,7 +106,7 @@ public class AddGradeScreen extends JFrame {
             creditsPanel.setLayout(new FlowLayout());
             addBtnPanel.setLayout(new FlowLayout());
 
-            //Adding components to the frame
+            //Adding components to the relevant panels
             coursePanel.add(courseLabel);
             coursePanel.add(courseComboBox);
 
@@ -158,7 +131,6 @@ public class AddGradeScreen extends JFrame {
             semesterPanel.add(semesterLabel);
             semesterPanel.add(semesterComboBox);
 
-
             Container container = frame.getContentPane();
             //setting container layout
             container.setLayout(new GridLayout(8,1,5,5));
@@ -177,6 +149,7 @@ public class AddGradeScreen extends JFrame {
             //setting the frame visible
             //frame.setSize(500,500);
             frame.pack();
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });

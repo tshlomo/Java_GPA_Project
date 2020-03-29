@@ -7,7 +7,6 @@ public class Driver {
         SwingUtilities.invokeLater(() -> {
             try {
                 TableHomeFrame window = new TableHomeFrame();
-                window.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
