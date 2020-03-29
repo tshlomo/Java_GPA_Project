@@ -27,7 +27,7 @@ public class DBActions {
 
             statement = conn.createStatement();
             logger.info("adding new grade...");
-            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + ((int) testGrade) + "," +((double) credit) + "," +((int) finalGrade) + ")");
+            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
 
         } catch (Exception e) {
             logger.warning(e.getMessage());

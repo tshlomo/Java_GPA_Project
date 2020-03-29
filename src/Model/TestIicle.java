@@ -13,7 +13,7 @@ public class TestIicle {
         //int x=cal.calculate_GPA();
         //System.out.println(x);
         dbact.addGrade("math1","c",80,2.0,98);
-        dbact.printTable();
+        //dbact.printTable();
         //Double x=cal.gpaByGrade("infi",20);
         //System.out.println(" lala   "+x);
 

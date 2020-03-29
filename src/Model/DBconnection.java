@@ -28,7 +28,7 @@ public class DBconnection {
                 if(conn == null)
                 {
                     try {
-                        //Instantiating the dirver class will indirectly register
+                        //Instantiating the driver class will indirectly register
                         //this driver as an available driver for DriverManager
                         Class.forName(driver);
                         //Getting a connection by calling getConnection
