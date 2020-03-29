@@ -4,8 +4,6 @@ import Model.DBActions;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class TableHomeFrame extends JTable {
@@ -96,11 +94,10 @@ public class TableHomeFrame extends JTable {
         //Buttons
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
-        btnDesiredGradeUpdate = new JButton("Update GPA");
+        btnDesiredGradeUpdate = new JButton("Calculate new GPA");
 
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
-
                 dbActions.printTable();
             } catch (Exception q) { q.printStackTrace(); }
         });
@@ -122,7 +119,7 @@ public class TableHomeFrame extends JTable {
         //setting layouts
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
         //panelBottom.setLayout(new GridLayout(7,1,5,5));
-        panelTop.setLayout(new FlowLayout());
+        panelTop.setLayout(new BorderLayout());
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
         labelPanel.setLayout(new FlowLayout());
         yearPanel.setLayout(new FlowLayout());
@@ -135,11 +132,14 @@ public class TableHomeFrame extends JTable {
         currentGpaPanel.setLayout(new FlowLayout());
 
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
+        improvingGradesLabel.setForeground(Color.RED);
         textGPA.setEditable(false);
         textUpdatedGrade.setEditable(false);
 
         //adding top panel
         panelTop.add(pane);
+
+        currentGpaPanel.add(addDeleteBtnPanel);
 
         //setting relevant components in the relevant panels for middle panel
         currentGpaPanel.add(GPALabel);
@@ -147,8 +147,6 @@ public class TableHomeFrame extends JTable {
         addDeleteBtnPanel.add(btnAddGrade);
         addDeleteBtnPanel.add(btnDeleteGrade);
         labelPanel.add(improvingGradesLabel);
-
-        currentGpaPanel.add(addDeleteBtnPanel);
 
         panelMiddle.add(currentGpaPanel);
         //panelMiddle.add(addDeleteBtnPanel);
@@ -167,12 +165,12 @@ public class TableHomeFrame extends JTable {
         updatedGpaPanel.add(textUpdatedGrade);
         btnPanel.add(btnDesiredGradeUpdate);
 
-        panelBottom.add(yearPanel);
-        panelBottom.add(semesterPanel);
+        //panelBottom.add(yearPanel);
+        //panelBottom.add(semesterPanel);
         panelBottom.add(coursePanel);
         panelBottom.add(desiredGradePanel);
-        panelBottom.add(updatedGpaPanel);
         panelBottom.add(btnPanel);
+        panelBottom.add(updatedGpaPanel);
 
         //creating container to handle the frame content pane
         Container container = frame.getContentPane();
@@ -180,7 +178,7 @@ public class TableHomeFrame extends JTable {
         container.setLayout(new BorderLayout());
         //attaching relevant panels to the container
         container.add(panelTop,BorderLayout.NORTH);
-        container.add(panelMiddle,BorderLayout.WEST);
+        container.add(panelMiddle,BorderLayout.CENTER);
         container.add(panelBottom,BorderLayout.SOUTH);
 
         //frame properties

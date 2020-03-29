@@ -91,8 +91,8 @@ public class AddGradeScreen extends JFrame {
 
 
 
-            quizPrecentage.setEditable(false);
-            testPrecentage.setEditable(false);
+//            quizPrecentage.setEditable(false);
+//            testPrecentage.setEditable(false);
 
             //button action listener
             btnAdd.addActionListener(e ->

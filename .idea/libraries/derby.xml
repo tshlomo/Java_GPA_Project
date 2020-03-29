@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="derby">
     <CLASSES>
-      <root url="jar://C:/Program Files/Java/jdk-14/db/lib/derbyclient.jar!/" />
-      <root url="jar://C:/Program Files/Java/jdk-14/db/lib/derbytools.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-api-2.13.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-core-2.13.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-1.2-api-2.13.1.jar!/" />
+      <root url="jar://C:/Program Files/Java/jdk-11.0.6/db/lib/derby.jar!/" />
+      <root url="jar://C:/Program Files/Java/jdk-11.0.6/db/lib/derbyclient.jar!/" />
+      <root url="jar://C:/Program Files/Java/jdk-11.0.6/db/lib/derbytools.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

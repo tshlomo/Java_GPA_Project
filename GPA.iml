@@ -61,5 +61,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="derby" level="project" />
+    <orderEntry type="library" name="log4j-1.2-api-2.13.1" level="project" />
   </component>
 </module>
