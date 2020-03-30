@@ -25,8 +25,6 @@ public class AddGradeScreen extends JFrame {
     private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
     private static final Integer NUM_OF_SEMESTERS = 3;
 
-    private ViewModel viewModel;
-
     private static JFrame frame;
     private static JPanel yearPanel,semesterPanel,coursePanel,quizPanel,testPanel,creditsPanel,addBtnPanel;
     private static JLabel courseLabel;
@@ -94,7 +92,7 @@ public class AddGradeScreen extends JFrame {
 
             //button action listener
             btnAdd.addActionListener(e -> {
-                        viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), semesterComboBox.getSelectedIndex() + 1 + yearComboBox.getSelectedIndex() * NUM_OF_SEMESTERS
+                        ViewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1,  semesterComboBox.getSelectedIndex() + 1
                                 , Integer.valueOf(textQuiz.getText()), Double.parseDouble(textCredits.getText())
                                 , Integer.valueOf(textFinalTest.getText()));
                     }
@@ -157,9 +155,5 @@ public class AddGradeScreen extends JFrame {
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
-    }
-
-    public void addGradeScreen() {
-
     }
 }

@@ -61,6 +61,9 @@ public class TableHomeFrame extends JTable {
     private JScrollPane pane;
     private DefaultTableModel model;
 
+    //table properties
+    String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
+
     public TableHomeFrame() {
         viewModel = new ViewModel(this);
         dbActions = new DBActions();
@@ -109,8 +112,6 @@ public class TableHomeFrame extends JTable {
             } catch (Exception q) { q.printStackTrace(); }
         });
 
-        //table properties
-        String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
         Font font = new Font("", 1, 16);
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
@@ -196,11 +197,16 @@ public class TableHomeFrame extends JTable {
         //listener for add grade button
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen());
 
-        viewModel.updateTable();
+        viewModel.updateTable(true);
     }
 
-    public void updateGradesTable(ArrayList<CourseDetails> courseDetails){
+    public void updateGradesTable(ArrayList<CourseDetails> courseDetails,boolean clearTable){
         Object[] row = new Object[6];
+        //clearing the table first
+        if(clearTable) {
+            table.setModel(new DefaultTableModel(null, columns));
+            model= (DefaultTableModel) table.getModel();
+        }
         courseDetails.forEach((c) -> {
             row[0] = c.getCourseName();
             row[1] = c.getYear();
