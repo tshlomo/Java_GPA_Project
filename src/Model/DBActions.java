@@ -21,13 +21,13 @@ public class DBActions {
         logger=Logger.getLogger(DBActions.class.getName());
     }
     //this func receives all of the params of the db table and and updates it with insert statement
-    public void addGrade(String course, String semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
+    public void addGrade(String course,Integer shana, Integer semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
             logger.info("adding new grade...");
-            statement.execute("INSERT INTO GPA VALUES ('" + course + "','" + semester + "'," + testGrade + "," + credit + "," + finalGrade + ")");
+            statement.execute("INSERT INTO GPA VALUES ('" + course + "',"+shana+"," + semester + "," + testGrade + "," + credit + "," + finalGrade + ")");
             logger.info("grade has been successfully added");
 
         } catch (Exception e) {
@@ -53,13 +53,13 @@ public class DBActions {
     }
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
-    public void editGrade(String course, String semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
+    public void editGrade(String course, Integer semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
             logger.info("updating grade...");
-            statement.executeUpdate("UPDATE GPA SET (semester= '" + semester + "' ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
+            statement.executeUpdate("UPDATE GPA SET (semester= " + semester + " ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
             logger.info("grade has been successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class DBActions {
             rs = statement.executeQuery("SELECT * FROM gpa");
             logger.info("printing grades table...");
             while (rs.next()) {
-                System.out.println("course= " + rs.getString("course") + " semester= " + rs.getString("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
+                System.out.println("course= " + rs.getString("course") + "  year= " + rs.getInt("shana")+ " semester= " + rs.getInt("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
             }
         } catch (Exception e) {
             e.printStackTrace();
