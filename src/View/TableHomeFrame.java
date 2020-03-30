@@ -110,32 +110,31 @@ public class TableHomeFrame extends JTable {
         textGPA.setEditable(false);
         textUpdatedGrade = new JTextField(3);
         textUpdatedGrade.setEditable(false);
-        textDesiredGrade = new JFormattedTextField(3);
+        textDesiredGrade = new JTextField(3);
 
         textDesiredGrade.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
                 char c = ke.getKeyChar();
-                if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                String data = textDesiredGrade.getText();
+                Integer val = -1;
+                if(data.length()>1)
+                try {
+                    val = Integer.parseInt(data);
+                    if (val >= 100) {
+                        textDesiredGrade.setText("100");
+                    }
+                } catch (Exception e) {e.printStackTrace();}
+                if(val >= 100) {
+                    ke.consume();
+                }
+                else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                     desiredGradeLabelValidation.setText("");
                 }
                 else {
                     ke.consume();
                     desiredGradeLabelValidation.setText("* Enter only digits from 0 to 100");
                 }
-            }
-        });
-
-        textDesiredGrade.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                String data = textDesiredGrade.getText();
-                    try {
-                        int val = Integer.parseInt(data);
-                        if (val >= 100) {
-                            textDesiredGrade.setText("100");
-                        }
-                    } catch (Exception ke) {}
             }
         });
 
