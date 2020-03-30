@@ -15,7 +15,6 @@ public class Caluclations {
         return score;
     }
 
-
     //func receives grades array + correspondent credits array and calculates gpa
     public Double calculate_GPA() throws SQLException {
         Double credits_sum=0.0;

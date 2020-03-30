@@ -7,6 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -97,7 +100,7 @@ public class TableHomeFrame extends JTable {
         yearLabel = new JLabel("Year");
         semesterLabel = new JLabel("Semester");
         //TextFields
-        textGPA = new JTextField(3);
+        textGPA = new JTextField(4);
         textDesiredGrade = new JTextField(3);
         textUpdatedGrade = new JTextField(3);
         //Buttons
@@ -197,6 +200,8 @@ public class TableHomeFrame extends JTable {
         //listener for add grade button
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen());
 
+        btnDeleteGrade.addActionListener(e -> ViewModel.deleteCourse(table.getValueAt(table.getSelectedRow(),0).toString()));
+
         viewModel.updateTable(true);
     }
 
@@ -216,5 +221,9 @@ public class TableHomeFrame extends JTable {
             row[5] = c.getFinalGrade();
             model.addRow(row);
         });
+    }
+
+    public void updateGPA(Double calculate_gpa) {
+        textGPA.setText(new DecimalFormat("##.##").format(calculate_gpa));
     }
 }
