@@ -53,13 +53,13 @@ public class DBActions {
     }
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
-    public void editGrade(String course, Integer semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
+    public void editGrade(String course,Integer shana, Integer semester, Integer testGrade, Double credit, Integer finalGrade) throws SQLException {
         conn = DBconnection.getDBConnection();
         try {
 
             statement = conn.createStatement();
             logger.info("updating grade...");
-            statement.executeUpdate("UPDATE GPA SET (semester= " + semester + " ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
+            statement.executeUpdate("UPDATE GPA SET course='"+course+"',shana= " + shana + ", semester= " + semester + " ,testGrade=" + testGrade + ",credits=" + credit + " ,finalGrade=" + finalGrade + " WHERE course='" + course + "'");
             logger.info("grade has been successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
