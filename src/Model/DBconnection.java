@@ -39,7 +39,7 @@ public class DBconnection {
                         rs = conn.getMetaData().getTables(null, "APP", "%", null);
                         if(!rs.next()){
                             logger.info("it seems that GPA table does not exist. don't worry we are making a new one right now...");
-                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
+                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Shana INT,Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
                         }
 
                     } catch (Exception e) {

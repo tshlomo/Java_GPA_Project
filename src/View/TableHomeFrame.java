@@ -9,6 +9,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -65,6 +68,9 @@ public class TableHomeFrame extends JTable {
     private DefaultTableModel model;
 
 
+    //table properties
+    private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
+
     public TableHomeFrame() {
         viewModel = new ViewModel(this);
         dbActions = new DBActions();
@@ -100,7 +106,7 @@ public class TableHomeFrame extends JTable {
         desiredGradeLabelValidation = new JLabel("");
         desiredGradeLabelValidation.setForeground(Color.RED);
         //TextFields
-        textGPA = new JTextField(3);
+        textGPA = new JTextField(4);
         textGPA.setEditable(false);
         textUpdatedGrade = new JTextField(3);
         textUpdatedGrade.setEditable(false);
@@ -145,7 +151,6 @@ public class TableHomeFrame extends JTable {
         });
 
         //table properties
-        String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
         Font font = new Font("", 1, 16);
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
@@ -231,11 +236,18 @@ public class TableHomeFrame extends JTable {
         //listener for add grade button
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen());
 
-        viewModel.updateTable();
+        btnDeleteGrade.addActionListener(e -> ViewModel.deleteCourse(table.getValueAt(table.getSelectedRow(),0).toString()));
+
+        viewModel.updateTable(true);
     }
 
-    public void updateGradesTable(ArrayList<CourseDetails> courseDetails){
+    public void updateGradesTable(ArrayList<CourseDetails> courseDetails,boolean clearTable){
         Object[] row = new Object[6];
+        //clearing the table first
+        if(clearTable) {
+            table.setModel(new DefaultTableModel(null, columns));
+            model= (DefaultTableModel) table.getModel();
+        }
         courseDetails.forEach((c) -> {
             row[0] = c.getCourseName();
             row[1] = c.getYear();
@@ -245,5 +257,9 @@ public class TableHomeFrame extends JTable {
             row[5] = c.getFinalGrade();
             model.addRow(row);
         });
+    }
+
+    public void updateGPA(Double calculate_gpa) {
+        textGPA.setText(new DecimalFormat("##.##").format(calculate_gpa));
     }
 }

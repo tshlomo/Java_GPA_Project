@@ -3,33 +3,30 @@ package View;
 import ViewModel.ViewModel;
 
 import javax.swing.*;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 
 public class AddGradeScreen extends JFrame {
 
-    private static final String[] courses = {"Linear algebra","Infinitesimal calculus 1","Computer science Introduction","Introduction to discrete math"
-            ,"Probability","Infinitesimal calculus 2","Computer structure and switching theory","Data Structures","Advanced Programming Workshop"
-            ,"Computer organization and threshold language","Database systems","Computer communication networks","Graph theory","Object oriented programming"
-            ,"Automatic and formal languages","Software engineering","Operating systems","Algorithm design and analysis"
-            ,"Computational and Computational Algorithms","Mathematical tools","Machine learning","Programming in the Web Environment"
-            ,"DevOPS","Development of server side systems in an open source environment","Developing a client side in an Android environment","Compilation Theory"
-            ,"Involvement in Israeli society","Yoga","Basketball team","Football team","Information Society"};
-    private static final Object[] credits = {5,6.5,5,5,
-            3.5,5,4,4,3,
-            2.5,4,3.5,3.5,5,
-            4,4,3.5,4,
-            4,5,3,3,
-            3,3,3.5,3.5,
-            4,1,1,1,2};
-    private static final String[] year = {"First Year","Second Year","Third Year"};
-    private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
+    private static final String[] courses = {"Linear algebra", "Infinitesimal calculus 1", "Computer science Introduction", "Introduction to discrete math"
+            , "Probability", "Infinitesimal calculus 2", "Computer structure and switching theory", "Data Structures", "Advanced Programming Workshop"
+            , "Computer organization and threshold language", "Database systems", "Computer communication networks", "Graph theory", "Object oriented programming"
+            , "Automatic and formal languages", "Software engineering", "Operating systems", "Algorithm design and analysis"
+            , "Computational and Computational Algorithms", "Mathematical tools", "Machine learning", "Programming in the Web Environment"
+            , "DevOPS", "Development of server side systems in an open source environment", "Developing a client side in an Android environment", "Compilation Theory"
+            , "Involvement in Israeli society", "Yoga", "Basketball team", "Football team", "Information Society"};
+    private static final Object[] credits = {5, 6.5, 5, 5,
+            3.5, 5, 4, 4, 3,
+            2.5, 4, 3.5, 3.5, 5,
+            4, 4, 3.5, 4,
+            4, 5, 3, 3,
+            3, 3, 3.5, 3.5,
+            4, 1, 1, 1, 2};
+    private static final String[] year = {"First Year", "Second Year", "Third Year"};
+    private static final String[] semester = {"First Semester", "Second Semester", "Third Semester"};
     private static final Integer NUM_OF_SEMESTERS = 3;
 
-    private ViewModel viewModel;
-
     private static JFrame frame;
-    private static JPanel yearPanel,semesterPanel,coursePanel,quizPanel,testPanel,creditsPanel,addBtnPanel;
+    private static JPanel yearPanel, semesterPanel, coursePanel, quizPanel, testPanel, creditsPanel, addBtnPanel;
     private static JLabel courseLabel;
     private static JLabel quizLabel;
     private static JLabel finalTestLabel;
@@ -49,7 +46,7 @@ public class AddGradeScreen extends JFrame {
     private static JButton btnAdd;
 
 
-    public AddGradeScreen(){
+    public AddGradeScreen() {
         //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
             //creating labels
@@ -61,18 +58,22 @@ public class AddGradeScreen extends JFrame {
             percentageSign2 = new JLabel("%");
             yearLabel = new JLabel("Year");
             semesterLabel = new JLabel("Semester");
+
             //Creating ComboBox
             courseComboBox = new JComboBox(courses);
             yearComboBox = new JComboBox(year);
             semesterComboBox = new JComboBox(semester);
+
             //creating text fields
             textQuiz = new JTextField(3);
             textFinalTest = new JTextField(3);
             textCredits = new JTextField(3);
             quizPrecentage = new JTextField(2);
             testPrecentage = new JTextField(2);
+
             //creating buttons
             btnAdd = new JButton("Add");
+
             //creating panels
             yearPanel = new JPanel();
             semesterPanel = new JPanel();
@@ -81,14 +82,14 @@ public class AddGradeScreen extends JFrame {
             testPanel = new JPanel();
             creditsPanel = new JPanel();
             addBtnPanel = new JPanel();
+
             //creating frame
             frame = new JFrame("Add Grade");
 
 
-
             //button action listener
             btnAdd.addActionListener(e -> {
-                        viewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), semesterComboBox.getSelectedIndex() + 1 + yearComboBox.getSelectedIndex() * NUM_OF_SEMESTERS
+                        ViewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
                                 , Integer.valueOf(textQuiz.getText()), Double.parseDouble(textCredits.getText())
                                 , Integer.valueOf(textFinalTest.getText()));
                     }
@@ -131,7 +132,7 @@ public class AddGradeScreen extends JFrame {
 
             Container container = frame.getContentPane();
             //setting container layout
-            container.setLayout(new GridLayout(8,1,5,5));
+            container.setLayout(new GridLayout(8, 1, 5, 5));
             //attaching panels to the main frame
             container.add(yearPanel);
             container.add(semesterPanel);
@@ -151,11 +152,5 @@ public class AddGradeScreen extends JFrame {
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
-    }
-
-
-
-    public void addGradeScreen() {
-
     }
 }
