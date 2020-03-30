@@ -1,8 +1,6 @@
 package View;
-
 import Model.DBActions;
-import ViewModel.CourseDetails;
-import ViewModel.ViewModel;
+import ViewModel.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -66,7 +64,6 @@ public class TableHomeFrame extends JTable {
     private JButton btnDesiredGradeUpdate;
     private JScrollPane pane;
     private DefaultTableModel model;
-
 
     //table properties
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
@@ -145,6 +142,7 @@ public class TableHomeFrame extends JTable {
 
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
+
                 dbActions.getGradeTable();
             } catch (Exception q) { q.printStackTrace(); }
         });
@@ -249,8 +247,24 @@ public class TableHomeFrame extends JTable {
         }
         courseDetails.forEach((c) -> {
             row[0] = c.getCourseName();
-            row[1] = c.getYear();
-            row[2] = c.getSemester();
+            switch (c.getYear()){
+                case 1: row[1] = "First";
+                    break;
+                case 2: row[1] = "Second";
+                    break;
+                case 3: row[1] = "Third";
+                    break;
+                default: row[1]="???";
+            }
+            switch (c.getSemester()){
+                case 1: row[2] = "First";
+                    break;
+                case 2: row[2] = "Second";
+                    break;
+                case 3: row[2] = "Third";
+                    break;
+                default: row[2]="???";
+            }
             row[3] = c.getTestGrade();
             row[4] = c.getCredits();
             row[5] = c.getFinalGrade();
