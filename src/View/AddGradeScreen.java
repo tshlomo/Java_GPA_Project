@@ -3,6 +3,7 @@ package View;
 import ViewModel.ViewModel;
 
 import javax.swing.*;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 
 public class AddGradeScreen extends JFrame {
@@ -47,6 +48,7 @@ public class AddGradeScreen extends JFrame {
     private static JTextField testPrecentage;
     private static JButton btnAdd;
 
+
     public AddGradeScreen(){
         //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
@@ -59,12 +61,10 @@ public class AddGradeScreen extends JFrame {
             percentageSign2 = new JLabel("%");
             yearLabel = new JLabel("Year");
             semesterLabel = new JLabel("Semester");
-
             //Creating ComboBox
             courseComboBox = new JComboBox(courses);
             yearComboBox = new JComboBox(year);
             semesterComboBox = new JComboBox(semester);
-
             //creating text fields
             textQuiz = new JTextField(3);
             textFinalTest = new JTextField(3);
@@ -73,7 +73,6 @@ public class AddGradeScreen extends JFrame {
             testPrecentage = new JTextField(2);
             //creating buttons
             btnAdd = new JButton("Add");
-
             //creating panels
             yearPanel = new JPanel();
             semesterPanel = new JPanel();
@@ -82,15 +81,10 @@ public class AddGradeScreen extends JFrame {
             testPanel = new JPanel();
             creditsPanel = new JPanel();
             addBtnPanel = new JPanel();
+            //creating frame
             frame = new JFrame("Add Grade");
 
 
-            //Setting the screen properties
-
-
-
-//            quizPrecentage.setEditable(false);
-//            testPrecentage.setEditable(false);
 
             //button action listener
             btnAdd.addActionListener(e -> {
@@ -158,6 +152,8 @@ public class AddGradeScreen extends JFrame {
             frame.setVisible(true);
         });
     }
+
+
 
     public void addGradeScreen() {
 

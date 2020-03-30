@@ -1,4 +1,5 @@
 package View;
+
 import Model.DBActions;
 import ViewModel.CourseDetails;
 import ViewModel.ViewModel;
@@ -6,6 +7,8 @@ import ViewModel.ViewModel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 
@@ -51,6 +54,7 @@ public class TableHomeFrame extends JTable {
     private JLabel updatedGPA;
     private JLabel yearLabel;
     private JLabel semesterLabel;
+    private JLabel desiredGradeLabelValidation;
     private JTextField textGPA;
     private JTextField textDesiredGrade;
     private JTextField textUpdatedGrade;
@@ -59,6 +63,7 @@ public class TableHomeFrame extends JTable {
     private JButton btnDesiredGradeUpdate;
     private JScrollPane pane;
     private DefaultTableModel model;
+
 
     public TableHomeFrame() {
         viewModel = new ViewModel(this);
@@ -92,10 +97,42 @@ public class TableHomeFrame extends JTable {
         updatedGPA = new JLabel("Updated GPA");
         yearLabel = new JLabel("Year");
         semesterLabel = new JLabel("Semester");
+        desiredGradeLabelValidation = new JLabel("");
+        desiredGradeLabelValidation.setForeground(Color.RED);
         //TextFields
         textGPA = new JTextField(3);
-        textDesiredGrade = new JTextField(3);
+        textGPA.setEditable(false);
         textUpdatedGrade = new JTextField(3);
+        textUpdatedGrade.setEditable(false);
+        textDesiredGrade = new JFormattedTextField(3);
+
+        textDesiredGrade.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                char c = ke.getKeyChar();
+                if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                    desiredGradeLabelValidation.setText("");
+                }
+                else {
+                    ke.consume();
+                    desiredGradeLabelValidation.setText("* Enter only digits from 0 to 100");
+                }
+            }
+        });
+
+        textDesiredGrade.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String data = textDesiredGrade.getText();
+                    try {
+                        int val = Integer.parseInt(data);
+                        if (val >= 100) {
+                            textDesiredGrade.setText("100");
+                        }
+                    } catch (Exception ke) {}
+            }
+        });
+
         //Buttons
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
@@ -103,7 +140,6 @@ public class TableHomeFrame extends JTable {
 
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
-
                 dbActions.getGradeTable();
             } catch (Exception q) { q.printStackTrace(); }
         });
@@ -142,20 +178,18 @@ public class TableHomeFrame extends JTable {
         //adding top panel
         panelTop.add(pane);
 
-        currentGpaPanel.add(addDeleteBtnPanel);
-
         //setting relevant components in the relevant panels for middle panel
+        currentGpaPanel.add(addDeleteBtnPanel);
         currentGpaPanel.add(GPALabel);
         currentGpaPanel.add(textGPA);
         addDeleteBtnPanel.add(btnAddGrade);
         addDeleteBtnPanel.add(btnDeleteGrade);
         labelPanel.add(improvingGradesLabel);
-
-
-
         panelMiddle.add(currentGpaPanel);
         //panelMiddle.add(addDeleteBtnPanel);
         panelMiddle.add(labelPanel);
+        panelMiddle.add(coursePanel);
+        panelMiddle.add(desiredGradeLabelValidation);
 
         //setting bottom panel
 //        yearPanel.add(yearLabel);
@@ -169,12 +203,13 @@ public class TableHomeFrame extends JTable {
         updatedGpaPanel.add(updatedGPA);
         updatedGpaPanel.add(textUpdatedGrade);
         btnPanel.add(btnDesiredGradeUpdate);
+        panelMiddle.add(desiredGradePanel);
+        panelMiddle.add(btnPanel);
 
-        panelBottom.add(yearPanel);
-        panelBottom.add(semesterPanel);
-        panelBottom.add(coursePanel);
-        panelBottom.add(desiredGradePanel);
-        panelBottom.add(btnPanel);
+//        panelBottom.add(yearPanel);
+//        panelBottom.add(semesterPanel);
+
+
         panelBottom.add(updatedGpaPanel);
 
 
