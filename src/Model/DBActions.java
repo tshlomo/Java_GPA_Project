@@ -39,6 +39,7 @@ public class DBActions implements ISimpleActions {
 
         } catch (Exception e) {
             logger.warning(e.getMessage());
+            //editGrade(courseDetails);
             e.printStackTrace();
         } finally {
             resetStatementAndRS();
@@ -60,12 +61,16 @@ public class DBActions implements ISimpleActions {
     }
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
-    public void editGrade(String course, int year, int semester, int testGrade, double credit, int finalGrade) throws SQLException {
-        conn = DBconnection.getDBConnection();
+    public void editGrade(CourseDetails courseDetails) {
         try {
+            conn = DBconnection.getDBConnection();
             statement = conn.createStatement();
             logger.info("updating grade...");
-            statement.executeUpdate("UPDATE GPA SET (shana= '" + year + "' ,semester= '" + semester + "' ,testGrade=" + testGrade + ",credit=" + credit + " ,finalGrade=" + finalGrade + ") where course='" + course + "'");
+            statement.executeUpdate("UPDATE GPA SET shana=" + courseDetails.getYear()
+                    + " ,semester=" + courseDetails.getSemester()
+                    + " ,testGrade=" + courseDetails.getTestGrade()
+                    + " ,credits=" + courseDetails.getCredits()
+                    + " ,finalGrade=" + courseDetails.getFinalGrade() + " WHERE course='" + courseDetails.getCourseName() + "'");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
