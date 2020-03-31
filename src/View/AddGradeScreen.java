@@ -1,6 +1,8 @@
 package View;
 
+import Model.Caluclations;
 import ViewModel.ViewModel;
+import ViewModel.CourseDetails;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,10 +47,15 @@ public class AddGradeScreen extends JFrame {
     private static JTextField testPrecentage;
     private static JButton btnAdd;
 
+    private CourseDetails courseDetails;
+    private Caluclations caluclations;
+    private TableHomeFrame tableHomeFrame;
 
-    public AddGradeScreen() {
+
+    public AddGradeScreen(TableHomeFrame tableHomeFrame) {
         //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
+            this.tableHomeFrame=tableHomeFrame;
             //creating labels
             courseLabel = new JLabel("Course");
             quizLabel = new JLabel("HW/Quiz grade");
@@ -87,13 +94,18 @@ public class AddGradeScreen extends JFrame {
             frame = new JFrame("Add Grade");
 
 
+            courseDetails=null;
+            caluclations = new Caluclations();
+
             //button action listener
             btnAdd.addActionListener(e -> {
-                        ViewModel.addNewGrade(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
-                                , Integer.valueOf(textQuiz.getText()), Double.parseDouble(textCredits.getText())
-                                , Integer.valueOf(textFinalTest.getText()));
-                    }
-            );
+                courseDetails = new CourseDetails(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
+                        , Integer.valueOf(textFinalTest.getText()), Double.parseDouble(textCredits.getText())
+                        , caluclations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
+                        ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
+
+                tableHomeFrame.addGrade(courseDetails);
+            });
 
 
             //setting panels layouts

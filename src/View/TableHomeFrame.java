@@ -1,5 +1,5 @@
 package View;
-import Model.DBActions;
+import Interfaces.ISimpleActions;
 import ViewModel.*;
 
 import javax.swing.*;
@@ -7,8 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -39,8 +37,7 @@ public class TableHomeFrame extends JTable {
 
     private AddGradeScreen screen;
 
-    private DBActions dbActions;
-    private ViewModel viewModel;
+    private ISimpleActions simpleActions;
 
     private JFrame frame;
     private JTable table;
@@ -69,8 +66,7 @@ public class TableHomeFrame extends JTable {
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
 
     public TableHomeFrame() {
-        viewModel = new ViewModel(this);
-        dbActions = new DBActions();
+        simpleActions = new ViewModel(this);
         //Frame
         frame = new JFrame("GPA");
         //Table
@@ -142,8 +138,7 @@ public class TableHomeFrame extends JTable {
 
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
-
-                dbActions.getGradeTable();
+                //TODO this func
             } catch (Exception q) { q.printStackTrace(); }
         });
 
@@ -231,20 +226,19 @@ public class TableHomeFrame extends JTable {
         frame.setLocationRelativeTo(null);
 
         //listener for add grade button
-        btnAddGrade.addActionListener(e -> screen = new AddGradeScreen());
+        btnAddGrade.addActionListener(e -> screen = new AddGradeScreen(this));
 
-        btnDeleteGrade.addActionListener(e -> ViewModel.deleteCourse(table.getValueAt(table.getSelectedRow(),0).toString()));
+        btnDeleteGrade.addActionListener(e -> simpleActions.deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString()));
 
-        viewModel.updateTable(true);
+        simpleActions.deleteGrade("updateTable");
     }
 
-    public void updateGradesTable(ArrayList<CourseDetails> courseDetails,boolean clearTable){
+    public void updateGradesTable(ArrayList<CourseDetails> courseDetails){
         Object[] row = new Object[6];
         //clearing the table first
-        if(clearTable) {
-            table.setModel(new DefaultTableModel(null, columns));
-            model= (DefaultTableModel) table.getModel();
-        }
+        table.setModel(new DefaultTableModel(null, columns));
+        model= (DefaultTableModel) table.getModel();
+
         courseDetails.forEach((c) -> {
             row[0] = c.getCourseName();
             switch (c.getYear()){
@@ -261,7 +255,7 @@ public class TableHomeFrame extends JTable {
                     break;
                 case 2: row[2] = "Second";
                     break;
-                case 3: row[2] = "Third";
+                case 3: row[2] = "Summer";
                     break;
                 default: row[2]="???";
             }
@@ -270,6 +264,10 @@ public class TableHomeFrame extends JTable {
             row[5] = c.getFinalGrade();
             model.addRow(row);
         });
+    }
+
+    public void addGrade(CourseDetails courseDetails){
+        simpleActions.addGrade(courseDetails);
     }
 
     public void updateGPA(Double calculate_gpa) {

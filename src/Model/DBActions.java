@@ -1,6 +1,7 @@
 
 package Model;
 
+import Interfaces.ISimpleActions;
 import ViewModel.CourseDetails;
 
 import java.sql.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class DBActions {
+public class DBActions implements ISimpleActions {
 
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
     private ResultSet rs;//same as statement
@@ -23,13 +24,18 @@ public class DBActions {
         logger=Logger.getLogger(DBActions.class.getName());
     }
     //this func receives all of the params of the db table and and updates it with insert statement
-    public void addGrade(String course,int year, int semester, int testGrade, double credit, int finalGrade) throws SQLException {
-        conn = DBconnection.getDBConnection();
+    public void addGrade(CourseDetails courseDetails)  {
         try {
+            conn = DBconnection.getDBConnection();
 
             statement = conn.createStatement();
             logger.info("adding new grade...");
-            statement.execute("INSERT INTO GPA VALUES ('" + course + "'," + year + "," +  + semester + "," + testGrade + "," + credit + "," + finalGrade + ")");
+            statement.execute("INSERT INTO GPA VALUES ('" + courseDetails.getCourseName()
+                    + "'," + courseDetails.getYear()
+                    + "," + courseDetails.getSemester()
+                    + "," + courseDetails.getTestGrade()
+                    + "," + courseDetails.getCredits()
+                    + "," + courseDetails.getFinalGrade() + ")");
 
         } catch (Exception e) {
             logger.warning(e.getMessage());
@@ -40,9 +46,9 @@ public class DBActions {
 
     }
     //func receives key_value ->course and deletes specific row which corresponds with this value
-    public void deleteGrade(String coursename) throws SQLException {
-        conn = DBconnection.getDBConnection();
+    public void deleteGrade(String coursename) {
         try {
+            conn = DBconnection.getDBConnection();
             statement = conn.createStatement();
             logger.info("deleting grade...");
             statement.executeUpdate("DELETE FROM GPA WHERE course =('" + coursename + "')");
@@ -68,13 +74,13 @@ public class DBActions {
     }
 
     //func connects and prints db table
-    public ArrayList<CourseDetails> getGradeTable () throws SQLException {
+    public ArrayList<CourseDetails> getGradeTable () {
         ArrayList<CourseDetails> courseDetails=new ArrayList<>();
-        conn = DBconnection.getDBConnection();
         try {
+            conn = DBconnection.getDBConnection();
             statement = conn.createStatement();
             logger.info("retrieving grades table...");
-            rs = statement.executeQuery("SELECT * FROM gpa");
+            rs = statement.executeQuery("SELECT * FROM gpa ORDER BY course");
             logger.info("printing grades table...");
             //rs.next();
             while (rs.next()) {
@@ -142,7 +148,7 @@ public class DBActions {
 
 
     //func retrieves the values of the column finalGrade from the db and returns it in an array(for gpa calculation)
-        public List<Integer> getGradesList() throws SQLException {
+    public List<Integer> getGradesList() throws SQLException {
             List testGrades = new ArrayList();
             conn = DBconnection.getDBConnection();
             try {

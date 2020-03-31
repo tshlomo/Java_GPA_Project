@@ -1,5 +1,6 @@
 package ViewModel;
 
+import Interfaces.ISimpleActions;
 import Model.Caluclations;
 import Model.DBActions;
 import View.TableHomeFrame;
@@ -9,7 +10,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ViewModel {
+public class ViewModel implements ISimpleActions {
 
     private static DBActions dbActions;
     private static TableHomeFrame tableHomeFrame;
@@ -22,12 +23,12 @@ public class ViewModel {
         caluclations = new Caluclations();
     }
 
-    public static void addNewGrade(String courseName, Integer year, Integer semester, Integer testGrade,Double credits, Integer finalGrade)
+    public void addGrade(CourseDetails courseDetails)
     {
         try {
-            dbActions.addGrade(courseName,year,semester,testGrade,credits,finalGrade);
-            updateTable(true);
-        } catch (SQLException e) {
+            dbActions.addGrade(courseDetails);
+            updateTable();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -36,19 +37,23 @@ public class ViewModel {
         tableHomeFrame.updateGPA(calculate_gpa);
     }
 
-    public static void updateTable(boolean clearTable) {
+    public static void updateTable() {
         try {
-            tableHomeFrame.updateGradesTable(dbActions.getGradeTable(),clearTable);
+            tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
             updateGPA(caluclations.calculate_GPA());
         } catch (SQLException e) {e.printStackTrace();}
     }
 
-    public static void deleteCourse(String courseName) {
-        try {
-            dbActions.deleteGrade(courseName);
-            updateTable(true);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void deleteGrade(String courseName) {
+        if(courseName.equals("updateTable"))
+            updateTable();
+        else {
+            try {
+                dbActions.deleteGrade(courseName);
+                updateTable();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

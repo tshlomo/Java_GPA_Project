@@ -22,7 +22,7 @@ public class Table {
 
         JFrame frame = new JFrame();
         JTable table = new JTable();
-        AddGradeScreen screen = new AddGradeScreen();
+        //AddGradeScreen screen = new AddGradeScreen();
 
         String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
         logger.info("setting table");

@@ -10,9 +10,9 @@ public class Caluclations {
     private Logger logger= Logger.getLogger(Caluclations.class.getName());
 
     //func calculates and returns final grade based on final test score and percentage + hw score and percentage
-    public Integer calculate_Final_Grade(Integer testGrade, Integer testPercent, Integer hwGrade, Integer hwPercent){
-        Integer score= testGrade*(testPercent/100)+hwGrade*(hwPercent/100);
-        return score;
+    public Integer calculate_Final_Grade(Double testGrade, Double testPercent, Double hwGrade, Double hwPercent){
+        Double score = (testGrade*(testPercent/100))+(hwGrade*(hwPercent/100));
+        return score.intValue();
     }
 
     //func receives grades array + correspondent credits array and calculates gpa
