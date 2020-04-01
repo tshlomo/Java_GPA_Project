@@ -23,13 +23,13 @@ public class TableHomeFrame extends JTable {
     private static final Object[] credits;
 
     static {
-        credits = new Object[]{(Object) 5,(Object) 6.5,(Object) 5,(Object) 5,
-                (Object) 3.5,(Object) 5,(Object) 4,(Object) 4,(Object) 3,
-                (Object) 2.5,(Object) 4,(Object) 3.5,(Object) 3.5,(Object) 5,
-                (Object) 4,(Object) 4,(Object) 3.5,(Object) 4,
-                (Object) 4,(Object) 5,(Object) 3,(Object) 3,
-                (Object) 3,(Object) 3,(Object) 3.5,(Object) 3.5,
-                (Object) 4,(Object) 1,(Object) 1,(Object) 1,(Object) 2};
+        credits = new Object[]{ 5, 6.5, 5, 5,
+                 3.5, 5, 4, 4, 3,
+                 2.5, 4, 3.5, 3.5, 5,
+                 4,4, 3.5, 4,
+                 4, 5, 3, 3,
+                 3,3, 3.5, 3.5,
+                 4, 1, 1, 1, 2};
     }
 
     private static final String[] year = {"First Year","Second Year","Third Year"};

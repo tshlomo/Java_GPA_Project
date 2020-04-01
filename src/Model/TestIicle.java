@@ -12,14 +12,14 @@ public class TestIicle {
         //Caluclations cal=new Caluclations();
         //int x=cal.calculate_GPA();
         //System.out.println(x);
-        //dbact.addGrade("math1","c",80,2.0,98);
+        //dbact.addGrade("klila",3,3,80,2.0,98);
         //dbact.printTable();
         //Double x=cal.gpaByGrade("infi",20);
         //System.out.println(" lala   "+x);
 
 //        System.out.println("now deleting bdida--------------------------------------------------------------------------------------------------");
-//        dbact.deleteGrade("bdida");
-         //dbact.printTable();
+        //dbact.deleteGrade("ski");
+         dbact.printTable();
         //Connection x=DBconnection.GetDBConnection();
         //System.out.println(x);
     }

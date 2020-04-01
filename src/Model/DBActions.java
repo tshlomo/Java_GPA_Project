@@ -37,10 +37,10 @@ public class DBActions implements ISimpleActions {
                     + "," + courseDetails.getCredits()
                     + "," + courseDetails.getFinalGrade() + ")");
 
+            logger.info("grade has been successfully added");
+
         } catch (Exception e) {
             logger.warning(e.getMessage());
-            //editGrade(courseDetails);
-            e.printStackTrace();
         } finally {
             resetStatementAndRS();
         }
@@ -53,6 +53,7 @@ public class DBActions implements ISimpleActions {
             statement = conn.createStatement();
             logger.info("deleting grade...");
             statement.executeUpdate("DELETE FROM GPA WHERE course =('" + coursename + "')");
+            logger.info("grade has been successfully deleted");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -71,6 +72,7 @@ public class DBActions implements ISimpleActions {
                     + " ,testGrade=" + courseDetails.getTestGrade()
                     + " ,credits=" + courseDetails.getCredits()
                     + " ,finalGrade=" + courseDetails.getFinalGrade() + " WHERE course='" + courseDetails.getCourseName() + "'");
+            logger.info("grade has been successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -79,6 +81,22 @@ public class DBActions implements ISimpleActions {
     }
 
     //func connects and prints db table
+    public void printTable () throws SQLException {
+        conn = DBconnection.getDBConnection();
+        try {
+            statement = conn.createStatement();
+            logger.info("retrieving grades table...");
+            rs = statement.executeQuery("SELECT * FROM gpa");
+            logger.info("printing grades table...");
+            while (rs.next()) {
+                System.out.println("course= " + rs.getString("course") + "  year= " + rs.getInt("shana")+ " semester= " + rs.getInt("semester") + " testGrade= " + rs.getInt("testGrade") + " credits= " + rs.getDouble("credits") + " finalGrade= " + rs.getInt("finalGrade"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            resetStatementAndRS();
+        }
+    }
     public ArrayList<CourseDetails> getGradeTable () {
         ArrayList<CourseDetails> courseDetails=new ArrayList<>();
         try {
@@ -122,6 +140,7 @@ public class DBActions implements ISimpleActions {
     conn=DBconnection.getDBConnection();
     try {
         statement = conn.createStatement();
+        logger.info("retrieving grade...");
         rs = statement.executeQuery("SELECT finalGrade FROM GPA WHERE course=('" + coursename + "')");
         rs.next();
         grade= rs.getInt("finalGrade");
@@ -138,6 +157,7 @@ public class DBActions implements ISimpleActions {
         conn=DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
+            logger.info("retrieving credit...");
             rs = statement.executeQuery("SELECT credits FROM GPA WHERE course=('" + coursename + "')");
             rs.next();
             credit= rs.getDouble("credits");
@@ -153,7 +173,7 @@ public class DBActions implements ISimpleActions {
 
 
     //func retrieves the values of the column finalGrade from the db and returns it in an array(for gpa calculation)
-    public List<Integer> getGradesList() throws SQLException {
+        public List<Integer> getGradesList() throws SQLException {
             List testGrades = new ArrayList();
             conn = DBconnection.getDBConnection();
             try {

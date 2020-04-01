@@ -11,9 +11,11 @@ public class Caluclations {
 
     //func calculates and returns final grade based on final test score and percentage + hw score and percentage
     public Integer calculate_Final_Grade(Double testGrade, Double testPercent, Double hwGrade, Double hwPercent){
+        logger.info("calculating final grade based on test and hw percentage...");
         Double score = (testGrade*(testPercent/100))+(hwGrade*(hwPercent/100));
         return score.intValue();
     }
+
 
     //func receives grades array + correspondent credits array and calculates gpa
     public Double calculate_GPA() throws SQLException {

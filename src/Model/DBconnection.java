@@ -34,12 +34,14 @@ public class DBconnection {
                         //Getting a connection by calling getConnection
                         logger.info("connecting to database...");
                         conn = DriverManager.getConnection(protocol);
+                        logger.info(" connection has been established");
                         statement = conn.createStatement();
                         logger.info("searching for GPA table...");
                         rs = conn.getMetaData().getTables(null, "APP", "%", null);
                         if(!rs.next()){
                             logger.info("it seems that GPA table does not exist. don't worry we are making a new one right now...");
-                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),Shana INT,Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
+                            statement.execute("CREATE TABLE GPA(Course VARCHAR(255),shana INT,Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
+                            logger.info("A table has been created");
                         }
 
                     } catch (Exception e) {
