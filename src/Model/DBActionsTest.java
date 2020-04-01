@@ -1,5 +1,7 @@
 package Model;
 
+import ViewModel.CourseDetails;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +22,7 @@ class DBActionsTest {
         conn = DBconnection.getDBConnection();
         statement = conn.createStatement();
         try {
-            dbact.addGrade("snowboarding", 3, 75, 90, 2.0,99); // adding same param values like in the array for comparing //
+            dbact.addGrade(new CourseDetails("snowboarding", 3, 75, 90, 2.0,99)); // adding same param values like in the array for comparing //
             rs = statement.executeQuery("SELECT * FROM GPA WHERE course='snowboarding'");
             while(rs.next()){
                 assertEquals(array[i],rs.getObject(i+2));
@@ -84,7 +86,7 @@ class DBActionsTest {
             statement = conn.createStatement();
             try {
                 statement.execute("INSERT INTO GPA VALUES ('scala',3,3,70,2.5,90)");
-                dbact.editGrade("scala", 3, 3, 70, 2.5, 85);  // updating the finalGrade param //
+                dbact.editGrade(new CourseDetails("scala", 3, 3, 70, 2.5, 85));  // updating the finalGrade param //
                 rs = statement.executeQuery("SELECT finalGrade FROM GPA WHERE course=('scala')");
                 rs.next();
                 assertEquals(85,rs.getDouble("finalGrade"));

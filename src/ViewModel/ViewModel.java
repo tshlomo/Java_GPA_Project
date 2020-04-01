@@ -1,6 +1,7 @@
 package ViewModel;
 
 import Interfaces.ISimpleActions;
+import Model.Calculations;
 import Model.DBActions;
 import View.TableHomeFrame;
 
@@ -13,13 +14,13 @@ public class ViewModel implements ISimpleActions {
 
     private static DBActions dbActions;
     private static TableHomeFrame tableHomeFrame;
-    private static Caluclations caluclations;
+    private static Calculations calculations;
     //CREATE TABLE GPA(Course VARCHAR(255),Semester VARCHAR(255),TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))
 
     public ViewModel(TableHomeFrame tableHomeFrame){
         dbActions = new DBActions();
         this.tableHomeFrame = tableHomeFrame;
-        caluclations = new Caluclations();
+        calculations = new Calculations();
     }
 
     public void addGrade(CourseDetails courseDetails)
@@ -39,7 +40,7 @@ public class ViewModel implements ISimpleActions {
     public static void updateTable() {
         try {
             tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
-            updateGPA(caluclations.calculate_GPA());
+            updateGPA(calculations.calculate_GPA());
         } catch (SQLException e) {e.printStackTrace();}
     }
 

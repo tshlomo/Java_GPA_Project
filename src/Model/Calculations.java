@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-public class Caluclations {
+public class Calculations {
 
-    private Logger logger= Logger.getLogger(Caluclations.class.getName());
+    private Logger logger= Logger.getLogger(Calculations.class.getName());
 
     //func calculates and returns final grade based on final test score and percentage + hw score and percentage
     public Integer calculate_Final_Grade(Double testGrade, Double testPercent, Double hwGrade, Double hwPercent){

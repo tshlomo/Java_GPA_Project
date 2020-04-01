@@ -1,6 +1,6 @@
 package View;
 
-import Model.Caluclations;
+import Model.Calculations;
 import ViewModel.ViewModel;
 import ViewModel.CourseDetails;
 
@@ -48,7 +48,7 @@ public class AddGradeScreen extends JFrame {
     private static JButton btnAdd;
 
     private CourseDetails courseDetails;
-    private Caluclations caluclations;
+    private Calculations calculations;
     private TableHomeFrame tableHomeFrame;
 
 
@@ -95,13 +95,13 @@ public class AddGradeScreen extends JFrame {
 
 
             courseDetails=null;
-            caluclations = new Caluclations();
+            calculations = new Calculations();
 
             //button action listener
             btnAdd.addActionListener(e -> {
                 courseDetails = new CourseDetails(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
                         , Integer.valueOf(textFinalTest.getText()), Double.parseDouble(textCredits.getText())
-                        , caluclations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
+                        , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
                         ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
 
                 tableHomeFrame.addGrade(courseDetails);
