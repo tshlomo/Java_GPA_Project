@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 public class TestIicle {
 
-    public static void main(String[] args) throws SQLException {
-        //DBconnection.getDBConnection();
-        DBActions dbact = new DBActions();
+    public static void main(String[] args) throws DBActionsException {
+        DBconnection.getDBConnection();
+        //DBActions dbact = new DBActions();
         //dbact.getFinalGrade("infi");
         //Caluclations cal=new Caluclations();
         //int x=cal.calculate_GPA();
@@ -19,7 +19,7 @@ public class TestIicle {
 
 //        System.out.println("now deleting bdida--------------------------------------------------------------------------------------------------");
         //dbact.deleteGrade("ski");
-         dbact.printTable();
+         //dbact.printTable();
         //Connection x=DBconnection.GetDBConnection();
         //System.out.println(x);
     }

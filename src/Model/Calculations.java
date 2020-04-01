@@ -18,7 +18,7 @@ public class Calculations {
 
 
     //func receives grades array + correspondent credits array and calculates gpa
-    public Double calculate_GPA() throws SQLException {
+    public Double calculate_GPA() throws DBActionsException {
         Double credits_sum=0.0;
         Double grades_sum=0.0;
         Integer i=0;
@@ -35,7 +35,7 @@ public class Calculations {
     }
 
 
-    public Double gpaByGrade(String coursename,Integer newGrade) throws SQLException {
+    public Double gpaByGrade(String coursename,Integer newGrade) throws  DBActionsException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;
         Integer oldGrade =0;

@@ -3,6 +3,7 @@ package ViewModel;
 import Interfaces.ISimpleActions;
 import Model.Calculations;
 import Model.DBActions;
+import Model.DBActionsException;
 import View.TableHomeFrame;
 
 import javax.swing.*;
@@ -37,14 +38,12 @@ public class ViewModel implements ISimpleActions {
         tableHomeFrame.updateGPA(calculate_gpa);
     }
 
-    public static void updateTable() {
-        try {
-            tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
-            updateGPA(calculations.calculate_GPA());
-        } catch (SQLException e) {e.printStackTrace();}
+    public static void updateTable() throws DBActionsException {
+        tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
+        updateGPA(calculations.calculate_GPA());
     }
 
-    public void deleteGrade(String courseName) {
+    public void deleteGrade(String courseName) throws DBActionsException {
         if(courseName.equals("updateTable"))
             updateTable();
         else {

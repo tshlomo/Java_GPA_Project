@@ -8,15 +8,19 @@ import java.util.logging.Logger;
 
 
 public class DBconnection {
-    static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    static String protocol = "jdbc:derby:gpadb;create=true";
+    static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+    static final String protocol = "jdbc:derby:gpadb;create=true";
     private static Logger logger=Logger.getLogger(DBconnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;
-
+    private DBconnection() throws ClassNotFoundException{
+        //Instantiating the driver class will indirectly register
+        //this driver as an available driver for DriverManager
+        Class.forName(driver);
+    }
     //the getDBConnection function is basically the getInstance function for regular singleton pattern.
     //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
-    public static Connection getDBConnection() {
+    public static Connection getDBConnection() throws DBActionsException {
         Statement statement = null;
         ResultSet rs = null;
 
@@ -27,10 +31,8 @@ public class DBconnection {
 
                 if(conn == null)
                 {
-                    try {
-                        //Instantiating the driver class will indirectly register
-                        //this driver as an available driver for DriverManager
-                        Class.forName(driver);
+
+                    try{
                         //Getting a connection by calling getConnection
                         logger.info("connecting to database...");
                         conn = DriverManager.getConnection(protocol);
@@ -43,8 +45,8 @@ public class DBconnection {
                             statement.execute("CREATE TABLE GPA(Course VARCHAR(255),shana INT,Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
                             logger.info("A table has been created");
                         }
-                    } catch (Exception e) {
-                       e.printStackTrace();
+                    } catch (SQLException e) {
+                       throw new DBActionsException("error, problem establishing a connection to db and finding 'gpa' table",e);
                    } finally {
                        if (statement != null) try {
                             statement.close();
