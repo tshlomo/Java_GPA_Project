@@ -3,6 +3,8 @@ package View;
 import Model.Calculations;
 import ViewModel.ViewModel;
 import ViewModel.CourseDetails;
+import org.apache.derby.iapi.util.StringUtil;
+import org.junit.platform.commons.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,6 +100,7 @@ public class AddGradeScreen extends JFrame {
 
             courseDetails=null;
             calculations = new Calculations();
+            textCredits.setEditable(false);
 
             //button action listener
             btnAdd.addActionListener(e -> {
@@ -123,6 +126,7 @@ public class AddGradeScreen extends JFrame {
                         } catch (Exception e) {e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textQuiz.setText("");
@@ -148,6 +152,7 @@ public class AddGradeScreen extends JFrame {
                         } catch (Exception e) {e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
@@ -164,18 +169,25 @@ public class AddGradeScreen extends JFrame {
                     char c = ke.getKeyChar();
                     String data = quizPrecentage.getText();
                     Integer val = -1;
-                    if(data.length()>1)
-                        try {
+                    try {
+                        if(c>='0' && c<='9')
                             val = Integer.parseInt(data+c);
-                            if (val >= 100) {
-                                quizPrecentage.setText("100");
-                            }
-                        } catch (Exception e) {e.printStackTrace();}
+                        else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                            val = Integer.parseInt(data);
+                        else
+                            val = 0;
+                        if (val >= 100) {
+                            quizPrecentage.setText("100");
+                            testPrecentage.setText("0");
+                        }
+                    } catch (Exception e) { e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
+                        testPrecentage.setText(String.valueOf(100-val));
                     }
                     else {
                         ke.consume();
@@ -189,18 +201,25 @@ public class AddGradeScreen extends JFrame {
                     char c = ke.getKeyChar();
                     String data = testPrecentage.getText();
                     Integer val = -1;
-                    if(data.length()>1)
-                        try {
+                    try {
+                        if(c>='0' && c<='9')
                             val = Integer.parseInt(data+c);
-                            if (val >= 100) {
-                                testPrecentage.setText("100");
-                            }
-                        } catch (Exception e) {e.printStackTrace();}
+                        else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                            val = Integer.parseInt(data);
+                        else
+                            val = 0;
+                        if (val >= 100) {
+                            testPrecentage.setText("100");
+                            quizPrecentage.setText("0");
+                        }
+                    } catch (Exception e) { e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
+                        quizPrecentage.setText(String.valueOf(100-val));
                     }
                     else {
                         ke.consume();

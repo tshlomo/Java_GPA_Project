@@ -120,6 +120,7 @@ public class TableHomeFrame extends JTable {
                 } catch (Exception e) {e.printStackTrace();}
                 if(val >= 100) {
                     ke.consume();
+                    desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                 }
                 else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                     desiredGradeLabelValidation.setText("");
