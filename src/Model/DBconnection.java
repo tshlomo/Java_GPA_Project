@@ -16,7 +16,7 @@ public class DBconnection {
 
     //the getDBConnection function is basically the getInstance function for regular singleton pattern.
     //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
-    public static Connection getDBConnection() throws SQLException {
+    public static Connection getDBConnection() {
         Statement statement = null;
         ResultSet rs = null;
 
@@ -43,7 +43,6 @@ public class DBconnection {
                             statement.execute("CREATE TABLE GPA(Course VARCHAR(255),shana INT,Semester INT,TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))");
                             logger.info("A table has been created");
                         }
-
                     } catch (Exception e) {
                        e.printStackTrace();
                    } finally {

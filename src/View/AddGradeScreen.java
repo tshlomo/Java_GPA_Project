@@ -6,6 +6,8 @@ import ViewModel.CourseDetails;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddGradeScreen extends JFrame {
 
@@ -105,6 +107,106 @@ public class AddGradeScreen extends JFrame {
                         ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
 
                 tableHomeFrame.addGrade(courseDetails);
+            });
+            textQuiz.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent ke) {
+                    char c = ke.getKeyChar();
+                    String data = textQuiz.getText();
+                    Integer val = -1;
+                    if(data.length()>1)
+                        try {
+                            val = Integer.parseInt(data+c);
+                            if (val >= 100) {
+                                textQuiz.setText("100");
+                            }
+                        } catch (Exception e) {e.printStackTrace();}
+                    if(val >= 100) {
+                        ke.consume();
+                    }
+                    else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                        //textQuiz.setText("");
+                    }
+                    else {
+                        ke.consume();
+                        //textQuiz.setText("* Enter only digits from 0 to 100");
+                    }
+                }
+            });
+            textFinalTest.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent ke) {
+                    char c = ke.getKeyChar();
+                    String data = textFinalTest.getText();
+                    Integer val = -1;
+                    if(data.length()>1)
+                        try {
+                            val = Integer.parseInt(data+c);
+                            if (val >= 100) {
+                                textFinalTest.setText("100");
+                            }
+                        } catch (Exception e) {e.printStackTrace();}
+                    if(val >= 100) {
+                        ke.consume();
+                    }
+                    else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                        //textFinalTest.setText("");
+                    }
+                    else {
+                        ke.consume();
+                        //textFinalTest.setText("* Enter only digits from 0 to 100");
+                    }
+                }
+            });
+            quizPrecentage.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent ke) {
+                    char c = ke.getKeyChar();
+                    String data = quizPrecentage.getText();
+                    Integer val = -1;
+                    if(data.length()>1)
+                        try {
+                            val = Integer.parseInt(data+c);
+                            if (val >= 100) {
+                                quizPrecentage.setText("100");
+                            }
+                        } catch (Exception e) {e.printStackTrace();}
+                    if(val >= 100) {
+                        ke.consume();
+                    }
+                    else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                        //textFinalTest.setText("");
+                    }
+                    else {
+                        ke.consume();
+                        //textFinalTest.setText("* Enter only digits from 0 to 100");
+                    }
+                }
+            });
+            testPrecentage.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent ke) {
+                    char c = ke.getKeyChar();
+                    String data = testPrecentage.getText();
+                    Integer val = -1;
+                    if(data.length()>1)
+                        try {
+                            val = Integer.parseInt(data+c);
+                            if (val >= 100) {
+                                testPrecentage.setText("100");
+                            }
+                        } catch (Exception e) {e.printStackTrace();}
+                    if(val >= 100) {
+                        ke.consume();
+                    }
+                    else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                        //textFinalTest.setText("");
+                    }
+                    else {
+                        ke.consume();
+                        //textFinalTest.setText("* Enter only digits from 0 to 100");
+                    }
+                }
             });
 
 

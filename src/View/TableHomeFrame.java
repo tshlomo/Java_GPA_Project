@@ -113,7 +113,7 @@ public class TableHomeFrame extends JTable {
                 Integer val = -1;
                 if(data.length()>1)
                 try {
-                    val = Integer.parseInt(data);
+                    val = Integer.parseInt(data+c);
                     if (val >= 100) {
                         textDesiredGrade.setText("100");
                     }

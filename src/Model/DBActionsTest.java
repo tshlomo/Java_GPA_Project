@@ -1,5 +1,6 @@
 package Model;
 
+import Interfaces.ISimpleActions;
 import ViewModel.CourseDetails;
 
 import java.sql.Connection;
@@ -18,7 +19,7 @@ class DBActionsTest {
     void addGrade() throws SQLException {
         Integer i=0;
         Object [] array={3,75,90,2.0,99};
-        DBActions dbact = new DBActions();
+        ISimpleActions dbact = new DBActions();
         conn = DBconnection.getDBConnection();
         statement = conn.createStatement();
         try {
@@ -108,7 +109,7 @@ class DBActionsTest {
                 rs = null;
                 statement = null;
             }
-            }
+        }
 
 
         @org.junit.jupiter.api.Test
