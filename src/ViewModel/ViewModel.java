@@ -1,5 +1,6 @@
 package ViewModel;
 
+import Interfaces.ISimpleActions;
 import Model.DBActions;
 import View.TableHomeFrame;
 
