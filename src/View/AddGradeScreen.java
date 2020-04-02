@@ -81,6 +81,7 @@ public class AddGradeScreen extends JFrame {
             textCredits = new JTextField(3);
             quizPrecentage = new JTextField(2);
             testPrecentage = new JTextField(2);
+            textCredits.setEditable(false);
 
             //creating buttons
             btnAdd = new JButton("Add");
@@ -227,7 +228,6 @@ public class AddGradeScreen extends JFrame {
                     }
                 }
             });
-
 
             //setting panels layouts
             yearPanel.setLayout(new FlowLayout());

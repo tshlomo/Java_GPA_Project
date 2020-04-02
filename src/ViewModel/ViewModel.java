@@ -5,10 +5,7 @@ import Model.Calculations;
 import Model.DBActions;
 import View.TableHomeFrame;
 
-import javax.swing.*;
-import java.awt.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ViewModel implements ISimpleActions {
 

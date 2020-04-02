@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Wed Apr 01 16:23:12 IDT 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0171-35e8-f599-00000ef00000 
-on database directory D:\HiTComputerScienceBSc\Internet Course\GPA\gpaDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
-Loaded from file:/C:/Program%20Files/Java/jdk-14/db/lib/derby.jar
+Fri Apr 03 00:13:33 IDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0171-3cbd-f0df-00000eb836c0 
+on database directory C:\Users\roeim\Desktop\Files\לימודים\שנה ב'\B\Java\GPA2\gpaDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2437c6dc 
+Loaded from file:/C:/Program%20Files/Java/jdk-11.0.6/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=14+36-1461
-user.dir=D:\HiTComputerScienceBSc\Internet Course\GPA
+java.runtime.version=11.0.6+8-LTS
+user.dir=C:\Users\roeim\Desktop\Files\לימודים\שנה ב'\B\Java\GPA2
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

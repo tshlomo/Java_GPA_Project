@@ -1,6 +1,8 @@
 package View;
+
 import Interfaces.ISimpleActions;
-import ViewModel.*;
+import ViewModel.CourseDetails;
+import ViewModel.ViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,12 +26,12 @@ public class TableHomeFrame extends JTable {
 
     static {
         credits = new Object[]{ 5, 6.5, 5, 5,
-                 3.5, 5, 4, 4, 3,
-                 2.5, 4, 3.5, 3.5, 5,
-                 4,4, 3.5, 4,
-                 4, 5, 3, 3,
-                 3,3, 3.5, 3.5,
-                 4, 1, 1, 1, 2};
+                3.5, 5, 4, 4, 3,
+                2.5, 4, 3.5, 3.5, 5,
+                4,4, 3.5, 4,
+                4, 5, 3, 3,
+                3,3, 3.5, 3.5,
+                4, 1, 1, 1, 2};
     }
 
     private static final String[] year = {"First Year","Second Year","Third Year"};
@@ -61,6 +63,7 @@ public class TableHomeFrame extends JTable {
     private JButton btnDesiredGradeUpdate;
     private JScrollPane pane;
     private DefaultTableModel model;
+
 
     //table properties
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
@@ -112,12 +115,12 @@ public class TableHomeFrame extends JTable {
                 String data = textDesiredGrade.getText();
                 Integer val = -1;
                 if(data.length()>1)
-                try {
-                    val = Integer.parseInt(data+c);
-                    if (val >= 100) {
-                        textDesiredGrade.setText("100");
-                    }
-                } catch (Exception e) {e.printStackTrace();}
+                    try {
+                        val = Integer.parseInt(data+c);
+                        if (val >= 100) {
+                            textDesiredGrade.setText("100");
+                        }
+                    } catch (Exception e) {e.printStackTrace();}
                 if(val >= 100) {
                     ke.consume();
                     desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
@@ -145,10 +148,13 @@ public class TableHomeFrame extends JTable {
 
         //table properties
         Font font = new Font("", 1, 16);
+        //disabling editing the table
+        table.setDefaultEditor(Object.class,null);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
-/*        table.setModel(model);
-        table.setBackground(Color.white);
+/*      table.setBackground(Color.white);
+        table.setModel(model);
         table.setForeground(Color.red);
         table.setFont(font);
         table.setRowHeight(30);
@@ -209,7 +215,6 @@ public class TableHomeFrame extends JTable {
 
 
         panelBottom.add(updatedGpaPanel);
-
 
         //creating container to handle the frame content pane
         Container container = frame.getContentPane();

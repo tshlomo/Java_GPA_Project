@@ -16,7 +16,6 @@ public class DBActions implements ISimpleActions {
     private Connection conn;
     private  Logger logger;
 
-
     public DBActions() {
         statement = null;
         rs = null;
@@ -209,8 +208,6 @@ public class DBActions implements ISimpleActions {
         }
         return credits;
     }
-
-
 }
 
 
