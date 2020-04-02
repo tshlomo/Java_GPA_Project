@@ -14,7 +14,9 @@ public class CourseDetails {
     private Double credits;
     private Integer finalGrade;
 
-    public CourseDetails(String courseName,Integer year, Integer semester, Integer testGrade, Double credits, Integer finalGrade) {
+
+
+    public CourseDetails(String courseName, Integer year, Integer semester, Integer testGrade, Double credits, Integer finalGrade) {
         this.courseName = courseName;
         this.year = year;
         this.semester = semester;
@@ -22,6 +24,30 @@ public class CourseDetails {
         this.credits = credits;
         this.finalGrade = finalGrade;
     }
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
+
+    public void setTestGrade(Integer testGrade) {
+        this.testGrade = testGrade;
+    }
+
+    public void setCredits(Double credits) {
+        this.credits = credits;
+    }
+
+    public void setFinalGrade(Integer finalGrade) {
+        this.finalGrade = finalGrade;
+    }
+
 
     public Integer getYear(){ return year; }
 

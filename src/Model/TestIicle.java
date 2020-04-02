@@ -1,19 +1,28 @@
 package Model;
 
+import ViewModel.CourseDetails;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class TestIicle {
 
-    public static void main(String[] args) throws DBActionsException {
-        DBconnection.getDBConnection();
-        //DBActions dbact = new DBActions();
+    public static void main(String[] args) throws DBActionsException, SQLException {
+        //DBconnection.getDBConnection();
+        DBActions dbact = new DBActions();
+        dbact.printTable();
         //dbact.getFinalGrade("infi");
-        //Caluclations cal=new Caluclations();
-        //int x=cal.calculate_GPA();
+        //dbact.addGrade(new CourseDetails("klila",3,3,75,4.0,77));
+        //Calculations cal=new Calculations();
+        //double y=cal.calculate_GPA();
+        //System.out.println(y);
+        //Double x=cal.gpaByGrade("klila",60);
         //System.out.println(x);
-        //dbact.addGrade("klila",3,3,80,2.0,98);
-        //dbact.printTable();
+
+
+        //CourseDetails course=null;
+        //course= dbact.getCourse("klila");
+
         //Double x=cal.gpaByGrade("infi",20);
         //System.out.println(" lala   "+x);
 

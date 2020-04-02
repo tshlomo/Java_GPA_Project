@@ -1,5 +1,6 @@
 package View;
 import Interfaces.ISimpleActions;
+import Model.DBActionsException;
 import ViewModel.*;
 
 import javax.swing.*;
@@ -65,7 +66,7 @@ public class TableHomeFrame extends JTable {
     //table properties
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
 
-    public TableHomeFrame() {
+    public TableHomeFrame() throws DBActionsException {
         simpleActions = new ViewModel(this);
         //Frame
         frame = new JFrame("GPA");
@@ -228,7 +229,13 @@ public class TableHomeFrame extends JTable {
         //listener for add grade button
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen(this));
 
-        btnDeleteGrade.addActionListener(e -> simpleActions.deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString()));
+        btnDeleteGrade.addActionListener(e -> {
+            try {
+                simpleActions.deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString());
+            } catch (DBActionsException ex) {
+                ex.printStackTrace();
+            }
+        });
 
         simpleActions.deleteGrade("updateTable");
     }
@@ -266,7 +273,7 @@ public class TableHomeFrame extends JTable {
         });
     }
 
-    public void addGrade(CourseDetails courseDetails){
+    public void addGrade(CourseDetails courseDetails) throws DBActionsException {
         simpleActions.addGrade(courseDetails);
     }
 

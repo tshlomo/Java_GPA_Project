@@ -63,9 +63,7 @@ public class DBconnection {
                     }
                 }//the second IF statement ends here
                 else{
-                    //SOMEHOW 2 threads managed to get into the synchronized part and one of them couldn't see conn as null since the other thread instantiated it.
-                    //TODO log commands
-                    //sagi??
+                    logger.info("error,two threads have managed to get into the synchronized block");
                 }
             }
         }
