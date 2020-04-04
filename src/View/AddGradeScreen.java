@@ -1,6 +1,7 @@
 package View;
 
 import Model.Calculations;
+import Model.DBActionsException;
 import ViewModel.ViewModel;
 import ViewModel.CourseDetails;
 import org.apache.derby.iapi.util.StringUtil;
@@ -109,7 +110,11 @@ public class AddGradeScreen extends JFrame {
                         , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
                         ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
 
-                tableHomeFrame.addGrade(courseDetails);
+                try {
+                    tableHomeFrame.addGrade(courseDetails);
+                } catch (DBActionsException ex) {
+                    ex.printStackTrace();
+                }
             });
             textQuiz.addKeyListener(new KeyAdapter() {
                 @Override

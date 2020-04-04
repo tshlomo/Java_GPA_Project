@@ -1,6 +1,9 @@
 package Model;
 
+import ViewModel.CourseDetails;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -18,42 +21,45 @@ public class Calculations {
 
 
     //func receives grades array + correspondent credits array and calculates gpa
-    public Double calculate_GPA() throws SQLException {
+    public Double calculate_GPA() throws DBActionsException {
+        DBActions dbActions = new DBActions();
+        ArrayList<CourseDetails> courseTable;
         Double credits_sum=0.0;
         Double grades_sum=0.0;
-        Integer i=0;
-        DBActions dbActions = new DBActions();
-        List<Integer> grades = dbActions.getGradesList();
-        List<Double>credits=dbActions.getCreditsList();
-        logger.info("calculating gpa...");
-        for (Integer x:grades) {
-            grades_sum+=x*credits.get(i);
-            credits_sum+=credits.get(i);
+        Integer i = 0;
+        //getting the values from db table
+        courseTable=dbActions.getGradeTable();
+        // gpa calculation formula is = (sum of all grades multiplied by their credits)/(sum of credits)
+        while (i<courseTable.size()){
+            grades_sum+= (courseTable.get(i).getFinalGrade())*(courseTable.get(i).getCredits());
+            credits_sum+=courseTable.get(i).getCredits();
             i++;
         }
+
+
         return (grades_sum/credits_sum);
     }
 
 
-    public Double gpaByGrade(String coursename,Integer newGrade) throws SQLException {
+    public Double gpaByGrade(String coursename,Integer newGrade) throws  DBActionsException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;
-        Integer oldGrade =0;
-        Double credit=0.0;
         Integer i=0;
+        ArrayList<CourseDetails> courseTable;
         DBActions dbActions = new DBActions();
-        List<Integer> grades = dbActions.getGradesList();
-        List<Double> credits = dbActions.getCreditsList();
-        logger.info("calculating new gpa...");
-        for (Integer x : grades) {
-            grades_sum += x * credits.get(i);
-            credits_sum += credits.get(i);
+        courseTable=dbActions.getGradeTable();
+        //getting specific course details
+        CourseDetails course=dbActions.getCourse(coursename);
+        //calculating current gpa
+        while (i<courseTable.size()){
+            grades_sum+= (courseTable.get(i).getFinalGrade())*(courseTable.get(i).getCredits());
+            credits_sum+=courseTable.get(i).getCredits();
             i++;
         }
-        credit=dbActions.getCredit(coursename);
-        oldGrade=dbActions.getFinalGrade(coursename);
-        grades_sum-=oldGrade*credit;
-        grades_sum+=newGrade*credit;
+        //removing old grade from calculation
+        grades_sum-=(course.getCredits())*(course.getFinalGrade());
+        //adding new grade to calculation
+        grades_sum+=(newGrade)*(course.getCredits());
         return (grades_sum/credits_sum);
 
     }
