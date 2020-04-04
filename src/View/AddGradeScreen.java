@@ -193,6 +193,8 @@ public class AddGradeScreen extends JFrame {
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
                         testPrecentage.setText(String.valueOf(100-val));
+                        if(c == KeyEvent.VK_BACK_SPACE && val == 0)
+                            quizPrecentage.setText(String.valueOf(val));
                     }
                     else {
                         ke.consume();
@@ -225,6 +227,8 @@ public class AddGradeScreen extends JFrame {
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
                         quizPrecentage.setText(String.valueOf(100-val));
+                        if(c == KeyEvent.VK_BACK_SPACE && val == 0)
+                            testPrecentage.setText(String.valueOf(val));
                     }
                     else {
                         ke.consume();
