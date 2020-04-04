@@ -150,6 +150,7 @@ public class TableHomeFrame extends JTable {
         Font font = new Font("", 1, 16);
         //disabling editing the table
         table.setDefaultEditor(Object.class,null);
+        //auto resizing the columns
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
