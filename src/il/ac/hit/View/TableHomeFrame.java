@@ -4,7 +4,10 @@ import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.ViewModel.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -146,7 +149,8 @@ public class TableHomeFrame implements ISimpleActions {
         //disabling editing the table
         table.setDefaultEditor(Object.class,null);
         //auto resizing the columns
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
 /*        table.setModel(model);
@@ -161,7 +165,7 @@ public class TableHomeFrame implements ISimpleActions {
         //setting layouts
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
         //panelBottom.setLayout(new GridLayout(7,1,5,5));
-        panelTop.setLayout(new BorderLayout());
+        panelTop.setLayout(new FlowLayout());
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
         labelPanel.setLayout(new FlowLayout());
 //        yearPanel.setLayout(new FlowLayout());
@@ -273,6 +277,23 @@ public class TableHomeFrame implements ISimpleActions {
             row[4] = c.getCredits();
             row[5] = c.getFinalGrade();
             model.addRow(row);
+        }
+
+        //resizing each column by the maximum length of each
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
+            TableColumn col = colModel.getColumn(i);
+            int width = 0;
+
+            TableCellRenderer renderer;
+            for (int r = 0; r < table.getRowCount(); r++) {
+                renderer = table.getCellRenderer(r, i);
+                Component comp = renderer.getTableCellRendererComponent(table, table.getValueAt(r, i),
+                        false, false, r, i);
+                width = Math.max(width, comp.getPreferredSize().width);
+            }
+            //TODO lol
+            col.setPreferredWidth(width + table.getParent().getWidth()/17 + 1);
         }
     }
 
