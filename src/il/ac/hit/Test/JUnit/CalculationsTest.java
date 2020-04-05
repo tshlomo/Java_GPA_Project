@@ -1,5 +1,6 @@
-package il.ac.hit.Model;
+package il.ac.hit.Test.JUnit;
 
+import il.ac.hit.Model.Calculations;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

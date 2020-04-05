@@ -1,6 +1,9 @@
-package il.ac.hit.Model;
+package il.ac.hit.Test.JUnit;
 
 import il.ac.hit.Interfaces.ISimpleActions;
+import il.ac.hit.Model.DBActions;
+import il.ac.hit.Model.DBActionsException;
+import il.ac.hit.Model.DBconnection;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.sql.Connection;
