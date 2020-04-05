@@ -11,9 +11,9 @@ import java.sql.Statement;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DBActionsTest {
-    Statement statement = null;
-    ResultSet rs = null;
-    Connection conn = null;
+    private Statement statement = null;
+    private ResultSet rs = null;
+    private Connection conn = null;
 
     @org.junit.jupiter.api.Test
     void addGrade() throws DBActionsException {

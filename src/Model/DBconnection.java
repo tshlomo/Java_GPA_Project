@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 
 public class DBconnection {
-    static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    static final String protocol = "jdbc:derby:gpaDB;create=true";
+    private static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+    private static final String protocol = "jdbc:derby:gpaDB;create=true";
     private static Logger logger=Logger.getLogger(DBconnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;
@@ -18,6 +18,7 @@ public class DBconnection {
         //this driver as an available driver for DriverManager
         Class.forName(driver);
     }
+
     //the getDBConnection function is basically the getInstance function for regular singleton pattern.
     //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
     public static Connection getDBConnection() throws DBActionsException {
