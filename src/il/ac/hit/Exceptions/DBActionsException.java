@@ -1,4 +1,4 @@
-package il.ac.hit.Model;
+package il.ac.hit.Exceptions;
 
 import java.sql.SQLException;
 

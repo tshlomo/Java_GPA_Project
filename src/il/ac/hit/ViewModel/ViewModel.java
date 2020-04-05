@@ -3,7 +3,7 @@ package il.ac.hit.ViewModel;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.Model.Calculations;
 import il.ac.hit.Model.DBActions;
-import il.ac.hit.Model.DBActionsException;
+import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.View.TableHomeFrame;
 
 public class ViewModel implements ISimpleActions {

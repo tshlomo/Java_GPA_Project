@@ -1,7 +1,7 @@
 package il.ac.hit.View;
 
 import il.ac.hit.Model.Calculations;
-import il.ac.hit.Model.DBActionsException;
+import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package il.ac.hit.View;
 import il.ac.hit.Interfaces.ISimpleActions;
-import il.ac.hit.Model.DBActionsException;
+import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.ViewModel.*;
 
 import javax.swing.*;

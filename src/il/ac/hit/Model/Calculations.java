@@ -1,5 +1,6 @@
 package il.ac.hit.Model;
 
+import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.util.List;

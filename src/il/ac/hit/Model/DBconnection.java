@@ -1,4 +1,6 @@
 package il.ac.hit.Model;
+import il.ac.hit.Exceptions.DBActionsException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -1,6 +1,7 @@
 
 package il.ac.hit.Model;
 
+import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.ViewModel.CourseDetails;
 
