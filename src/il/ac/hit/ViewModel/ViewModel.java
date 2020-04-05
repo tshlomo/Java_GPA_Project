@@ -11,7 +11,6 @@ public class ViewModel implements IFindNewGPA {
     private static Model dbActions;
     private static TableHomeFrame tableHomeFrame;
     private static Calculations calculations;
-    //CREATE TABLE GPA(Course VARCHAR(255),Semester VARCHAR(255),TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course))
 
     public ViewModel(TableHomeFrame tableHomeFrame){
         dbActions = new Model();

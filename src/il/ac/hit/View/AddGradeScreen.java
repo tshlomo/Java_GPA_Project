@@ -117,9 +117,7 @@ public class AddGradeScreen {
 
                 try {
                     tableHomeFrame.addGrade(courseDetails);
-                } catch (DBActionsException ex) {
-                    ex.printStackTrace();
-                }
+                } catch (DBActionsException ex) {}
             }
         });
 
