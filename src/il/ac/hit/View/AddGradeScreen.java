@@ -124,7 +124,14 @@ public class AddGradeScreen extends JFrame {
                     Integer val = -1;
                     if(data.length()>1)
                         try {
-                            val = Integer.parseInt(data+c);
+                            if(c >='0' && c <= '9')
+                                val = Integer.parseInt(data+c);
+                            else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                                val = Integer.parseInt(data.substring(0,data.length()-1));
+                            else if (!data.isEmpty())
+                                val = Integer.parseInt(data);
+                            else
+                                val = 0;
                             if (val >= 100) {
                                 textQuiz.setText("100");
                             }
@@ -150,7 +157,14 @@ public class AddGradeScreen extends JFrame {
                     Integer val = -1;
                     if(data.length()>1)
                         try {
-                            val = Integer.parseInt(data+c);
+                            if(c >='0' && c <= '9')
+                                val = Integer.parseInt(data+c);
+                            else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                                val = Integer.parseInt(data.substring(0,data.length()-1));
+                            else if (!data.isEmpty())
+                                val = Integer.parseInt(data);
+                            else
+                                val = 0;
                             if (val >= 100) {
                                 textFinalTest.setText("100");
                             }
@@ -175,9 +189,11 @@ public class AddGradeScreen extends JFrame {
                     String data = quizPrecentage.getText();
                     Integer val = -1;
                     try {
-                        if(c>='0' && c<='9')
+                        if(c >='0' && c <= '9')
                             val = Integer.parseInt(data+c);
                         else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                            val = Integer.parseInt(data.substring(0,data.length()-1));
+                        else if (!data.isEmpty())
                             val = Integer.parseInt(data);
                         else
                             val = 0;
@@ -209,9 +225,11 @@ public class AddGradeScreen extends JFrame {
                     String data = testPrecentage.getText();
                     Integer val = -1;
                     try {
-                        if(c>='0' && c<='9')
+                        if(c >='0' && c <= '9')
                             val = Integer.parseInt(data+c);
                         else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                            val = Integer.parseInt(data.substring(0,data.length()-1));
+                        else if (!data.isEmpty())
                             val = Integer.parseInt(data);
                         else
                             val = 0;

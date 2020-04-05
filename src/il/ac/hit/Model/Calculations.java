@@ -1,6 +1,7 @@
 package il.ac.hit.Model;
 
 import il.ac.hit.Exceptions.DBActionsException;
+import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.util.List;
@@ -35,7 +36,6 @@ public class Calculations {
 
         return (grades_sum/credits_sum);
     }
-
 
     public Double gpaByGrade(String courseName,Integer newGrade) throws  DBActionsException {
         Double credits_sum = 0.0;

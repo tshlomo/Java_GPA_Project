@@ -1,12 +1,13 @@
 package il.ac.hit.ViewModel;
 
+import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.Model.Calculations;
 import il.ac.hit.Model.DBActions;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.View.TableHomeFrame;
 
-public class ViewModel implements ISimpleActions {
+public class ViewModel implements IFindNewGPA {
 
     private static DBActions dbActions;
     private static TableHomeFrame tableHomeFrame;
@@ -54,5 +55,11 @@ public class ViewModel implements ISimpleActions {
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException{
         dbActions.editGrade(courseDetails);
+    }
+
+    @Override
+    public Double newGPA(String courseName, Integer newGrade) throws DBActionsException{
+        Double newGPA = calculations.gpaByGrade(courseName,newGrade);
+        return newGPA;
     }
 }

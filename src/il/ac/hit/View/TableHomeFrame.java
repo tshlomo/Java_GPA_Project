@@ -1,4 +1,5 @@
 package il.ac.hit.View;
+import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.ViewModel.*;
@@ -38,7 +39,7 @@ public class TableHomeFrame implements ISimpleActions {
 
     private AddGradeScreen screen;
 
-    private ISimpleActions simpleActions;
+    private IFindNewGPA simpleAndGPAActions;
 
     private JFrame frame;
     private JTable table;
@@ -67,7 +68,7 @@ public class TableHomeFrame implements ISimpleActions {
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
 
     public TableHomeFrame() throws DBActionsException {
-        simpleActions = new ViewModel(this);
+        simpleAndGPAActions = new ViewModel(this);
         //Frame
         frame = new JFrame("GPA");
         //Table
@@ -114,7 +115,14 @@ public class TableHomeFrame implements ISimpleActions {
                 Integer val = -1;
                 if(data.length()>1)
                 try {
-                    val = Integer.parseInt(data+c);
+                    if(c >='0' && c <= '9')
+                        val = Integer.parseInt(data+c);
+                    else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                        val = Integer.parseInt(data.substring(0,data.length()-1));
+                    else if (!data.isEmpty())
+                        val = Integer.parseInt(data);
+                    else
+                        val = 0;
                     if (val >= 100) {
                         textDesiredGrade.setText("100");
                     }
@@ -139,9 +147,11 @@ public class TableHomeFrame implements ISimpleActions {
         btnDesiredGradeUpdate = new JButton("Calculate new GPA");
 
         btnDesiredGradeUpdate.addActionListener(e -> {
-            try{
-                //TODO this func
-            } catch (Exception q) { q.printStackTrace(); }
+            try {
+                textUpdatedGrade.setText(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()),Integer.valueOf(textDesiredGrade.getText())).toString());
+            } catch (DBActionsException e1) {
+                e1.printStackTrace();
+            }
         });
 
         //table properties
@@ -244,7 +254,7 @@ public class TableHomeFrame implements ISimpleActions {
 
         });
 
-        simpleActions.deleteGrade("updateTable");
+        simpleAndGPAActions.deleteGrade("updateTable");
     }
 
     public void updateGradesTable(List<CourseDetails> courseDetails){
@@ -298,16 +308,12 @@ public class TableHomeFrame implements ISimpleActions {
     }
 
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
-        simpleActions.addGrade(courseDetails);
+        simpleAndGPAActions.addGrade(courseDetails);
     }
 
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
-        try {
-            simpleActions.deleteGrade(courseName);
-        } catch (DBActionsException ex) {
-            ex.printStackTrace();
-        }
+        simpleAndGPAActions.deleteGrade(courseName);
     }
 
     public void updateGPA(Double calculate_gpa) {
@@ -331,7 +337,7 @@ public class TableHomeFrame implements ISimpleActions {
     public void editGrade(CourseDetails courseDetails) throws DBActionsException{
         int dialogResult = JOptionPane.showConfirmDialog (null, "You've already got grade on "+courseDetails.getCourseName()+"\nWould you like to update your grades?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION){
-            simpleActions.editGrade(courseDetails);
+            simpleAndGPAActions.editGrade(courseDetails);
         }
     }
 }
