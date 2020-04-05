@@ -5,6 +5,7 @@ import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.ViewModel.CourseDetails;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,17 @@ public class Model implements ISimpleActions {
         conn = null;
         logger=Logger.getLogger(Model.class.getName());
     }
+
+    /**
+     * adds CourseDetails object's values to the gpa table in the db.
+     * The CourseDetails argument was instantiated before and must hold all correct (not null) values.
+     * <p>
+     * This method inserts object values via insert statement.
+     *
+     * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
+     * @throws DBActionsException if an sql exception occurred
+     * @see
+     */
 
     //this func receives all of the params of the db table and and updates it with insert statement
     @Override
@@ -48,8 +60,19 @@ public class Model implements ISimpleActions {
             resetStatementAndRS();
         }
 
-    }
+        /**
+         * deletes specific course from db table
+         * The String coursename must hold a correct name of the specific course we intend to delete.
+         * <p>
+         * func establishes connection to db
+         * func deletes row from table via executeUpdate statement
+         *
+         * @param  coursename  correct name of the course that would be deleted
+         * @throws DBActionsException if an sql exception occurred
+         * @see
+         */
 
+    }
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
@@ -65,6 +88,18 @@ public class Model implements ISimpleActions {
             resetStatementAndRS();
         }
     }
+
+    /**
+     * updates grades of a specific course in table
+     * The CourseDetails argument was instantiated before and must hold all correct (not null) values.
+     * <p>
+     * func establishes connection to db
+     * func updates a specific course grades from table with new values via executeUpdate statement
+     *
+     * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
+     * @throws DBActionsException if an sql exception occurred
+     * @see
+     */
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
     @Override
@@ -87,6 +122,16 @@ public class Model implements ISimpleActions {
         }
     }
 
+    /**
+     * returns a CourseDetails type list of all courses in table.
+     * <p>
+     * func establishes connection to db
+     * retrieves course values from table via query into the CourseDetails object instantiation in the loop
+     *
+     * @throws DBActionsException if an sql exception occurred
+     * @return list of all courses values
+     */
+
     public List<CourseDetails> getGradeTable () throws DBActionsException{
         List<CourseDetails> courseDetails=new ArrayList<>();
         try {
@@ -107,8 +152,20 @@ public class Model implements ISimpleActions {
         return courseDetails;
     }
 
+    /**
+     * returns a specific course from db table
+     * The String coursename must hold a correct name of the specific course we intend to retrieve.
+     * <p>
+     * func establishes connection to db
+     * func retrieves a row from table via query with the corresponding courseName and
+     * instantiates a CourseDetails object with the retrieved values.
+     *
+     * @param  courseName  correct name of the course that would be deleted
+     * @throws DBActionsException if an sql exception occurred
+     * @return values of a specific course
+     */
+// func returns a specific course from table
     public CourseDetails getCourse (String courseName) throws DBActionsException{
-        //CourseDetails course = null;
         try {
             conn = DBconnection.getDBConnection();
             statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -127,6 +184,14 @@ public class Model implements ISimpleActions {
         }
         return null;
     }
+
+
+    /**
+     * closes all params which are used to connect and work with db.
+     * this func is called at the end of any method which connects to db
+     *
+     */
+
     //func closes all the connection params(we use it at the end of any method which is in this class)
     private void resetStatementAndRS() {
         if (statement != null) try {
