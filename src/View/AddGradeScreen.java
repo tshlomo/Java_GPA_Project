@@ -2,13 +2,21 @@ package View;
 
 import Model.Calculations;
 import ViewModel.CourseDetails;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.logging.Logger;
+
+/**
+ * This class holds the components of the add grade screen
+ * giving the user the ability to add the desired grades
+ * to the main GPA table.
+ */
 
 public class AddGradeScreen extends JFrame {
+
+    private Logger logger= Logger.getLogger(AddGradeScreen.class.getName());
 
     private static final String[] courses = {"Linear algebra", "Infinitesimal calculus 1", "Computer science Introduction", "Introduction to discrete math","Java Basics"
             , "Probability", "Infinitesimal calculus 2", "Computer structure and switching theory", "Data Structures", "Advanced Programming Workshop","C#"
@@ -58,6 +66,7 @@ public class AddGradeScreen extends JFrame {
         SwingUtilities.invokeLater(() -> {
             this.tableHomeFrame=tableHomeFrame;
             //creating labels
+            logger.info("creating the labels...");
             courseLabel = new JLabel("Course");
             quizLabel = new JLabel("HW/Quiz grade");
             finalTestLabel = new JLabel("Final Test");
@@ -67,7 +76,9 @@ public class AddGradeScreen extends JFrame {
             yearLabel = new JLabel("Year");
             semesterLabel = new JLabel("Semester");
 
+
             //creating text fields
+            logger.info("creating the text fields...");
             textQuiz = new JTextField(3);
             textFinalTest = new JTextField(3);
             textCredits = new JTextField(3);
@@ -76,9 +87,11 @@ public class AddGradeScreen extends JFrame {
             textCredits.setEditable(false);
 
             //creating buttons
+            logger.info("creating a button...");
             btnAdd = new JButton("Add");
 
             //creating panels
+            logger.info("creating the panels...");
             yearPanel = new JPanel();
             semesterPanel = new JPanel();
             coursePanel = new JPanel();
@@ -88,6 +101,7 @@ public class AddGradeScreen extends JFrame {
             addBtnPanel = new JPanel();
 
             //creating frame
+            logger.info("creating the frame...");
             frame = new JFrame("Add Grade");
 
             courseDetails=null;
@@ -95,7 +109,8 @@ public class AddGradeScreen extends JFrame {
             textCredits.setEditable(false);
 
             //Creating ComboBox
-            courseComboBox = new JComboBox();
+            logger.info("creating the combo boxes...");
+            courseComboBox = new JComboBox(courses);
             yearComboBox = new JComboBox(year);
             semesterComboBox = new JComboBox(semester);
 
@@ -105,7 +120,7 @@ public class AddGradeScreen extends JFrame {
                         , Integer.valueOf(textFinalTest.getText()), Double.parseDouble(textCredits.getText())
                         , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
                         ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
-
+                logger.info("adding a grade to the table...");
                 tableHomeFrame.addGrade(courseDetails);
                 frame.dispose();
             });
@@ -126,6 +141,7 @@ public class AddGradeScreen extends JFrame {
                         } catch (Exception e) {e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        logger.info("an attempt to add a grade with a higher score than 100 has been made");
                         //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
@@ -154,6 +170,7 @@ public class AddGradeScreen extends JFrame {
                         } catch (Exception e) {e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        logger.info("an attempt to add a grade with a higher score than 100 has been made");
                         //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
@@ -187,6 +204,7 @@ public class AddGradeScreen extends JFrame {
                     } catch (Exception e) { e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        logger.info("an attempt to add a grade with a higher score than 100 has been made");
                         //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
@@ -220,6 +238,7 @@ public class AddGradeScreen extends JFrame {
                     } catch (Exception e) { e.printStackTrace();}
                     if(val >= 100) {
                         ke.consume();
+                        logger.info("an attempt to add a grade with a higher score than 100 has been made");
                         //desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
@@ -234,6 +253,7 @@ public class AddGradeScreen extends JFrame {
             });
 
             //setting panels layouts
+            logger.info("setting the panels layouts");
             yearPanel.setLayout(new FlowLayout());
             semesterPanel.setLayout(new FlowLayout());
             coursePanel.setLayout(new FlowLayout());
@@ -243,6 +263,7 @@ public class AddGradeScreen extends JFrame {
             addBtnPanel.setLayout(new FlowLayout());
 
             //Adding components to the relevant panels
+            logger.info("adding components to the panels");
             coursePanel.add(courseLabel);
             coursePanel.add(courseComboBox);
 
@@ -271,6 +292,7 @@ public class AddGradeScreen extends JFrame {
             //setting container layout
             container.setLayout(new GridLayout(8, 1, 5, 5));
             //attaching panels to the main frame
+            logger.info("adding panels to the mainframe");
             container.add(yearPanel);
             container.add(semesterPanel);
             container.add(coursePanel);
@@ -284,6 +306,7 @@ public class AddGradeScreen extends JFrame {
 
             //setting the frame visible
             //frame.setSize(500,500);
+            logger.info("defining the frame properties");
             frame.pack();
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setLocationRelativeTo(null);

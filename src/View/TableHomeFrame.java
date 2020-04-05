@@ -3,7 +3,6 @@ package View;
 import Interfaces.ISimpleActions;
 import ViewModel.CourseDetails;
 import ViewModel.ViewModel;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,9 +10,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+/**
+ * This class holds the components of the main screen
+ * hence providing the interaction between the user and the application.
+ */
 
 public class TableHomeFrame extends JTable {
+
+    private Logger logger= Logger.getLogger(TableHomeFrame.class.getName());
 
     private static final String[] courses = {"Linear algebra","Infinitesimal calculus 1","Computer science Introduction","Introduction to discrete math"
             ,"Probability","Infinitesimal calculus 2","Computer structure and switching theory","Data Structures","Advanced Programming Workshop"
@@ -23,7 +29,6 @@ public class TableHomeFrame extends JTable {
             ,"DevOPS","Development of server side systems in an open source environment","Developing a client side in an Android environment","Compilation Theory"
             ,"Involvement in Israeli society","Yoga","Basketball team","Football team","Information Society"};
     private static final Object[] credits;
-
     static {
         credits = new Object[]{ 5, 6.5, 5, 5,
                 3.5, 5, 4, 4, 3,
@@ -33,14 +38,11 @@ public class TableHomeFrame extends JTable {
                 3,3, 3.5, 3.5,
                 4, 1, 1, 1, 2};
     }
-
     private static final String[] year = {"First Year","Second Year","Third Year"};
     private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
-
+    //Variables declarations
     private AddGradeScreen screen;
-
     private ISimpleActions simpleActions;
-
     private JFrame frame;
     private JTable table;
     private JPanel panelTop,panelMiddle,panelBottom,labelPanel,yearPanel,semesterPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
@@ -69,12 +71,16 @@ public class TableHomeFrame extends JTable {
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
 
     public TableHomeFrame() {
+        logger.info("instantiating all the class components");
         simpleActions = new ViewModel(this);
         //Frame
+        logger.info("creating the frame..");
         frame = new JFrame("GPA");
         //Table
+        logger.info("creating the table..");
         table = new JTable();
         //Panels
+        logger.info("creating the panels..");
         panelBottom = new JPanel();
         panelTop = new JPanel();
         panelMiddle = new JPanel();
@@ -88,10 +94,12 @@ public class TableHomeFrame extends JTable {
         addDeleteBtnPanel = new JPanel();
         currentGpaPanel = new JPanel();
         //ComboBox
+        logger.info("creating the combo boxes..");
         courseComboBox = new JComboBox(courses);
         yearComboBox = new JComboBox(year);
         semesterComboBox = new JComboBox(semester);
         //Labels
+        logger.info("creating the labels..");
         GPALabel = new JLabel("Current GPA");
         desiredGradeLabel = new JLabel("Desired Grade");
         courseLabel = new JLabel("Course");
@@ -102,11 +110,20 @@ public class TableHomeFrame extends JTable {
         desiredGradeLabelValidation = new JLabel("");
         desiredGradeLabelValidation.setForeground(Color.RED);
         //TextFields
+        logger.info("creating the text fields..");
         textGPA = new JTextField(4);
         textGPA.setEditable(false);
         textUpdatedGrade = new JTextField(3);
         textUpdatedGrade.setEditable(false);
         textDesiredGrade = new JTextField(3);
+        //Buttons
+        logger.info("creating the buttons..");
+        btnAddGrade = new JButton("Add New Grade");
+        btnDeleteGrade = new JButton("Delete Grade");
+        btnDesiredGradeUpdate = new JButton("Calculate new GPA");
+        //ScrollPane
+        logger.info("creating the scroll pane..");
+        pane = new JScrollPane(table);
 
         textDesiredGrade.addKeyListener(new KeyAdapter() {
             @Override
@@ -123,6 +140,7 @@ public class TableHomeFrame extends JTable {
                     } catch (Exception e) {e.printStackTrace();}
                 if(val >= 100) {
                     ke.consume();
+                    logger.info("an attempt to add a grade with a higher score than 100 has been made");
                     desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                 }
                 else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
@@ -135,11 +153,6 @@ public class TableHomeFrame extends JTable {
             }
         });
 
-        //Buttons
-        btnAddGrade = new JButton("Add New Grade");
-        btnDeleteGrade = new JButton("Delete Grade");
-        btnDesiredGradeUpdate = new JButton("Calculate new GPA");
-
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
                 //TODO this func
@@ -147,43 +160,37 @@ public class TableHomeFrame extends JTable {
         });
 
         //table properties
-        Font font = new Font("", 1, 16);
-        //disabling editing the table
+        logger.info("disabling the option to edit the table");
         table.setDefaultEditor(Object.class,null);
-        //auto resizing the columns
+        logger.info("auto resizing the columns..");
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        logger.info("setting the model..");
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
-/*      table.setBackground(Color.white);
-        table.setModel(model);
-        table.setForeground(Color.red);
-        table.setFont(font);
-        table.setRowHeight(30);
-*/
-        //ScrollPane
-        pane = new JScrollPane(table);
+
+
 
         //setting layouts
+        logger.info("setting up the layouts for the panels..");
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
-        //panelBottom.setLayout(new GridLayout(7,1,5,5));
         panelTop.setLayout(new BorderLayout());
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
         labelPanel.setLayout(new FlowLayout());
-//        yearPanel.setLayout(new FlowLayout());
-//        semesterPanel.setLayout(new FlowLayout());
         coursePanel.setLayout(new FlowLayout());
         desiredGradePanel.setLayout(new FlowLayout());
         btnPanel.setLayout(new FlowLayout());
         updatedGpaPanel.setLayout(new FlowLayout());
         addDeleteBtnPanel.setLayout(new FlowLayout());
         currentGpaPanel.setLayout(new FlowLayout());
-
+        logger.info("setting up the improving grades label font..");
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
 
         //adding top panel
+        logger.info("adding the scroll pane..");
         panelTop.add(pane);
 
-        //setting relevant components in the relevant panels for middle panel
+        //setting relevant components in the relevant panels
+        logger.info("setting up the components in the relevant panels..");
         currentGpaPanel.add(addDeleteBtnPanel);
         currentGpaPanel.add(GPALabel);
         currentGpaPanel.add(textGPA);
@@ -191,16 +198,9 @@ public class TableHomeFrame extends JTable {
         addDeleteBtnPanel.add(btnDeleteGrade);
         labelPanel.add(improvingGradesLabel);
         panelMiddle.add(currentGpaPanel);
-        //panelMiddle.add(addDeleteBtnPanel);
         panelMiddle.add(labelPanel);
         panelMiddle.add(coursePanel);
         panelMiddle.add(desiredGradeLabelValidation);
-
-        //setting bottom panel
-//        yearPanel.add(yearLabel);
-//        yearPanel.add(yearComboBox);
-//        semesterPanel.add(semesterLabel);
-//        semesterPanel.add(semesterComboBox);
         coursePanel.add(courseLabel);
         coursePanel.add(courseComboBox);
         desiredGradePanel.add(desiredGradeLabel);
@@ -210,33 +210,33 @@ public class TableHomeFrame extends JTable {
         btnPanel.add(btnDesiredGradeUpdate);
         panelMiddle.add(desiredGradePanel);
         panelMiddle.add(btnPanel);
-
-//        panelBottom.add(yearPanel);
-//        panelBottom.add(semesterPanel);
-
-
         panelBottom.add(updatedGpaPanel);
 
         //creating container to handle the frame content pane
+        logger.info("creating the container..");
         Container container = frame.getContentPane();
         //setting container layout
+        logger.info("setting up the container layout..");
         container.setLayout(new BorderLayout());
         //attaching relevant panels to the container
+        logger.info("adding the panels to the container..");
         container.add(panelTop,BorderLayout.NORTH);
         container.add(panelMiddle,BorderLayout.CENTER);
         container.add(panelBottom,BorderLayout.SOUTH);
 
         //frame properties
+        logger.info("setting up the frame properties..");
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
         //listener for add grade button
+        logger.info("setting up the add button listener..");
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen(this));
-
+        //listener for delete grade button
+        logger.info("setting up the delete button listener..");
         btnDeleteGrade.addActionListener(e -> simpleActions.deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString()));
-
         simpleActions.deleteGrade("updateTable");
     }
 

@@ -1,18 +1,18 @@
 package View;
 
+import org.apache.log4j.BasicConfigurator;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.logging.Logger;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.SimpleLayout;
-import org.apache.logging.log4j.core.appender.FileAppender;
+/**
+ * The Table class is used to display and edit regular
+ * two-dimensional tables of cells, the Table class has many facilities
+ * that make it possible to customize and edit but provides defaults
+ * for these features so that simple tables can be set up easily.
+ */
 
 public class Table {
     protected static Logger logger = Logger.getLogger("Table");
@@ -101,43 +101,3 @@ public class Table {
     }
 }
 
-//        //Setting up an action listener for btnAdd
-//        btnAdd.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                row[0]= textCourse.getText();
-//                row[1]= textQuiz.getText();
-//                row[2]= textFinalTest.getText();
-//                row[3]= textCredits.getText();
-//                row[4]= Double.parseDouble(textQuiz.getText())*quizWeight + Double.parseDouble(textFinalTest.getText())*finalTestWeight;
-//                model.addRow(row);
-//            }
-//        });
-//
-//        //Setting up an action listener for btnDelete
-//        btnDelete.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                int i = table.getSelectedRow();
-//                if (i >= 0) {
-//                    model.removeRow(i);
-//                }
-//                else System.out.println("Deletion Error");
-//            }
-//        });
-//
-//        //Setting a mouse listener for the selected row
-//        table.addMouseListener(new MouseAdapter() {
-//            public void mouseClicked(MouseEvent e){
-//                int i = table.getSelectedRow();
-//                textCourse.setText(model.getValueAt(i,0).toString());
-//                textQuiz.setText(model.getValueAt(i,1).toString());
-//                textFinalTest.setText(model.getValueAt(i,2).toString());
-//                textCredits.setText(model.getValueAt(i,3).toString());
-//
-//            }
-//        });
-//
-//
-//    }
-//}
