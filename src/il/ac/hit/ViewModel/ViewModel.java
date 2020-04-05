@@ -24,9 +24,9 @@ public class ViewModel implements IFindNewGPA {
     }
 
     public static void updateTable() throws DBActionsException {
-        tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
         tableHomeFrame.updateCourseComboBox(dbActions.getGradeTable());
         updateGPA(calculations.calculate_GPA());
+        tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
     }
 
     @Override

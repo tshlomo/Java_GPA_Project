@@ -255,6 +255,7 @@ public class TableHomeFrame implements ISimpleActions {
             model.addRow(row);
         }
 
+        Integer columnsWidth=0;
         //resizing each column by the maximum length of each
         for (int i = 0; i < table.getColumnCount(); i++) {
             DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
@@ -270,8 +271,9 @@ public class TableHomeFrame implements ISimpleActions {
             }
             width = Math.max(width,table.getColumn(columns[i]).getWidth()-5);
             col.setPreferredWidth(width + 3);
+            columnsWidth+=width+3;
         }
-        pane.setSize(table.getSize());
+        frame.setSize(columnsWidth + 20,frame.getHeight() + 20);
     }
 
     @Override
