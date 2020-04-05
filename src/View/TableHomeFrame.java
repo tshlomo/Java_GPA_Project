@@ -240,6 +240,13 @@ public class TableHomeFrame extends JTable {
         simpleActions.deleteGrade("updateTable");
     }
 
+    /**
+     * Updates the table with an ArrayList of CourseDetails Objects.
+     * Each CourseDetails object is then displayed to the user inside the table.
+     *
+     * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
+     */
+
     public void updateGradesTable(ArrayList<CourseDetails> courseDetails){
         Object[] row = new Object[6];
         //clearing the table first
@@ -273,10 +280,24 @@ public class TableHomeFrame extends JTable {
         });
     }
 
+    /**
+     * This method is triggered once the "Add Grade" button is pressed by the user.
+     * It adds a CourseDetails object to the table.
+     * The grade components are then displayed to the user inside the table.
+     *
+     * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
+     */
+
     public void addGrade(CourseDetails courseDetails){
         simpleActions.addGrade(courseDetails);
     }
 
+    /**
+     * Sets the updated GPA to be in a format of "##.##" i.e: "93.45".
+     * This method is triggered once a new grade is added.
+     *
+     * @param calculate_gpa The outcome from the calculation of the GPA that is then formatted to "##.##" format.
+     */
     public void updateGPA(Double calculate_gpa) {
         textGPA.setText(new DecimalFormat("##.##").format(calculate_gpa));
     }

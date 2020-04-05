@@ -1,10 +1,7 @@
 package View;
 
 import Model.Calculations;
-import ViewModel.ViewModel;
 import ViewModel.CourseDetails;
-import org.apache.derby.iapi.util.StringUtil;
-import org.junit.platform.commons.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,20 +10,20 @@ import java.awt.event.KeyEvent;
 
 public class AddGradeScreen extends JFrame {
 
-    private static final String[] courses = {"Linear algebra", "Infinitesimal calculus 1", "Computer science Introduction", "Introduction to discrete math"
-            , "Probability", "Infinitesimal calculus 2", "Computer structure and switching theory", "Data Structures", "Advanced Programming Workshop"
-            , "Computer organization and threshold language", "Database systems", "Computer communication networks", "Graph theory", "Object oriented programming"
+    private static final String[] courses = {"Linear algebra", "Infinitesimal calculus 1", "Computer science Introduction", "Introduction to discrete math","Java Basics"
+            , "Probability", "Infinitesimal calculus 2", "Computer structure and switching theory", "Data Structures", "Advanced Programming Workshop","C#"
+            , "Computer organization and threshold language", "Database systems", "Computer communication networks", "Graph theory", "Object oriented programming","Advanced Python"
             , "Automatic and formal languages", "Software engineering", "Operating systems", "Algorithm design and analysis"
-            , "Computational and Computational Algorithms", "Mathematical tools", "Machine learning", "Programming in the Web Environment"
+            , "Computational and Computational Algorithms", "Mathematical tools", "Machine learning", "Programming in the Web Environment","Design patterns"
             , "DevOPS", "Development of server side systems in an open source environment", "Developing a client side in an Android environment", "Compilation Theory"
-            , "Involvement in Israeli society", "Yoga", "Basketball team", "Football team", "Information Society"};
-    private static final Object[] credits = {5, 6.5, 5, 5,
-            3.5, 5, 4, 4, 3,
-            2.5, 4, 3.5, 3.5, 5,
+            , "Involvement in the Israeli society", "Yoga", "Basketball team", "Football team", "Information Society","Developing a client side in an Android environment 2"};
+    private static final Object[] credits = {5, 6.5, 5, 5,4,
+            3.5, 5, 4, 4, 3,3,
+            2.5, 4, 3.5, 3.5, 5,4,
             4, 4, 3.5, 4,
-            4, 5, 3, 3,
+            4, 5, 3, 3,4,
             3, 3, 3.5, 3.5,
-            4, 1, 1, 1, 2};
+            4, 1, 1, 1, 2,3};
     private static final String[] year = {"First Year", "Second Year", "Third Year"};
     private static final String[] semester = {"First Semester", "Second Semester", "Third Semester"};
     private static final Integer NUM_OF_SEMESTERS = 3;
@@ -70,11 +67,6 @@ public class AddGradeScreen extends JFrame {
             yearLabel = new JLabel("Year");
             semesterLabel = new JLabel("Semester");
 
-            //Creating ComboBox
-            courseComboBox = new JComboBox(courses);
-            yearComboBox = new JComboBox(year);
-            semesterComboBox = new JComboBox(semester);
-
             //creating text fields
             textQuiz = new JTextField(3);
             textFinalTest = new JTextField(3);
@@ -98,10 +90,14 @@ public class AddGradeScreen extends JFrame {
             //creating frame
             frame = new JFrame("Add Grade");
 
-
             courseDetails=null;
             calculations = new Calculations();
             textCredits.setEditable(false);
+
+            //Creating ComboBox
+            courseComboBox = new JComboBox();
+            yearComboBox = new JComboBox(year);
+            semesterComboBox = new JComboBox(semester);
 
             //button action listener
             btnAdd.addActionListener(e -> {
@@ -111,7 +107,10 @@ public class AddGradeScreen extends JFrame {
                         ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
 
                 tableHomeFrame.addGrade(courseDetails);
+                frame.dispose();
             });
+
+            //text quiz action listener
             textQuiz.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
@@ -138,6 +137,8 @@ public class AddGradeScreen extends JFrame {
                     }
                 }
             });
+
+            //text final quiz action listener
             textFinalTest.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
@@ -164,6 +165,8 @@ public class AddGradeScreen extends JFrame {
                     }
                 }
             });
+
+            //quiz percentage action listener
             quizPrecentage.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
@@ -196,6 +199,7 @@ public class AddGradeScreen extends JFrame {
                     }
                 }
             });
+            //test percentage action listener
             testPrecentage.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
