@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/gpaDB/seg0/c10.dat" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/gpaDB/seg0/c241.dat" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/gpaDB/seg0/c251.dat" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/gpaDB/seg0/c490.dat" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/gpaDB/seg0/c4a1.dat" charset="ISO-8859-1" />
+  </component>
 </project>
