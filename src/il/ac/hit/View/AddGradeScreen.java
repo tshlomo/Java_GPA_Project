@@ -28,7 +28,6 @@ public class AddGradeScreen {
             4, 1, 1, 1, 2};
     private static final String[] year = {"First Year", "Second Year", "Third Year"};
     private static final String[] semester = {"First Semester", "Second Semester", "Third Semester"};
-    private static final Integer NUM_OF_SEMESTERS = 3;
 
     private JFrame frame;
     private JPanel yearPanel, semesterPanel, coursePanel, quizPanel, testPanel, creditsPanel, addBtnPanel, inputErrPanel;
@@ -46,8 +45,8 @@ public class AddGradeScreen {
     private JTextField textQuiz;
     private JTextField textFinalTest;
     private JTextField textCredits;
-    private JTextField quizPrecentage;
-    private JTextField testPrecentage;
+    private JTextField quizPercentage;
+    private JTextField testPercentage;
     private JButton btnAdd;
     private JLabel inputErrLabel;
 
@@ -79,8 +78,8 @@ public class AddGradeScreen {
         textQuiz = new JTextField(3);
         textFinalTest = new JTextField(3);
         textCredits = new JTextField(3);
-        quizPrecentage = new JTextField(2);
-        testPrecentage = new JTextField(2);
+        quizPercentage = new JTextField(2);
+        testPercentage = new JTextField(2);
         textCredits.setEditable(false);
         //Linear Algebra first credit points is 5
         textCredits.setText("5");
@@ -107,14 +106,14 @@ public class AddGradeScreen {
 
         //button action listener
         btnAdd.addActionListener(e -> {
-            if (textQuiz.getText().length() == 0 || textFinalTest.getText().length() == 0 || quizPrecentage.getText().length() == 0 || testPrecentage.getText().length() == 0)
+            if (textQuiz.getText().length() == 0 || textFinalTest.getText().length() == 0 || quizPercentage.getText().length() == 0 || testPercentage.getText().length() == 0)
             {
                 JOptionPane.showMessageDialog(null, "Please input all values");
             } else {
                 courseDetails = new CourseDetails(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
                         , Integer.valueOf(textFinalTest.getText()), Double.parseDouble(textCredits.getText())
-                        , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
-                        ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
+                        , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPercentage.getText())
+                        ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPercentage.getText())));
 
                 try {
                     tableHomeFrame.addGrade(courseDetails);
@@ -184,11 +183,11 @@ public class AddGradeScreen {
             }
         });
 
-        quizPrecentage.addKeyListener(new KeyAdapter() {
+        quizPercentage.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
                 char c = ke.getKeyChar();
-                String data = quizPrecentage.getText();
+                String data = quizPercentage.getText();
                 Integer val = -1;
                 if(c >='0' && c <= '9')
                     val = Integer.parseInt(data+c);
@@ -199,16 +198,16 @@ public class AddGradeScreen {
                 else
                     val = 0;
                 if (val >= 100) {
-                    quizPrecentage.setText("100");
-                    testPrecentage.setText("0");
+                    quizPercentage.setText("100");
+                    testPercentage.setText("0");
                     ke.consume();
                     inputErrLabel.setText("Your grade can't be higher than 100");
                 }
                 else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                     inputErrLabel.setText("");
-                    testPrecentage.setText(String.valueOf(100-val));
+                    testPercentage.setText(String.valueOf(100-val));
                     if(c == KeyEvent.VK_BACK_SPACE && val == 0)
-                        quizPrecentage.setText(String.valueOf(val));
+                        quizPercentage.setText(String.valueOf(val));
                 }
                 else {
                     ke.consume();
@@ -217,11 +216,11 @@ public class AddGradeScreen {
             }
         });
 
-        testPrecentage.addKeyListener(new KeyAdapter() {
+        testPercentage.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
                 char c = ke.getKeyChar();
-                String data = testPrecentage.getText();
+                String data = testPercentage.getText();
                 Integer val = -1;
                 if(c >='0' && c <= '9')
                     val = Integer.parseInt(data+c);
@@ -232,16 +231,16 @@ public class AddGradeScreen {
                 else
                     val = 0;
                 if (val >= 100) {
-                    testPrecentage.setText("100");
-                    quizPrecentage.setText("0");
+                    testPercentage.setText("100");
+                    quizPercentage.setText("0");
                     ke.consume();
                     inputErrLabel.setText("Your grade can't be higher than 100");
                 }
                 else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                     inputErrLabel.setText("");
-                    quizPrecentage.setText(String.valueOf(100-val));
+                    quizPercentage.setText(String.valueOf(100-val));
                     if(c == KeyEvent.VK_BACK_SPACE && val == 0)
-                        testPrecentage.setText(String.valueOf(val));
+                        testPercentage.setText(String.valueOf(val));
                 }
                 else {
                     ke.consume();
@@ -266,12 +265,12 @@ public class AddGradeScreen {
 
         quizPanel.add(quizLabel);
         quizPanel.add(textQuiz);
-        quizPanel.add(quizPrecentage);
+        quizPanel.add(quizPercentage);
         quizPanel.add(percentageSign);
 
         testPanel.add(finalTestLabel);
         testPanel.add(textFinalTest);
-        testPanel.add(testPrecentage);
+        testPanel.add(testPercentage);
         testPanel.add(percentageSign2);
 
         creditsPanel.add(creditsLabel);

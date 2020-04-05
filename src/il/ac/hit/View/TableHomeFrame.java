@@ -13,29 +13,10 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class TableHomeFrame implements ISimpleActions {
-
-    private static final String[] courses = {"Linear algebra","Infinitesimal calculus 1","Computer science Introduction","Introduction to discrete math"
-            ,"Probability","Infinitesimal calculus 2","Computer structure and switching theory","Data Structures","Advanced Programming Workshop"
-            ,"Computer organization and threshold language","Database systems","Computer communication networks","Graph theory","Object oriented programming"
-            ,"Automatic and formal languages","Software engineering","Operating systems","Algorithm design and analysis"
-            ,"Computational and Computational Algorithms","Mathematical tools","Machine learning","Programming in the Web Environment"
-            ,"DevOPS","Development of server side systems in an open source environment","Developing a client side in an Android environment","Compilation Theory"
-            ,"Involvement in Israeli society","Yoga","Basketball team","Football team","Information Society"};
-    private static final Object[] credits = new Object[]{ 5, 6.5, 5, 5,
-            3.5, 5, 4, 4, 3,
-            2.5, 4, 3.5, 3.5, 5,
-            4,4, 3.5, 4,
-            4, 5, 3, 3,
-            3,3, 3.5, 3.5,
-            4, 1, 1, 1, 2};;
-
-    private static final String[] year = {"First Year","Second Year","Third Year"};
-    private static final String[] semester ={"First Semester","Second Semester","Summer Semester"};
 
     private static AddGradeScreen screen;
 

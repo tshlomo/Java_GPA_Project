@@ -59,20 +59,19 @@ public class Model implements ISimpleActions {
         } finally {
             resetStatementAndRS();
         }
-
-        /**
-         * deletes specific course from db table
-         * The String coursename must hold a correct name of the specific course we intend to delete.
-         * <p>
-         * func establishes connection to db
-         * func deletes row from table via executeUpdate statement
-         *
-         * @param  coursename  correct name of the course that would be deleted
-         * @throws DBActionsException if an sql exception occurred
-         * @see
-         */
-
     }
+
+    /**
+     * deletes specific course from db table
+     * The String coursename must hold a correct name of the specific course we intend to delete.
+     * <p>
+     * func establishes connection to db
+     * func deletes row from table via executeUpdate statement
+     *
+     * @param  courseName  correct name of the course that would be deleted
+     * @throws DBActionsException if an sql exception occurred
+     * @see
+     */
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
