@@ -13,6 +13,12 @@ import java.util.logging.Logger;
 
 public class Model implements ISimpleActions {
 
+    /**
+     * declaring class params which will be used to connecet and work with the db
+     * each one of those params will be closed and nulled at the end of each method
+     * +logger
+     */
+
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
     private ResultSet rs;//same as statement
     private Connection conn;
