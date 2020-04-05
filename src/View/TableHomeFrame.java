@@ -9,7 +9,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class TableHomeFrame extends JTable {
@@ -21,17 +22,13 @@ public class TableHomeFrame extends JTable {
             ,"Computational and Computational Algorithms","Mathematical tools","Machine learning","Programming in the Web Environment"
             ,"DevOPS","Development of server side systems in an open source environment","Developing a client side in an Android environment","Compilation Theory"
             ,"Involvement in Israeli society","Yoga","Basketball team","Football team","Information Society"};
-    private static final Object[] credits;
-
-    static {
-        credits = new Object[]{ 5, 6.5, 5, 5,
-                 3.5, 5, 4, 4, 3,
-                 2.5, 4, 3.5, 3.5, 5,
-                 4,4, 3.5, 4,
-                 4, 5, 3, 3,
-                 3,3, 3.5, 3.5,
-                 4, 1, 1, 1, 2};
-    }
+    private static final Object[] credits = new Object[]{ 5, 6.5, 5, 5,
+            3.5, 5, 4, 4, 3,
+            2.5, 4, 3.5, 3.5, 5,
+            4,4, 3.5, 4,
+            4, 5, 3, 3,
+            3,3, 3.5, 3.5,
+            4, 1, 1, 1, 2};;
 
     private static final String[] year = {"First Year","Second Year","Third Year"};
     private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
@@ -86,7 +83,7 @@ public class TableHomeFrame extends JTable {
         addDeleteBtnPanel = new JPanel();
         currentGpaPanel = new JPanel();
         //ComboBox
-        courseComboBox = new JComboBox(courses);
+        courseComboBox = new JComboBox();
         yearComboBox = new JComboBox(year);
         semesterComboBox = new JComboBox(semester);
         //Labels
@@ -241,13 +238,13 @@ public class TableHomeFrame extends JTable {
         simpleActions.deleteGrade("updateTable");
     }
 
-    public void updateGradesTable(ArrayList<CourseDetails> courseDetails){
+    public void updateGradesTable(List<CourseDetails> courseDetails){
         Object[] row = new Object[6];
         //clearing the table first
         table.setModel(new DefaultTableModel(null, columns));
         model= (DefaultTableModel) table.getModel();
 
-        courseDetails.forEach((c) -> {
+        for (CourseDetails c: courseDetails){
             row[0] = c.getCourseName();
             switch (c.getYear()){
                 case 1: row[1] = "First";
@@ -271,7 +268,7 @@ public class TableHomeFrame extends JTable {
             row[4] = c.getCredits();
             row[5] = c.getFinalGrade();
             model.addRow(row);
-        });
+        }
     }
 
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
@@ -280,5 +277,15 @@ public class TableHomeFrame extends JTable {
 
     public void updateGPA(Double calculate_gpa) {
         textGPA.setText(new DecimalFormat("##.##").format(calculate_gpa));
+    }
+
+    public void updateCourseComboBox(List<CourseDetails> gradeTable) {
+        String[] courses = new String[gradeTable.size()];
+        Integer i = 0;
+        for (CourseDetails c: gradeTable){
+            courses[i] = c.getCourseName();
+            i++;
+        }
+        courseComboBox = new JComboBox(courses);
     }
 }

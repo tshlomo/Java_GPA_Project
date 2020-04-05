@@ -40,7 +40,7 @@ public class DBActions implements ISimpleActions {
             logger.info("grade has been successfully added");
 
         } catch (SQLException e) {
-            throw new DBActionsException("problem adding grade",e);
+            throw new DBActionsException("problem adding grade " + e.getMessage(),e);
         } finally {
             resetStatementAndRS();
         }
@@ -97,8 +97,8 @@ public class DBActions implements ISimpleActions {
             resetStatementAndRS();
         }
     }
-    public ArrayList<CourseDetails> getGradeTable () throws DBActionsException{
-        ArrayList<CourseDetails> courseDetails=new ArrayList<>();
+    public List<CourseDetails> getGradeTable () throws DBActionsException{
+        List<CourseDetails> courseDetails=new ArrayList<>();
         try {
             conn = DBconnection.getDBConnection();
             statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -122,7 +122,7 @@ public class DBActions implements ISimpleActions {
     }
 
     public CourseDetails getCourse (String courseName) throws DBActionsException{
-        CourseDetails course=new CourseDetails("stam",1,1,1,1.0,1);
+        //CourseDetails course = null;
         try {
             conn = DBconnection.getDBConnection();
             statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -134,19 +134,16 @@ public class DBActions implements ISimpleActions {
             }
             rs.previous();
             while (rs.next()) {
-                course.setCourseName(rs.getString("course"));
-                course.setYear(rs.getInt("shana"));
-                course.setSemester(rs.getInt("semester"));
-                course.setTestGrade(rs.getInt("testGrade"));
-                course.setCredits(rs.getDouble("credits"));
-                course.setFinalGrade(rs.getInt("finalGrade"));
+                return new CourseDetails(rs.getString("course"),rs.getInt("shana")
+                        ,rs.getInt("semester"),rs.getInt("testGrade")
+                        ,rs.getDouble("credits"),rs.getInt("finalGrade"));
             }
         } catch (SQLException e) {
             throw new DBActionsException("problem getting course from table",e);
         } finally {
             resetStatementAndRS();
         }
-        return course;
+        return null;
     }
     //func closes all the connection params(we use it at the end of any method which is in this class)
     private void resetStatementAndRS() {

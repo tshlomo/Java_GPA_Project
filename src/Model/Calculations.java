@@ -23,17 +23,15 @@ public class Calculations {
     //func receives grades array + correspondent credits array and calculates gpa
     public Double calculate_GPA() throws DBActionsException {
         DBActions dbActions = new DBActions();
-        ArrayList<CourseDetails> courseTable;
+        List<CourseDetails> courseTable;
         Double credits_sum=0.0;
         Double grades_sum=0.0;
-        Integer i = 0;
         //getting the values from db table
         courseTable=dbActions.getGradeTable();
         // gpa calculation formula is = (sum of all grades multiplied by their credits)/(sum of credits)
-        while (i<courseTable.size()){
-            grades_sum+= (courseTable.get(i).getFinalGrade())*(courseTable.get(i).getCredits());
-            credits_sum+=courseTable.get(i).getCredits();
-            i++;
+        for (CourseDetails courseDetails: courseTable){
+            grades_sum+= (courseDetails.getFinalGrade())*(courseDetails.getCredits());
+            credits_sum+=courseDetails.getCredits();
         }
 
 
@@ -41,20 +39,18 @@ public class Calculations {
     }
 
 
-    public Double gpaByGrade(String coursename,Integer newGrade) throws  DBActionsException {
+    public Double gpaByGrade(String courseName,Integer newGrade) throws  DBActionsException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;
-        Integer i=0;
-        ArrayList<CourseDetails> courseTable;
+        List<CourseDetails> courseTable;
         DBActions dbActions = new DBActions();
         courseTable=dbActions.getGradeTable();
         //getting specific course details
-        CourseDetails course=dbActions.getCourse(coursename);
+        CourseDetails course=dbActions.getCourse(courseName);
         //calculating current gpa
-        while (i<courseTable.size()){
-            grades_sum+= (courseTable.get(i).getFinalGrade())*(courseTable.get(i).getCredits());
-            credits_sum+=courseTable.get(i).getCredits();
-            i++;
+        for (CourseDetails courseDetails: courseTable){
+            grades_sum+= (courseDetails.getFinalGrade())*(courseDetails.getCredits());
+            credits_sum+=courseDetails.getCredits();
         }
         //removing old grade from calculation
         grades_sum-=(course.getCredits())*(course.getFinalGrade());

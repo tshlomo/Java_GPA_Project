@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class DBconnection {
     static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    static final String protocol = "jdbc:derby:gpadb;create=true";
+    static final String protocol = "jdbc:derby:gpaDB;create=true";
     private static Logger logger=Logger.getLogger(DBconnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;

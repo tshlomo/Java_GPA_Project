@@ -40,6 +40,7 @@ public class ViewModel implements ISimpleActions {
 
     public static void updateTable() throws DBActionsException {
         tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
+        tableHomeFrame.updateCourseComboBox(dbActions.getGradeTable());
         updateGPA(calculations.calculate_GPA());
     }
 
