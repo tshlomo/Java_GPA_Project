@@ -35,25 +35,21 @@ public class TableHomeFrame implements ISimpleActions {
             4, 1, 1, 1, 2};;
 
     private static final String[] year = {"First Year","Second Year","Third Year"};
-    private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
+    private static final String[] semester ={"First Semester","Second Semester","Summer Semester"};
 
-    private AddGradeScreen screen;
+    private static AddGradeScreen screen;
 
     private IFindNewGPA simpleAndGPAActions;
 
     private JFrame frame;
     private JTable table;
-    private JPanel panelTop,panelMiddle,panelBottom,labelPanel,yearPanel,semesterPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
+    private JPanel panelMiddle,panelBottom,labelPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
     private JComboBox courseComboBox;
-    private JComboBox yearComboBox;
-    private JComboBox semesterComboBox;
     private JLabel GPALabel;
     private JLabel desiredGradeLabel;
     private JLabel courseLabel;
     private JLabel improvingGradesLabel;
     private JLabel updatedGPA;
-    private JLabel yearLabel;
-    private JLabel semesterLabel;
     private JLabel desiredGradeLabelValidation;
     private JTextField textGPA;
     private JTextField textDesiredGrade;
@@ -65,7 +61,7 @@ public class TableHomeFrame implements ISimpleActions {
     private DefaultTableModel model;
 
     //table properties
-    private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
+    private static final String[] columns = {"Course", "Year", "Semester", "Test", "Credits", "Final Grade"};
 
     public TableHomeFrame() throws DBActionsException {
         simpleAndGPAActions = new ViewModel(this);
@@ -75,12 +71,9 @@ public class TableHomeFrame implements ISimpleActions {
         table = new JTable();
         //Panels
         panelBottom = new JPanel();
-        panelTop = new JPanel();
         panelMiddle = new JPanel();
         labelPanel = new JPanel();
-        yearPanel = new JPanel();
         coursePanel = new JPanel();
-        semesterPanel = new JPanel();
         desiredGradePanel = new JPanel();
         updatedGpaPanel = new JPanel();
         btnPanel = new JPanel();
@@ -88,16 +81,12 @@ public class TableHomeFrame implements ISimpleActions {
         currentGpaPanel = new JPanel();
         //ComboBox
         courseComboBox = new JComboBox();
-        yearComboBox = new JComboBox(year);
-        semesterComboBox = new JComboBox(semester);
         //Labels
         GPALabel = new JLabel("Current GPA");
         desiredGradeLabel = new JLabel("Desired Grade");
         courseLabel = new JLabel("Course");
         improvingGradesLabel = new JLabel("Fill the details below to calculate your GPA after course improvement");
         updatedGPA = new JLabel("Updated GPA");
-        yearLabel = new JLabel("Year");
-        semesterLabel = new JLabel("Semester");
         desiredGradeLabelValidation = new JLabel("");
         desiredGradeLabelValidation.setForeground(Color.RED);
         //TextFields
@@ -114,20 +103,16 @@ public class TableHomeFrame implements ISimpleActions {
                 String data = textDesiredGrade.getText();
                 Integer val = -1;
                 if(data.length()>1)
-                try {
-                    if(c >='0' && c <= '9')
-                        val = Integer.parseInt(data+c);
-                    else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
-                        val = Integer.parseInt(data.substring(0,data.length()-1));
-                    else if (!data.isEmpty())
-                        val = Integer.parseInt(data);
-                    else
-                        val = 0;
-                    if (val >= 100) {
-                        textDesiredGrade.setText("100");
-                    }
-                } catch (Exception e) {e.printStackTrace();}
-                if(val >= 100) {
+                if(c >='0' && c <= '9')
+                    val = Integer.parseInt(data+c);
+                else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                    val = Integer.parseInt(data.substring(0,data.length()-1));
+                else if (!data.isEmpty())
+                    val = Integer.parseInt(data);
+                else
+                    val = 0;
+                if (val >= 100) {
+                    textDesiredGrade.setText("100");
                     ke.consume();
                     desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                 }
@@ -147,15 +132,17 @@ public class TableHomeFrame implements ISimpleActions {
         btnDesiredGradeUpdate = new JButton("Calculate new GPA");
 
         btnDesiredGradeUpdate.addActionListener(e -> {
-            try {
-                textUpdatedGrade.setText(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()),Integer.valueOf(textDesiredGrade.getText())).toString());
-            } catch (DBActionsException e1) {
-                e1.printStackTrace();
+            if(textDesiredGrade.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "Please input desired grade");
+            } else {
+                try {
+                    textUpdatedGrade.setText(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText())).toString());
+                } catch (DBActionsException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
-        //table properties
-        Font font = new Font("", 1, 16);
         //disabling editing the table
         table.setDefaultEditor(Object.class,null);
         //auto resizing the columns
@@ -163,23 +150,14 @@ public class TableHomeFrame implements ISimpleActions {
 
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
-/*        table.setModel(model);
-        table.setBackground(Color.white);
-        table.setForeground(Color.red);
-        table.setFont(font);
-        table.setRowHeight(30);
-*/
+
         //ScrollPane
         pane = new JScrollPane(table);
 
         //setting layouts
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
-        //panelBottom.setLayout(new GridLayout(7,1,5,5));
-        panelTop.setLayout(new FlowLayout());
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
         labelPanel.setLayout(new FlowLayout());
-//        yearPanel.setLayout(new FlowLayout());
-//        semesterPanel.setLayout(new FlowLayout());
         coursePanel.setLayout(new FlowLayout());
         desiredGradePanel.setLayout(new FlowLayout());
         btnPanel.setLayout(new FlowLayout());
@@ -188,9 +166,6 @@ public class TableHomeFrame implements ISimpleActions {
         currentGpaPanel.setLayout(new FlowLayout());
 
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
-
-        //adding top panel
-        panelTop.add(pane);
 
         //setting relevant components in the relevant panels for middle panel
         currentGpaPanel.add(addDeleteBtnPanel);
@@ -206,10 +181,6 @@ public class TableHomeFrame implements ISimpleActions {
         panelMiddle.add(desiredGradeLabelValidation);
 
         //setting bottom panel
-//        yearPanel.add(yearLabel);
-//        yearPanel.add(yearComboBox);
-//        semesterPanel.add(semesterLabel);
-//        semesterPanel.add(semesterComboBox);
         coursePanel.add(courseLabel);
         coursePanel.add(courseComboBox);
         desiredGradePanel.add(desiredGradeLabel);
@@ -220,19 +191,14 @@ public class TableHomeFrame implements ISimpleActions {
         panelMiddle.add(desiredGradePanel);
         panelMiddle.add(btnPanel);
 
-//        panelBottom.add(yearPanel);
-//        panelBottom.add(semesterPanel);
-
-
         panelBottom.add(updatedGpaPanel);
-
 
         //creating container to handle the frame content pane
         Container container = frame.getContentPane();
         //setting container layout
         container.setLayout(new BorderLayout());
         //attaching relevant panels to the container
-        container.add(panelTop,BorderLayout.NORTH);
+        container.add(pane,BorderLayout.NORTH);
         container.add(panelMiddle,BorderLayout.CENTER);
         container.add(panelBottom,BorderLayout.SOUTH);
 
@@ -243,7 +209,7 @@ public class TableHomeFrame implements ISimpleActions {
         frame.setLocationRelativeTo(null);
 
         //listener for add grade button
-        btnAddGrade.addActionListener(e -> screen = new AddGradeScreen(this));
+        btnAddGrade.addActionListener(e -> SwingUtilities.invokeLater(()-> screen = new AddGradeScreen(this)));
 
         btnDeleteGrade.addActionListener(e -> {
             try {
@@ -251,9 +217,9 @@ public class TableHomeFrame implements ISimpleActions {
             } catch (DBActionsException e1) {
                 e1.printStackTrace();
             }
-
         });
 
+        //updating the table for the first time
         simpleAndGPAActions.deleteGrade("updateTable");
     }
 
@@ -302,11 +268,13 @@ public class TableHomeFrame implements ISimpleActions {
                         false, false, r, i);
                 width = Math.max(width, comp.getPreferredSize().width);
             }
-            //TODO lol
-            col.setPreferredWidth(width + table.getParent().getWidth()/17 + 1);
+            width = Math.max(width,table.getColumn(columns[i]).getWidth()-5);
+            col.setPreferredWidth(width + 3);
         }
+        pane.setSize(table.getSize());
     }
 
+    @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
         simpleAndGPAActions.addGrade(courseDetails);
     }
@@ -314,6 +282,14 @@ public class TableHomeFrame implements ISimpleActions {
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
         simpleAndGPAActions.deleteGrade(courseName);
+    }
+
+    @Override
+    public void editGrade(CourseDetails courseDetails) throws DBActionsException{
+        int dialogResult = JOptionPane.showConfirmDialog (null, "You've already got grade on "+courseDetails.getCourseName()+"\nWould you like to update your grades?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION){
+            simpleAndGPAActions.editGrade(courseDetails);
+        }
     }
 
     public void updateGPA(Double calculate_gpa) {
@@ -324,20 +300,6 @@ public class TableHomeFrame implements ISimpleActions {
         courseComboBox.removeAllItems();
         for (CourseDetails c: gradeTable){
             courseComboBox.addItem(c.getCourseName());
-        }
-    }
-
-    public List getCurrentCourse(){
-        List<String> courses = new ArrayList<>();
-        for(int i=0; i<courseComboBox.getItemCount(); i++)
-            courses.add(String.valueOf(courseComboBox.getItemAt(i)));
-        return courses;
-    }
-
-    public void editGrade(CourseDetails courseDetails) throws DBActionsException{
-        int dialogResult = JOptionPane.showConfirmDialog (null, "You've already got grade on "+courseDetails.getCourseName()+"\nWould you like to update your grades?","Warning",JOptionPane.YES_NO_OPTION);
-        if(dialogResult == JOptionPane.YES_OPTION){
-            simpleAndGPAActions.editGrade(courseDetails);
         }
     }
 }

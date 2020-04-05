@@ -17,34 +17,34 @@ public class CourseDetails {
 
 
     public CourseDetails(String courseName, Integer year, Integer semester, Integer testGrade, Double credits, Integer finalGrade) {
+        setCourseName(courseName);
+        setYear(year);
+        setSemester(semester);
+        setTestGrade(testGrade);
+        setCredits(credits);
+        setFinalGrade(finalGrade);
+    }
+    private void setCourseName(String courseName) {
         this.courseName = courseName;
-        this.year = year;
-        this.semester = semester;
-        this.testGrade = testGrade;
-        this.credits = credits;
-        this.finalGrade = finalGrade;
-    }
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
     }
 
-    public void setYear(Integer year) {
+    private void setYear(Integer year) {
         this.year = year;
     }
 
-    public void setSemester(Integer semester) {
+    private void setSemester(Integer semester) {
         this.semester = semester;
     }
 
-    public void setTestGrade(Integer testGrade) {
+    private void setTestGrade(Integer testGrade) {
         this.testGrade = testGrade;
     }
 
-    public void setCredits(Double credits) {
+    private void setCredits(Double credits) {
         this.credits = credits;
     }
 
-    public void setFinalGrade(Integer finalGrade) {
+    private void setFinalGrade(Integer finalGrade) {
         this.finalGrade = finalGrade;
     }
 

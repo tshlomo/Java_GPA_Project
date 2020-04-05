@@ -1,7 +1,6 @@
 package il.ac.hit.Model;
 
 import il.ac.hit.Exceptions.DBActionsException;
-import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class Calculations {
 
     //func receives grades array + correspondent credits array and calculates gpa
     public Double calculate_GPA() throws DBActionsException {
-        DBActions dbActions = new DBActions();
+        Model dbActions = new Model();
         List<CourseDetails> courseTable;
         Double credits_sum=0.0;
         Double grades_sum=0.0;
@@ -32,16 +31,14 @@ public class Calculations {
             grades_sum+= (courseDetails.getFinalGrade())*(courseDetails.getCredits());
             credits_sum+=courseDetails.getCredits();
         }
-
-
         return (grades_sum/credits_sum);
     }
 
-    public Double gpaByGrade(String courseName,Integer newGrade) throws  DBActionsException {
+    public Double gpaByGrade(String courseName,Integer newGrade) throws DBActionsException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;
         List<CourseDetails> courseTable;
-        DBActions dbActions = new DBActions();
+        Model dbActions = new Model();
         courseTable=dbActions.getGradeTable();
         //getting specific course details
         CourseDetails course=dbActions.getCourse(courseName);

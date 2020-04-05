@@ -1,7 +1,7 @@
 package il.ac.hit.Test.JUnit;
 
 import il.ac.hit.Interfaces.ISimpleActions;
-import il.ac.hit.Model.DBActions;
+import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Model.DBconnection;
 import il.ac.hit.ViewModel.CourseDetails;
@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DBActionsTest {
+class ModelTest {
     Statement statement = null;
     ResultSet rs = null;
     Connection conn = null;
@@ -22,7 +22,7 @@ class DBActionsTest {
     void addGrade() throws DBActionsException {
         Integer i=0;
         Object [] array={"snowboarding",3,75,90,2.0,99};
-        ISimpleActions dbact = new DBActions();
+        ISimpleActions dbact = new Model();
         conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
@@ -50,7 +50,7 @@ class DBActionsTest {
 
     @org.junit.jupiter.api.Test
     void deleteGrade() throws DBActionsException {
-        DBActions dbact = new DBActions();
+        Model dbact = new Model();
         conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
@@ -81,7 +81,7 @@ class DBActionsTest {
 
         @org.junit.jupiter.api.Test
         void editGrade () throws DBActionsException {
-            DBActions dbact = new DBActions();
+            Model dbact = new Model();
             conn = DBconnection.getDBConnection();
             try {
                 statement = conn.createStatement();
@@ -110,7 +110,7 @@ class DBActionsTest {
 
     @org.junit.jupiter.api.Test
     void getCourse() throws DBActionsException {
-        DBActions dbact = new DBActions();
+        Model dbact = new Model();
         CourseDetails newCourse=new CourseDetails("fifa",3,2,90,2.0,99);  // those param values will be compared in the assert methods ahead //
         conn = DBconnection.getDBConnection();
         try {

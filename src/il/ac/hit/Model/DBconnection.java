@@ -35,7 +35,7 @@ public class DBconnection {
                         //Getting a connection by calling getConnection
                         logger.info("connecting to database...");
                         conn = DriverManager.getConnection(protocol);
-                        logger.info(" connection has been established");
+                        logger.info(" connection to database has been established");
                         statement = conn.createStatement();
                         logger.info("searching for GPA table...");
                         rs = conn.getMetaData().getTables(null, "APP", "%", null);
