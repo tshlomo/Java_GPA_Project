@@ -32,7 +32,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-1.2-api-2.13.1.jar!/" />
+          <root url="jar://D:/Log4j/apache-log4j-2.13.1-bin/log4j-1.2-api-2.13.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -41,7 +41,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-api-2.13.1.jar!/" />
+          <root url="jar://D:/Log4j/apache-log4j-2.13.1-bin/log4j-api-2.13.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -50,7 +50,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Log4j/apache-log4j-2.13.1-bin/log4j-core-2.13.1.jar!/" />
+          <root url="jar://D:/Log4j/apache-log4j-2.13.1-bin/log4j-core-2.13.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
