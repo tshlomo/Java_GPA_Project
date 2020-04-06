@@ -229,6 +229,7 @@ public class TableHomeFrame implements IViewSimpleActions {
                 try {
                     textUpdatedGrade.setText(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText())).toString());
                 } catch (DBActionsException e1) {
+                    logger.warning("Couldn't pull table grades...");
                     e1.printStackTrace();
                 }
             }
@@ -352,6 +353,7 @@ public class TableHomeFrame implements IViewSimpleActions {
             try {
                 deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString());
             } catch (DBActionsException e1) {
+                logger.warning("Couldn't delete this grade from GPA table...");
                 e1.printStackTrace();
             }
         });

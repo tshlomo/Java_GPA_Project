@@ -206,7 +206,6 @@ public class AddGradeScreen {
                     tableHomeFrame.addGrade(courseDetails);
                     logger.info("added a grade to the table...");
                 } catch (DBActionsException ex) {
-
                     logger.info("asking the user if he would like to edit a grade from the table...");
                     ex.printStackTrace();
                 }

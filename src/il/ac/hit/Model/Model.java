@@ -60,6 +60,7 @@ public class Model implements IDBSimpleActions {
             logger.info("grade has been successfully added");
 
         } catch (SQLException e) {
+            logger.warning("Problem adding a grade..");
             throw new DBActionsException("problem adding grade " + e.getMessage(),e);
         } finally {
             resetStatementAndRS();
@@ -73,7 +74,7 @@ public class Model implements IDBSimpleActions {
          * func establishes connection to db
          * func deletes row from table via executeUpdate statement
          *
-         * @param  coursename  correct name of the course that would be deleted
+         * @param  courseName  correct name of the course that would be deleted
          * @throws DBActionsException if an sql exception occurred
          * @see  DBconnection#getDBConnection() uses this method to connect to db
          */
@@ -88,6 +89,7 @@ public class Model implements IDBSimpleActions {
             statement.executeUpdate("DELETE FROM GPA WHERE course =('" + courseName + "')");
             logger.info("grade has been successfully deleted");
         } catch (SQLException e) {
+            logger.warning("Problem deleting a grade..");
             throw new DBActionsException("problem deleting grade",e);
         } finally {
             resetStatementAndRS();
@@ -121,6 +123,7 @@ public class Model implements IDBSimpleActions {
                     + " WHERE course='" + courseDetails.getCourseName() + "'");
             logger.info("grade has been successfully updated");
         } catch (SQLException e) {
+            logger.warning("Problem updating a grade..");
             throw new DBActionsException("problem updating grade",e);
         } finally {
             resetStatementAndRS();
@@ -152,6 +155,7 @@ public class Model implements IDBSimpleActions {
                         ,rs.getDouble("credits"),rs.getInt("finalGrade")));
             }
         } catch (SQLException e) {
+            logger.warning("Problem getting grades table..");
             throw new DBActionsException("problem getting grades table from db",e);
         } finally {
             resetStatementAndRS();
@@ -186,6 +190,7 @@ public class Model implements IDBSimpleActions {
                         ,rs.getDouble("credits"),rs.getInt("finalGrade"));
             }
         } catch (SQLException e) {
+            logger.warning("Problem getting course from table..");
             throw new DBActionsException("problem getting course from table",e);
         } finally {
             resetStatementAndRS();
