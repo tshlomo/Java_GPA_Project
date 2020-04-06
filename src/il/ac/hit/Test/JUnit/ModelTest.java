@@ -5,6 +5,7 @@ import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Model.DBconnection;
 import il.ac.hit.ViewModel.CourseDetails;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -52,18 +53,18 @@ class ModelTest {
     @org.junit.jupiter.api.Test
     void addGrade() throws DBActionsException {
         CourseDetails courseDetails;
-        CourseDetails addedCourse = new CourseDetails("snowboarding", 3, 75, 90, 2.0, 99);
+        CourseDetails addedCourse = new CourseDetails("snowboarding", 3, 2, 90, 2.0, 99);
         try {
             statement = conn.createStatement();
             dbAct.addGrade(addedCourse); // adding same param values like in the array for comparing //
-            courseDetails=dbAct.getCourse("snowboarding");
+            courseDetails=dbAct.getCourse(addedCourse.getCourseName());
             assertTrue(courseDetails.isSameCourse(addedCourse));
         } catch (SQLException e) {
             throw new DBActionsException("problem adding/retrieving course", e);
         } finally {
-            dbAct.deleteGrade("snowboarding");
             courseDetails = null;
             addedCourse = null;
+            dbAct.deleteGrade("snowboarding");
         }
     }
 

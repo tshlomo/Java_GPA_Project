@@ -70,7 +70,7 @@ public class CourseDetails {
         if (getCourseName().equals(courseDetails.getCourseName()))
             if (getYear() == courseDetails.getYear())
                 if (getSemester() == courseDetails.getSemester())
-                    if (getCredits() == courseDetails.getCredits())
+                    if (getCredits().equals(courseDetails.getCredits()))
                         if (getTestGrade() == courseDetails.getTestGrade())
                             if (getFinalGrade() == courseDetails.getFinalGrade())
                                 return true;
