@@ -93,6 +93,8 @@ class ModelTest {
 
         } catch (SQLException e) {
             throw new DBActionsException("problem updating the grade", e);
+        }finally {
+            dbAct.deleteGrade("scala");
         }
     }
 
@@ -102,7 +104,7 @@ class ModelTest {
         CourseDetails courseDetails;
         try {
             statement = conn.createStatement();
-            dbAct.addGrade(addedCourse);  //adding the newCourse to db
+            dbAct.addGrade(addedCourse);  //adding the addedCourse to db
             courseDetails=dbAct.getCourse("fifa");
             assertTrue(courseDetails.isSameCourse(addedCourse));
 
