@@ -65,4 +65,15 @@ public class CourseDetails {
     public Integer getFinalGrade() {
         return finalGrade;
     }
+
+    public Boolean isSameCourse(CourseDetails courseDetails) {
+        if (getCourseName().equals(courseDetails.getCourseName()))
+            if (getYear() == courseDetails.getYear())
+                if (getSemester() == courseDetails.getSemester())
+                    if (getCredits() == courseDetails.getCredits())
+                        if (getTestGrade() == courseDetails.getTestGrade())
+                            if (getFinalGrade() == courseDetails.getFinalGrade())
+                                return true;
+        return false;
+    }
 }

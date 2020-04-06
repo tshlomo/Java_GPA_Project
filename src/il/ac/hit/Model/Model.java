@@ -12,6 +12,12 @@ import java.util.logging.Logger;
 
 public class Model implements IDBSimpleActions {
 
+    /**
+     * declaring class params which will be used to connecet and work with the db
+     * each one of those params will be closed and nulled at the end of each method
+     * +logger
+     */
+
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
     private ResultSet rs;//same as statement
     private Connection conn;
@@ -33,7 +39,7 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      */
 
     //this func receives all of the params of the course and and updates it with insert statement
@@ -60,17 +66,17 @@ public class Model implements IDBSimpleActions {
         }
     }
 
-    /**
-     * deletes specific course from db table
-     * The String coursename must hold a correct name of the specific course we intend to delete.
-     * <p>
-     * func establishes connection to db
-     * func deletes row from table via executeUpdate statement
-     *
-     * @param  courseName  correct name of the course that would be deleted
-     * @throws DBActionsException if an sql exception occurred
-     * @see
-     */
+        /**
+         * deletes specific course from db table
+         * The String coursename must hold a correct name of the specific course we intend to delete.
+         * <p>
+         * func establishes connection to db
+         * func deletes row from table via executeUpdate statement
+         *
+         * @param  coursename  correct name of the course that would be deleted
+         * @throws DBActionsException if an sql exception occurred
+         * @see  DBconnection#getDBConnection() uses this method to connect to db
+         */
 
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
@@ -97,7 +103,7 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      */
 
     //func receives all of the course params and updates the row which corresponds with the key value->course
@@ -128,6 +134,7 @@ public class Model implements IDBSimpleActions {
      * retrieves course values from table via query into the CourseDetails object instantiation in the loop
      *
      * @throws DBActionsException if an sql exception occurred
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      * @return list of all courses values
      */
     //The function returns a list of courseDetails with all the courses and parameters that the db holds
@@ -162,6 +169,7 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      * @return values of a specific course
      */
     //func returns a specific course from table by the courseName it gets
@@ -196,12 +204,12 @@ public class Model implements IDBSimpleActions {
     private void resetStatementAndRS() {
         if (statement != null) try {
             statement.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         if (rs != null) try {
             rs.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         conn = null;
