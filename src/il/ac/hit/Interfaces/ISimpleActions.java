@@ -7,4 +7,5 @@ public interface ISimpleActions {
     void addGrade(CourseDetails courseDetails) throws DBActionsException;
     void deleteGrade(String courseName) throws DBActionsException;
     void editGrade(CourseDetails courseDetails) throws  DBActionsException;
+    void getCourse
 }
