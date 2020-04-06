@@ -71,6 +71,7 @@ public class Model implements IDBSimpleActions {
      * @throws DBActionsException if an sql exception occurred
      * @see
      */
+
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
