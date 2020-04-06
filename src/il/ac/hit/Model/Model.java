@@ -40,7 +40,7 @@ public class Model implements ISimpleActions {
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      */
 
     //this func receives all of the params of the db table and and updates it with insert statement
@@ -75,7 +75,7 @@ public class Model implements ISimpleActions {
          *
          * @param  coursename  correct name of the course that would be deleted
          * @throws DBActionsException if an sql exception occurred
-         * @see
+         * @see  DBconnection#getDBConnection() uses this method to connect to db
          */
 
     }
@@ -104,7 +104,7 @@ public class Model implements ISimpleActions {
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      */
 
     //func receives all of the table params and updates the row which corresponds with the key value->course
@@ -135,6 +135,7 @@ public class Model implements ISimpleActions {
      * retrieves course values from table via query into the CourseDetails object instantiation in the loop
      *
      * @throws DBActionsException if an sql exception occurred
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      * @return list of all courses values
      */
 
@@ -168,6 +169,7 @@ public class Model implements ISimpleActions {
      *
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
      * @return values of a specific course
      */
 // func returns a specific course from table
