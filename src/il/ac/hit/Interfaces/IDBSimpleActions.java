@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IDBSimpleActions extends ISimpleActions {
     List<CourseDetails> getGradeTable() throws DBActionsException;
+    CourseDetails getCourse(String courseName) throws DBActionsException;
 }

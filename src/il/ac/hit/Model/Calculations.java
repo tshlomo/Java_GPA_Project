@@ -2,6 +2,7 @@ package il.ac.hit.Model;
 
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Interfaces.ICalcGPA;
+import il.ac.hit.Interfaces.IDBSimpleActions;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.util.List;
@@ -9,7 +10,13 @@ import java.util.logging.Logger;
 
 public class Calculations implements ICalcGPA {
 
+    //Setting the logger for this class
     private Logger logger= Logger.getLogger(Calculations.class.getName());
+    private IDBSimpleActions dbActions;
+
+    public Calculations(){
+        dbActions = new Model();
+    }
 
     /**
      * calculates and returns the final grade of a course.
@@ -26,7 +33,7 @@ public class Calculations implements ICalcGPA {
      * @return  final grade
      */
 
-    //func calculates and returns final grade based on final test score and percentage + hw score and percentage
+    //Func calculates and returns final grade based on final test score and percentage + hw score and percentage
     public Integer calculate_Final_Grade(Double testGrade, Double testPercent, Double hwGrade, Double hwPercent){
         logger.info("calculating final grade based on test and hw percentage...");
         Double score = (testGrade*(testPercent/100))+(hwGrade*(hwPercent/100));
@@ -34,8 +41,8 @@ public class Calculations implements ICalcGPA {
     }
 
     /**
-     * calculates and returns the gpa of the grades table.
-     * func receives params from the add grade panel by the user
+     * Calculates and returns the GPA of the grades table.
+     * The func receives params from the add grade panel by the user
      * <p>
      * func gets the details list of the table via the getGradeTable method.
      * it calculates the sum of all the final grades multiplied by their specific credits value
@@ -46,10 +53,9 @@ public class Calculations implements ICalcGPA {
      */
 
 
-    //func calculates gpa of the grades table in db
+    //Func calculates gpa of the grades table in db
     @Override
     public Double calculate_GPA() throws DBActionsException {
-        Model dbActions = new Model();
         List<CourseDetails> courseTable;
         Double credits_sum=0.0;
         Double grades_sum=0.0;
@@ -82,13 +88,12 @@ public class Calculations implements ICalcGPA {
      * @return  calculated total grade gpa
      */
 
-    //func calculates new gpa by replacing one of the grades with a new one entered by the user func receives the name of the course and the new grade
+    //Calculates new gpa by replacing one of the grades with a new one entered by the user func receives the name of the course and the new grade
     @Override
     public Double gpaByGrade(String courseName,Integer newGrade) throws  DBActionsException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;
         List<CourseDetails> courseTable;
-        Model dbActions = new Model();
         courseTable=dbActions.getGradeTable();
         //getting specific course details
         CourseDetails course=dbActions.getCourse(courseName);
@@ -105,6 +110,5 @@ public class Calculations implements ICalcGPA {
         return (grades_sum/credits_sum);
 
     }
-
 }
 

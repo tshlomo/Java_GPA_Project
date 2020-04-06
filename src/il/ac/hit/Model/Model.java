@@ -15,7 +15,7 @@ public class Model implements IDBSimpleActions {
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
     private ResultSet rs;//same as statement
     private Connection conn;
-    private  Logger logger;
+    private Logger logger;
 
 
     public Model() {
@@ -36,7 +36,7 @@ public class Model implements IDBSimpleActions {
      * @see
      */
 
-    //this func receives all of the params of the db table and and updates it with insert statement
+    //this func receives all of the params of the course and and updates it with insert statement
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
         try {
@@ -99,7 +99,7 @@ public class Model implements IDBSimpleActions {
      * @see
      */
 
-    //func receives all of the table params and updates the row which corresponds with the key value->course
+    //func receives all of the course params and updates the row which corresponds with the key value->course
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException {
         try {
@@ -129,7 +129,7 @@ public class Model implements IDBSimpleActions {
      * @throws DBActionsException if an sql exception occurred
      * @return list of all courses values
      */
-
+    //The function returns a list of courseDetails with all the courses and parameters that the db holds
     @Override
     public List<CourseDetails> getGradeTable () throws DBActionsException{
         List<CourseDetails> courseDetails=new ArrayList<>();
@@ -163,7 +163,7 @@ public class Model implements IDBSimpleActions {
      * @throws DBActionsException if an sql exception occurred
      * @return values of a specific course
      */
-// func returns a specific course from table
+    //func returns a specific course from table by the courseName it gets
     public CourseDetails getCourse (String courseName) throws DBActionsException{
         try {
             conn = DBconnection.getDBConnection();
@@ -191,7 +191,7 @@ public class Model implements IDBSimpleActions {
      *
      */
 
-    //func closes all the connection params(we use it at the end of any method which is in this class)
+    //Private func - closes all the connection params(we use it at the end of any method which is in this class)
     private void resetStatementAndRS() {
         if (statement != null) try {
             statement.close();

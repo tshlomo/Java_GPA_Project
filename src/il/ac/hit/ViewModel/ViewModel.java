@@ -18,10 +18,12 @@ public class ViewModel implements IFindNewGPA {
         calculations = new Calculations();
     }
 
+    //The func is sending to the view the new GPA value to update
     private void updateGPA(Double calculate_gpa) {
         tableHomeFrame.updateGPA(calculate_gpa);
     }
 
+    //The function trying to add a grade based on the values inside the courseDetails var
     public void updateTable() throws DBActionsException {
         updateGPA(calculations.calculate_GPA());
         tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
@@ -43,7 +45,7 @@ public class ViewModel implements IFindNewGPA {
     {
         try {
             dbActions.addGrade(courseDetails);
-        } catch (Exception e) {
+        } catch (DBActionsException e) {
             tableHomeFrame.editGrade(courseDetails);
         } finally {
             updateTable();

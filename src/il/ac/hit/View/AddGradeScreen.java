@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 
 public class AddGradeScreen {
 
+    //Final object with the course names to choose from
     private static final String[] courses = {"Linear algebra", "Infinitesimal calculus 1", "Computer science Introduction", "Introduction to discrete math"
             , "Probability", "Infinitesimal calculus 2", "Computer structure and switching theory", "Data Structures", "Advanced Programming Workshop"
             , "Computer organization and threshold language", "Database systems", "Computer communication networks", "Graph theory", "Object oriented programming"
@@ -19,6 +20,7 @@ public class AddGradeScreen {
             , "Computational and Computational Algorithms", "Mathematical tools", "Machine learning", "Programming in the Web Environment"
             , "DevOPS", "Development of server side systems in an open source environment", "Developing a client side in an Android environment", "Compilation Theory"
             , "Involvement in Israeli society", "Yoga", "Basketball team", "Football team", "Information Society"};
+    //Final object with the credit points of each course at the relevant index.
     private static final Object[] credits = {5, 6.5, 5, 5,
             3.5, 5, 4, 4, 3,
             2.5, 4, 3.5, 3.5, 5,
@@ -26,7 +28,9 @@ public class AddGradeScreen {
             4, 5, 3, 3,
             3, 3, 3.5, 3.5,
             4, 1, 1, 1, 2};
+    //Final array to set up the years string
     private static final String[] year = {"First Year", "Second Year", "Third Year"};
+    //Final array to set up the semeter strings
     private static final String[] semester = {"First Semester", "Second Semester", "Third Semester"};
 
     private JFrame frame;
@@ -102,25 +106,30 @@ public class AddGradeScreen {
 
         courseDetails=null;
         calculations = new Calculations();
+        //the credits are loaded by the combobox listener
         textCredits.setEditable(false);
 
         //button action listener
         btnAdd.addActionListener(e -> {
+            //checking if one of the inputs is empty
             if (textQuiz.getText().isEmpty() || textFinalTest.getText().isEmpty() || quizPercentage.getText().isEmpty() || testPercentage.getText().isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "Please input all values");
             } else {
+                //creating new courseDetails object to hold the values
                 courseDetails = new CourseDetails(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
                         , Integer.valueOf(textFinalTest.getText()), Double.parseDouble(textCredits.getText())
                         , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPercentage.getText())
                         ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPercentage.getText())));
 
                 try {
+                    //trying to add the course details to the db
                     tableHomeFrame.addGrade(courseDetails);
-                } catch (DBActionsException ex) {}
+                } catch (DBActionsException ex) {ex.printStackTrace();}
             }
         });
 
+        //setting quiz input listener
         textQuiz.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
@@ -129,12 +138,16 @@ public class AddGradeScreen {
                 Integer val = -1;
                 if(data.length()>1)
                     if(c >='0' && c <= '9')
+                        //converting the number we should get with the current input
                         val = Integer.parseInt(data+c);
                     else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                        //converting the number by backspacing last character
                         val = Integer.parseInt(data.substring(0,data.length()-1));
                     else if (!data.isEmpty())
+                        //converting the text that is within the textfield before the current input
                         val = Integer.parseInt(data);
                     else
+                        //we deleted all values and therefore the new value is 0
                         val = 0;
                 if (val >= 100) {
                     textQuiz.setText("100");
@@ -151,6 +164,7 @@ public class AddGradeScreen {
             }
         });
 
+        //setting test input listener
         textFinalTest.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
@@ -159,12 +173,16 @@ public class AddGradeScreen {
                 Integer val = -1;
                 if(data.length()>1)
                 if(c >='0' && c <= '9')
+                    //converting the number we should get with the current input
                     val = Integer.parseInt(data+c);
                 else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                    //converting the number by backspacing last character
                     val = Integer.parseInt(data.substring(0,data.length()-1));
                 else if (!data.isEmpty())
+                    //converting the text that is within the textfield before the current input
                     val = Integer.parseInt(data);
                 else
+                    //we deleted all values and therefore the new value is 0
                     val = 0;
                 if (val >= 100) {
                     textFinalTest.setText("100");
@@ -181,6 +199,7 @@ public class AddGradeScreen {
             }
         });
 
+        //setting quiz percentage input listener
         quizPercentage.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
@@ -188,12 +207,16 @@ public class AddGradeScreen {
                 String data = quizPercentage.getText();
                 Integer val;
                 if(c >='0' && c <= '9')
+                    //converting the number we should get with the current input
                     val = Integer.parseInt(data+c);
                 else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                    //converting the number by backspacing last character
                     val = Integer.parseInt(data.substring(0,data.length()-1));
                 else if (!data.isEmpty())
+                    //converting the text that is within the textfield before the current input
                     val = Integer.parseInt(data);
                 else
+                    //we deleted all values and therefore the new value is 0
                     val = 0;
                 if (val >= 100) {
                     quizPercentage.setText("100");
@@ -214,6 +237,7 @@ public class AddGradeScreen {
             }
         });
 
+        //setting test percentage input listener
         testPercentage.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
@@ -221,12 +245,16 @@ public class AddGradeScreen {
                 String data = testPercentage.getText();
                 Integer val;
                 if(c >='0' && c <= '9')
+                    //converting the number we should get with the current input
                     val = Integer.parseInt(data+c);
                 else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                    //converting the number by backspacing last character
                     val = Integer.parseInt(data.substring(0,data.length()-1));
                 else if (!data.isEmpty())
+                    //converting the text that is within the textfield before the current input
                     val = Integer.parseInt(data);
                 else
+                    //we deleted all values and therefore the new value is 0
                     val = 0;
                 if (val >= 100) {
                     testPercentage.setText("100");
@@ -301,7 +329,6 @@ public class AddGradeScreen {
         courseComboBox.addActionListener(e -> textCredits.setText(credits[courseComboBox.getSelectedIndex()].toString()));
 
         //setting the frame visible
-        //frame.setSize(500,500);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);

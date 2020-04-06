@@ -50,12 +50,12 @@ public class DBconnection {
                    } finally {
                        if (statement != null) try {
                             statement.close();
-                       } catch (Exception e) {
+                       } catch (SQLException e) {
                            e.printStackTrace();
                         }
                        if (rs != null) try {
                             rs.close();
-                        } catch (Exception e) {
+                        } catch (SQLException e) {
                             e.printStackTrace();
                         }
                     }

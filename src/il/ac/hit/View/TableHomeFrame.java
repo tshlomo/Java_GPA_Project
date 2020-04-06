@@ -85,12 +85,16 @@ public class TableHomeFrame implements IViewSimpleActions {
                 Integer val = -1;
                 if(data.length()>1)
                 if(c >='0' && c <= '9')
+                    //converting the number we should get with the current input
                     val = Integer.parseInt(data+c);
                 else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
+                    //converting the number by backspacing last character
                     val = Integer.parseInt(data.substring(0,data.length()-1));
                 else if (!data.isEmpty())
+                    //converting the text that is within the textfield before the current input
                     val = Integer.parseInt(data);
                 else
+                    //we deleted all values and therefore the new value is 0
                     val = 0;
                 if (val >= 100) {
                     textDesiredGrade.setText("100");
@@ -189,9 +193,10 @@ public class TableHomeFrame implements IViewSimpleActions {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
-        //listener for add grade button
+        //listener for add grade button to open new form
         btnAddGrade.addActionListener(e -> SwingUtilities.invokeLater(()-> screen = new AddGradeScreen(this)));
 
+        //listener for delete button
         btnDeleteGrade.addActionListener(e -> {
             try {
                 deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString());
@@ -200,12 +205,14 @@ public class TableHomeFrame implements IViewSimpleActions {
             }
         });
 
-        //updating the table for the first time
+        //updating the table for the first time with special keyword 'updateTable'
         simpleAndGPAActions.deleteGrade("updateTable");
     }
 
+    //updating the view table basing on the list of course details that it receives
     @Override
     public void updateGradesTable(List<CourseDetails> courseDetails){
+        //updating the course combobox first
         updateCourseComboBox(courseDetails);
         Object[] row = new Object[6];
         //clearing the table first
@@ -213,6 +220,7 @@ public class TableHomeFrame implements IViewSimpleActions {
         model= (DefaultTableModel) table.getModel();
 
         for (CourseDetails c: courseDetails){
+            //charging the values into the object array
             row[0] = c.getCourseName();
             switch (c.getYear()){
                 case 1: row[1] = "First";
@@ -235,9 +243,10 @@ public class TableHomeFrame implements IViewSimpleActions {
             row[3] = c.getTestGrade();
             row[4] = c.getCredits();
             row[5] = c.getFinalGrade();
+            //adding the values to the row
             model.addRow(row);
         }
-
+        //saving all table width to compare to current frame width
         Integer columnsWidth=0;
         //resizing each column by the maximum length of each
         for (int i = 0; i < table.getColumnCount(); i++) {
@@ -252,23 +261,30 @@ public class TableHomeFrame implements IViewSimpleActions {
                         false, false, r, i);
                 width = Math.max(width, comp.getPreferredSize().width);
             }
+            //comparing the width of the value in the column to the width of the title of the column
             width = Math.max(width,table.getColumn(columns[i]).getWidth()-5);
+            //setting the preffered maximum width
             col.setPreferredWidth(width + 3);
+            //adding to the sum var
             columnsWidth+=width+3;
         }
+        //setting the frame size to fit
         frame.setSize(columnsWidth + 20,frame.getHeight() + 20);
     }
 
+    //The function trying to add a grade based on the values inside the courseDetails var
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
         simpleAndGPAActions.addGrade(courseDetails);
     }
 
+    //The function trying to delete a grade based on the course name
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
         simpleAndGPAActions.deleteGrade(courseName);
     }
 
+    //The function trying to edit a grade based on the values inside the courseDetails var
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException{
         int dialogResult = JOptionPane.showConfirmDialog (null, "You've already got grade on "+courseDetails.getCourseName()+"\nWould you like to update your grades?","Warning",JOptionPane.YES_NO_OPTION);
@@ -277,11 +293,13 @@ public class TableHomeFrame implements IViewSimpleActions {
         }
     }
 
+    //The function updating the current GPA result based on the calculate_gpa double type var it receives
     @Override
     public void updateGPA(Double calculate_gpa) {
         textGPA.setText(new DecimalFormat("##.##").format(calculate_gpa));
     }
 
+    //updating to course combobox to the current courses
     public void updateCourseComboBox(List<CourseDetails> gradeTable) {
         courseComboBox.removeAllItems();
         for (CourseDetails c: gradeTable){
