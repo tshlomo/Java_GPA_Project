@@ -1,4 +1,5 @@
 package il.ac.hit.View;
+import il.ac.hit.Interfaces.IDBSimpleActions;
 import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Interfaces.IViewSimpleActions;
@@ -14,43 +15,106 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.List;
-
+import java.util.logging.Logger;
 
 public class TableHomeFrame implements IViewSimpleActions {
+/**
+ * This class holds the components of the main screen
+ * hence providing the interaction between the user and the application.
+ */
 
-    private static AddGradeScreen screen;
+
+    /**
+     * creating a logger object to log messages for
+     * our application components.
+     */
+
+    private Logger logger= Logger.getLogger(TableHomeFrame.class.getName());
+
+    //Variables declarations
+    /**
+     * creating the AddGradeScreen class object.
+     */
+    private AddGradeScreen screen;
+
+    /**
+     * creating the ISimpleAction interface.
+     */
 
     private IFindNewGPA simpleAndGPAActions;
-
+    /**
+     * creating the frame object.
+     */
     private JFrame frame;
+    /**
+     * creating the table object.
+     */
     private JTable table;
-    private JPanel panelMiddle,panelBottom,labelPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
+    /**
+     * creating all the panel objects.
+     */
+    private JPanel panelTop,panelMiddle,panelBottom,labelPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
+    /**
+     * creating all the Combo box objects.
+     */
     private JComboBox courseComboBox;
-    private JLabel GPALabel;
-    private JLabel desiredGradeLabel;
-    private JLabel courseLabel;
-    private JLabel improvingGradesLabel;
-    private JLabel updatedGPA;
-    private JLabel desiredGradeLabelValidation;
-    private JTextField textGPA;
-    private JTextField textDesiredGrade;
-    private JTextField textUpdatedGrade;
-    private JButton btnAddGrade;
-    private JButton btnDeleteGrade;
-    private JButton btnDesiredGradeUpdate;
+    /**
+     * creating all the label objects.
+     */
+    private JLabel GPALabel,desiredGradeLabel,courseLabel,improvingGradesLabel,updatedGPA,desiredGradeLabelValidation;
+    /**
+     * creating all the text field objects.
+     */
+    private JTextField textGPA,textDesiredGrade,textUpdatedGrade;
+    /**
+     * creating all the button objects.
+     */
+    private JButton btnAddGrade,btnDeleteGrade,btnDesiredGradeUpdate;
+    /**
+     * creating the scroll pane object.
+     */
     private JScrollPane pane;
+    /**
+     * creating the DefaulTableModel object.
+     */
     private DefaultTableModel model;
 
+
+    /**
+     * creating the column array that hold all the table columns.
+     */
     //table properties
     private static final String[] columns = {"Course", "Year", "Semester", "Test", "Credits", "Final Grade"};
 
+    /**
+     * creating the constructor for the TableHomeFrame class.
+     */
+
     public TableHomeFrame() throws DBActionsException {
+        logger.info("instantiating all the class components");
+
+
         simpleAndGPAActions = new ViewModel(this);
         //Frame
+        // instantiating the frame.
+        /**
+         * instantiating the frame object.
+         */
+        logger.info("creating the frame..");
         frame = new JFrame("GPA");
-        //Table
+
+        //instantiating the table.
+        /**
+         * instantiating the table object.
+         */
+        logger.info("creating the table..");
         table = new JTable();
-        //Panels
+
+        //instantiating the panels.
+        /**
+         * instantiating the panel objects.
+         */
+        logger.info("creating the panels..");
         panelBottom = new JPanel();
         panelMiddle = new JPanel();
         labelPanel = new JPanel();
@@ -60,8 +124,21 @@ public class TableHomeFrame implements IViewSimpleActions {
         btnPanel = new JPanel();
         addDeleteBtnPanel = new JPanel();
         currentGpaPanel = new JPanel();
+
+
+        //instantiating the combo boxes.
+        /**
+         * instantiating the combo box objects.
+         */
+        logger.info("creating the combo boxes..");
         //ComboBox
         courseComboBox = new JComboBox();
+
+        //instantiating the label objects.
+        /**
+         * instantiating the label objects.
+         */
+        logger.info("creating the labels..");
         //Labels
         GPALabel = new JLabel("Current GPA");
         desiredGradeLabel = new JLabel("Desired Grade");
@@ -70,13 +147,38 @@ public class TableHomeFrame implements IViewSimpleActions {
         updatedGPA = new JLabel("Updated GPA");
         desiredGradeLabelValidation = new JLabel("");
         desiredGradeLabelValidation.setForeground(Color.RED);
-        //TextFields
+
+        //instantiating the text field objects.
+        /**
+         * instantiating the text field objects.
+         */
+        logger.info("creating the text fields..");
         textGPA = new JTextField(4);
         textGPA.setEditable(false);
         textUpdatedGrade = new JTextField(3);
         textUpdatedGrade.setEditable(false);
         textDesiredGrade = new JTextField(3);
 
+        //instantiating the button objects
+        /**
+         * instantiating the button objects.
+         */
+        logger.info("creating the buttons..");
+        btnAddGrade = new JButton("Add New Grade");
+        btnDeleteGrade = new JButton("Delete Grade");
+        btnDesiredGradeUpdate = new JButton("Calculate new GPA");
+
+        //instantiating the scroll pane object.
+        /**
+         * instantiating the scroll pane object.
+         */
+        logger.info("creating the scroll pane..");
+        pane = new JScrollPane(table);
+
+        //key listener for the "textDesiredGrade" text field
+        /**
+         * creating key listener for the "textDesiredGrade" text field.
+         */
         textDesiredGrade.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
@@ -99,6 +201,7 @@ public class TableHomeFrame implements IViewSimpleActions {
                 if (val >= 100) {
                     textDesiredGrade.setText("100");
                     ke.consume();
+                    logger.info("an attempt to add a grade with a higher score than 100 has been made");
                     desiredGradeLabelValidation.setText("Your grade can't be higher than 100");
                 }
                 else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
@@ -111,11 +214,14 @@ public class TableHomeFrame implements IViewSimpleActions {
             }
         });
 
+        //btnDesiredGradeUpdate action listener
+        /**
+         * creating action listener for the btnDesiredGradeUpdate button.
+         */
         //Buttons
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
         btnDesiredGradeUpdate = new JButton("Calculate new GPA");
-
         btnDesiredGradeUpdate.addActionListener(e -> {
             if(textDesiredGrade.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Please input desired grade");
@@ -128,11 +234,18 @@ public class TableHomeFrame implements IViewSimpleActions {
             }
         });
 
+        //table properties
+        /**
+         * setting up the table properties.
+         */
+        logger.info("disabling the option to edit the table");
         //disabling editing the table
         table.setDefaultEditor(Object.class,null);
         //auto resizing the columns
+        logger.info("disabling auto resizing the columns..");
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
+        logger.info("setting the model..");
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
 
@@ -140,6 +253,10 @@ public class TableHomeFrame implements IViewSimpleActions {
         pane = new JScrollPane(table);
 
         //setting layouts
+        /**
+         * setting up the panels layouts.
+         */
+        logger.info("setting up the layouts for the panels..");
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.PAGE_AXIS));
         labelPanel.setLayout(new FlowLayout());
@@ -149,9 +266,13 @@ public class TableHomeFrame implements IViewSimpleActions {
         updatedGpaPanel.setLayout(new FlowLayout());
         addDeleteBtnPanel.setLayout(new FlowLayout());
         currentGpaPanel.setLayout(new FlowLayout());
-
+        logger.info("setting up the improving grades label font..");
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
 
+        /**
+         * adding all the relevant components to their panels.
+         */
+        logger.info("setting up the components in the relevant panels..");
         //setting relevant components in the relevant panels for middle panel
         currentGpaPanel.add(addDeleteBtnPanel);
         currentGpaPanel.add(GPALabel);
@@ -160,7 +281,6 @@ public class TableHomeFrame implements IViewSimpleActions {
         addDeleteBtnPanel.add(btnDeleteGrade);
         labelPanel.add(improvingGradesLabel);
         panelMiddle.add(currentGpaPanel);
-        //panelMiddle.add(addDeleteBtnPanel);
         panelMiddle.add(labelPanel);
         panelMiddle.add(coursePanel);
         panelMiddle.add(desiredGradeLabelValidation);
@@ -168,34 +288,65 @@ public class TableHomeFrame implements IViewSimpleActions {
         //setting bottom panel
         coursePanel.add(courseLabel);
         coursePanel.add(courseComboBox);
+
         desiredGradePanel.add(desiredGradeLabel);
         desiredGradePanel.add(textDesiredGrade);
+
         updatedGpaPanel.add(updatedGPA);
         updatedGpaPanel.add(textUpdatedGrade);
+
         btnPanel.add(btnDesiredGradeUpdate);
+
         panelMiddle.add(desiredGradePanel);
         panelMiddle.add(btnPanel);
 
         panelBottom.add(updatedGpaPanel);
 
-        //creating container to handle the frame content pane
+        //creating the container
+        /**
+         * creating the container to handle the frame content pane.
+         */
+        logger.info("creating the container..");
         Container container = frame.getContentPane();
+
         //setting container layout
+        /**
+         * setting the container layout
+         */
+        logger.info("setting up the container layout..");
         container.setLayout(new BorderLayout());
+
         //attaching relevant panels to the container
+        /**
+         * adding the panels to the container.
+         */
+        logger.info("adding the panels to the container..");
         container.add(pane,BorderLayout.NORTH);
         container.add(panelMiddle,BorderLayout.CENTER);
         container.add(panelBottom,BorderLayout.SOUTH);
 
         //frame properties
+        /**
+         * setting up the frame properties.
+         */
+        logger.info("setting up the frame properties..");
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
+        /**
+         * creating the action listener for the "btnAddGrade" button.
+         */
+        logger.info("setting up the add button listener..");
         //listener for add grade button to open new form
         btnAddGrade.addActionListener(e -> SwingUtilities.invokeLater(()-> screen = new AddGradeScreen(this)));
 
+        //listener for delete grade button
+        /**
+         * creating the action listener for the "btnDeleteGrade" button.
+         */
+        logger.info("setting up the delete button listener..");
         //listener for delete button
         btnDeleteGrade.addActionListener(e -> {
             try {
@@ -208,6 +359,13 @@ public class TableHomeFrame implements IViewSimpleActions {
         //updating the table for the first time with special keyword 'updateTable'
         simpleAndGPAActions.deleteGrade("updateTable");
     }
+
+    /**
+     * Updates the table with an ArrayList of CourseDetails Objects.
+     * Each CourseDetails object is then displayed to the user inside the table.
+     *
+     * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
+     */
 
     //updating the view table basing on the list of course details that it receives
     @Override
@@ -253,7 +411,6 @@ public class TableHomeFrame implements IViewSimpleActions {
             DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
             TableColumn col = colModel.getColumn(i);
             int width = 0;
-
             TableCellRenderer renderer;
             for (int r = 0; r < table.getRowCount(); r++) {
                 renderer = table.getCellRenderer(r, i);
@@ -263,7 +420,7 @@ public class TableHomeFrame implements IViewSimpleActions {
             }
             //comparing the width of the value in the column to the width of the title of the column
             width = Math.max(width,table.getColumn(columns[i]).getWidth()-5);
-            //setting the preffered maximum width
+            //setting the prefered maximum width
             col.setPreferredWidth(width + 3);
             //adding to the sum var
             columnsWidth+=width+3;
@@ -272,6 +429,13 @@ public class TableHomeFrame implements IViewSimpleActions {
         frame.setSize(columnsWidth + 20,frame.getHeight() + 20);
     }
 
+    /**
+     * This method is triggered once the "Add Grade" button is pressed by the user.
+     * It adds a CourseDetails object to the table.
+     * The grade components are then displayed to the user inside the table.
+     *
+     * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
+     */
     //The function trying to add a grade based on the values inside the courseDetails var
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
@@ -293,6 +457,12 @@ public class TableHomeFrame implements IViewSimpleActions {
         }
     }
 
+    /**
+     * Sets the updated GPA to be in a format of "##.##" i.e: "93.45".
+     * This method is triggered once a new grade is added.
+     *
+     * @param calculate_gpa The outcome from the calculation of the GPA that is then formatted to "##.##" format.
+     */
     //The function updating the current GPA result based on the calculate_gpa double type var it receives
     @Override
     public void updateGPA(Double calculate_gpa) {
