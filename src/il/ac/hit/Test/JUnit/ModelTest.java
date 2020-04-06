@@ -1,5 +1,6 @@
 package il.ac.hit.Test.JUnit;
 
+import il.ac.hit.Interfaces.IDBSimpleActions;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
@@ -50,7 +51,7 @@ class ModelTest {
 
     @org.junit.jupiter.api.Test
     void deleteGrade() throws DBActionsException {
-        Model dbact = new Model();
+        IDBSimpleActions dbact = new Model();
         conn = DBconnection.getDBConnection();
         try {
             statement = conn.createStatement();
@@ -81,7 +82,7 @@ class ModelTest {
 
         @org.junit.jupiter.api.Test
         void editGrade () throws DBActionsException {
-            Model dbact = new Model();
+            IDBSimpleActions dbact = new Model();
             conn = DBconnection.getDBConnection();
             try {
                 statement = conn.createStatement();
@@ -110,7 +111,7 @@ class ModelTest {
 
     @org.junit.jupiter.api.Test
     void getCourse() throws DBActionsException {
-        Model dbact = new Model();
+        IDBSimpleActions dbact = new Model();
         CourseDetails newCourse=new CourseDetails("fifa",3,2,90,2.0,99);  // those param values will be compared in the assert methods ahead //
         conn = DBconnection.getDBConnection();
         try {
