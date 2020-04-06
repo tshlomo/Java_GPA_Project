@@ -1,7 +1,7 @@
 package il.ac.hit.View;
 import il.ac.hit.Interfaces.IFindNewGPA;
-import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.Exceptions.DBActionsException;
+import il.ac.hit.Interfaces.IViewSimpleActions;
 import il.ac.hit.ViewModel.*;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 
-public class TableHomeFrame implements ISimpleActions {
+public class TableHomeFrame implements IViewSimpleActions {
 
     private static AddGradeScreen screen;
 
@@ -113,7 +113,7 @@ public class TableHomeFrame implements ISimpleActions {
         btnDesiredGradeUpdate = new JButton("Calculate new GPA");
 
         btnDesiredGradeUpdate.addActionListener(e -> {
-            if(textDesiredGrade.getText().length() == 0){
+            if(textDesiredGrade.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Please input desired grade");
             } else {
                 try {
@@ -204,7 +204,9 @@ public class TableHomeFrame implements ISimpleActions {
         simpleAndGPAActions.deleteGrade("updateTable");
     }
 
+    @Override
     public void updateGradesTable(List<CourseDetails> courseDetails){
+        updateCourseComboBox(courseDetails);
         Object[] row = new Object[6];
         //clearing the table first
         table.setModel(new DefaultTableModel(null, columns));
@@ -275,6 +277,7 @@ public class TableHomeFrame implements ISimpleActions {
         }
     }
 
+    @Override
     public void updateGPA(Double calculate_gpa) {
         textGPA.setText(new DecimalFormat("##.##").format(calculate_gpa));
     }

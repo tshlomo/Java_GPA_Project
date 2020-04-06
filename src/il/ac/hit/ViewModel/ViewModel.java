@@ -1,6 +1,6 @@
 package il.ac.hit.ViewModel;
 
-import il.ac.hit.Interfaces.IFindNewGPA;
+import il.ac.hit.Interfaces.*;
 import il.ac.hit.Model.Calculations;
 import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
@@ -8,9 +8,9 @@ import il.ac.hit.View.TableHomeFrame;
 
 public class ViewModel implements IFindNewGPA {
 
-    private static Model dbActions;
-    private static TableHomeFrame tableHomeFrame;
-    private static Calculations calculations;
+    private IDBSimpleActions dbActions;
+    private IViewSimpleActions tableHomeFrame;
+    private ICalcGPA calculations;
 
     public ViewModel(TableHomeFrame tableHomeFrame){
         dbActions = new Model();
@@ -18,12 +18,11 @@ public class ViewModel implements IFindNewGPA {
         calculations = new Calculations();
     }
 
-    private static void updateGPA(Double calculate_gpa) {
+    private void updateGPA(Double calculate_gpa) {
         tableHomeFrame.updateGPA(calculate_gpa);
     }
 
-    public static void updateTable() throws DBActionsException {
-        tableHomeFrame.updateCourseComboBox(dbActions.getGradeTable());
+    public void updateTable() throws DBActionsException {
         updateGPA(calculations.calculate_GPA());
         tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
     }
@@ -36,7 +35,6 @@ public class ViewModel implements IFindNewGPA {
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see
      */
 
     //this func receives all of the params of the db table and and updates it with insert statement

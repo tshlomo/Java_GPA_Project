@@ -2,16 +2,15 @@
 package il.ac.hit.Model;
 
 import il.ac.hit.Exceptions.DBActionsException;
-import il.ac.hit.Interfaces.ISimpleActions;
+import il.ac.hit.Interfaces.IDBSimpleActions;
 import il.ac.hit.ViewModel.CourseDetails;
 
-import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Model implements ISimpleActions {
+public class Model implements IDBSimpleActions {
 
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
     private ResultSet rs;//same as statement
@@ -131,6 +130,7 @@ public class Model implements ISimpleActions {
      * @return list of all courses values
      */
 
+    @Override
     public List<CourseDetails> getGradeTable () throws DBActionsException{
         List<CourseDetails> courseDetails=new ArrayList<>();
         try {

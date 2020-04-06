@@ -1,12 +1,13 @@
 package il.ac.hit.Model;
 
 import il.ac.hit.Exceptions.DBActionsException;
+import il.ac.hit.Interfaces.ICalcGPA;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Calculations {
+public class Calculations implements ICalcGPA {
 
     private Logger logger= Logger.getLogger(Calculations.class.getName());
 
@@ -46,6 +47,7 @@ public class Calculations {
 
 
     //func calculates gpa of the grades table in db
+    @Override
     public Double calculate_GPA() throws DBActionsException {
         Model dbActions = new Model();
         List<CourseDetails> courseTable;
@@ -81,7 +83,7 @@ public class Calculations {
      */
 
     //func calculates new gpa by replacing one of the grades with a new one entered by the user func receives the name of the course and the new grade
-
+    @Override
     public Double gpaByGrade(String courseName,Integer newGrade) throws  DBActionsException {
         Double credits_sum = 0.0;
         Double grades_sum = 0.0;

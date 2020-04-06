@@ -2,9 +2,6 @@ package il.ac.hit.ViewModel;
 
 public class CourseDetails {
 
-//(Course VARCHAR(255),Semester VARCHAR(255),TestGrade INT,Credits DOUBLE,finalGrade INT, PRIMARY KEY(Course)
-
-    //choose # of semesters
     private static final Integer NUM_OF_SEMESTERS=3;
 
     private String courseName;
@@ -13,8 +10,6 @@ public class CourseDetails {
     private Integer testGrade;
     private Double credits;
     private Integer finalGrade;
-
-
 
     public CourseDetails(String courseName, Integer year, Integer semester, Integer testGrade, Double credits, Integer finalGrade) {
         setCourseName(courseName);

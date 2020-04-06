@@ -106,7 +106,7 @@ public class AddGradeScreen {
 
         //button action listener
         btnAdd.addActionListener(e -> {
-            if (textQuiz.getText().length() == 0 || textFinalTest.getText().length() == 0 || quizPercentage.getText().length() == 0 || testPercentage.getText().length() == 0)
+            if (textQuiz.getText().isEmpty() || textFinalTest.getText().isEmpty() || quizPercentage.getText().isEmpty() || testPercentage.getText().isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "Please input all values");
             } else {
@@ -186,7 +186,7 @@ public class AddGradeScreen {
             public void keyTyped(KeyEvent ke) {
                 char c = ke.getKeyChar();
                 String data = quizPercentage.getText();
-                Integer val = -1;
+                Integer val;
                 if(c >='0' && c <= '9')
                     val = Integer.parseInt(data+c);
                 else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
@@ -219,7 +219,7 @@ public class AddGradeScreen {
             public void keyTyped(KeyEvent ke) {
                 char c = ke.getKeyChar();
                 String data = testPercentage.getText();
-                Integer val = -1;
+                Integer val;
                 if(c >='0' && c <= '9')
                     val = Integer.parseInt(data+c);
                 else if(c == KeyEvent.VK_BACK_SPACE && !data.isEmpty())
