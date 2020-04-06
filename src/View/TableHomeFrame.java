@@ -19,7 +19,16 @@ import java.util.logging.Logger;
 
 public class TableHomeFrame extends JTable {
 
+    /**
+     * creating a logger object to log messages for
+     * our application components.
+     */
+
     private Logger logger= Logger.getLogger(TableHomeFrame.class.getName());
+
+    /**
+     * courses array is the array that holds all the courses.
+     */
 
     private static final String[] courses = {"Linear algebra","Infinitesimal calculus 1","Computer science Introduction","Introduction to discrete math"
             ,"Probability","Infinitesimal calculus 2","Computer structure and switching theory","Data Structures","Advanced Programming Workshop"
@@ -28,6 +37,12 @@ public class TableHomeFrame extends JTable {
             ,"Computational and Computational Algorithms","Mathematical tools","Machine learning","Programming in the Web Environment"
             ,"DevOPS","Development of server side systems in an open source environment","Developing a client side in an Android environment","Compilation Theory"
             ,"Involvement in Israeli society","Yoga","Basketball team","Football team","Information Society"};
+
+    /**
+     * credits array is the array that holds all the credits
+     * points, their location in the array matches the courses array.
+     */
+
     private static final Object[] credits;
     static {
         credits = new Object[]{ 5, 6.5, 5, 5,
@@ -38,48 +53,101 @@ public class TableHomeFrame extends JTable {
                 3,3, 3.5, 3.5,
                 4, 1, 1, 1, 2};
     }
+
+    /**
+     * year array is the array that holds all the years
+     * that a computer science student is studying.
+     */
+
     private static final String[] year = {"First Year","Second Year","Third Year"};
+
+    /**
+     * semester array is the array that holds all the semesters.
+     */
+
     private static final String[] semester ={"First Semester","Second Semester","Third Semester"};
+
     //Variables declarations
+    /**
+     * creating the AddGradeScreen class object.
+     */
     private AddGradeScreen screen;
+
+    /**
+     * creating the ISimpleAction interface.
+     */
+
     private ISimpleActions simpleActions;
+    /**
+     * creating the frame object.
+     */
     private JFrame frame;
+    /**
+     * creating the table object.
+     */
     private JTable table;
+    /**
+     * creating all the panel objects.
+     */
     private JPanel panelTop,panelMiddle,panelBottom,labelPanel,yearPanel,semesterPanel,coursePanel,desiredGradePanel,updatedGpaPanel,btnPanel,addDeleteBtnPanel,currentGpaPanel;
-    private JComboBox courseComboBox;
-    private JComboBox yearComboBox;
-    private JComboBox semesterComboBox;
-    private JLabel GPALabel;
-    private JLabel desiredGradeLabel;
-    private JLabel courseLabel;
-    private JLabel improvingGradesLabel;
-    private JLabel updatedGPA;
-    private JLabel yearLabel;
-    private JLabel semesterLabel;
-    private JLabel desiredGradeLabelValidation;
-    private JTextField textGPA;
-    private JTextField textDesiredGrade;
-    private JTextField textUpdatedGrade;
-    private JButton btnAddGrade;
-    private JButton btnDeleteGrade;
-    private JButton btnDesiredGradeUpdate;
+    /**
+     * creating all the Combo box objects.
+     */
+    private JComboBox courseComboBox,yearComboBox,semesterComboBox;
+    /**
+     * creating all the label objects.
+     */
+    private JLabel GPALabel,desiredGradeLabel,courseLabel,improvingGradesLabel,updatedGPA,yearLabel,semesterLabel,desiredGradeLabelValidation;
+    /**
+     * creating all the text field objects.
+     */
+    private JTextField textGPA,textDesiredGrade,textUpdatedGrade;
+    /**
+     * creating all the button objects.
+     */
+    private JButton btnAddGrade,btnDeleteGrade,btnDesiredGradeUpdate;
+    /**
+     * creating the scroll pane object.
+     */
     private JScrollPane pane;
+    /**
+     * creating the DefaulTableModel object.
+     */
     private DefaultTableModel model;
 
 
-    //table properties
+    /**
+     * creating the column array that hold all the table columns.
+     */
+
     private static final String[] columns = {"Course", "Year", "Semester", "Final Test", "Credits", "Final Grade"};
+
+    /**
+     * creating the constructor for the TableHomeFrame class.
+     */
 
     public TableHomeFrame() {
         logger.info("instantiating all the class components");
         simpleActions = new ViewModel(this);
-        //Frame
+
+        //instantiating the frame.
+        /**
+         * instantiating the frame object.
+         */
         logger.info("creating the frame..");
         frame = new JFrame("GPA");
-        //Table
+
+        //instantiating the table.
+        /**
+         * instantiating the table object.
+         */
         logger.info("creating the table..");
         table = new JTable();
-        //Panels
+
+        //instantiating the panels.
+        /**
+         * instantiating the panel objects.
+         */
         logger.info("creating the panels..");
         panelBottom = new JPanel();
         panelTop = new JPanel();
@@ -93,12 +161,20 @@ public class TableHomeFrame extends JTable {
         btnPanel = new JPanel();
         addDeleteBtnPanel = new JPanel();
         currentGpaPanel = new JPanel();
-        //ComboBox
+
+        //instantiating the combo boxes.
+        /**
+         * instantiating the combo box objects.
+         */
         logger.info("creating the combo boxes..");
         courseComboBox = new JComboBox(courses);
         yearComboBox = new JComboBox(year);
         semesterComboBox = new JComboBox(semester);
-        //Labels
+
+        //instantiating the label objects.
+        /**
+         * instantiating the label objects.
+         */
         logger.info("creating the labels..");
         GPALabel = new JLabel("Current GPA");
         desiredGradeLabel = new JLabel("Desired Grade");
@@ -109,22 +185,38 @@ public class TableHomeFrame extends JTable {
         semesterLabel = new JLabel("Semester");
         desiredGradeLabelValidation = new JLabel("");
         desiredGradeLabelValidation.setForeground(Color.RED);
-        //TextFields
+
+        //instantiating the text field objects.
+        /**
+         * instantiating the text field objects.
+         */
         logger.info("creating the text fields..");
         textGPA = new JTextField(4);
         textGPA.setEditable(false);
         textUpdatedGrade = new JTextField(3);
         textUpdatedGrade.setEditable(false);
         textDesiredGrade = new JTextField(3);
-        //Buttons
+
+        //instantiating the button objects
+        /**
+         * instantiating the button objects.
+         */
         logger.info("creating the buttons..");
         btnAddGrade = new JButton("Add New Grade");
         btnDeleteGrade = new JButton("Delete Grade");
         btnDesiredGradeUpdate = new JButton("Calculate new GPA");
-        //ScrollPane
+
+        //instantiating the scroll pane object.
+        /**
+         * instantiating the scroll pane object.
+         */
         logger.info("creating the scroll pane..");
         pane = new JScrollPane(table);
 
+        //key listener for the "textDesiredGrade" text field
+        /**
+         * creating key listener for the "textDesiredGrade" text field.
+         */
         textDesiredGrade.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent ke) {
@@ -153,6 +245,10 @@ public class TableHomeFrame extends JTable {
             }
         });
 
+        //btnDesiredGradeUpdate action listener
+        /**
+         * creating action listener for the btnDesiredGradeUpdate button.
+         */
         btnDesiredGradeUpdate.addActionListener(e -> {
             try{
                 //TODO this func
@@ -160,6 +256,9 @@ public class TableHomeFrame extends JTable {
         });
 
         //table properties
+        /**
+         * setting up the table properties.
+         */
         logger.info("disabling the option to edit the table");
         table.setDefaultEditor(Object.class,null);
         logger.info("auto resizing the columns..");
@@ -168,9 +267,10 @@ public class TableHomeFrame extends JTable {
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columns);
 
-
-
         //setting layouts
+        /**
+         * setting up the panels layouts.
+         */
         logger.info("setting up the layouts for the panels..");
         panelBottom.setLayout(new BoxLayout(panelBottom,BoxLayout.PAGE_AXIS));
         panelTop.setLayout(new BorderLayout());
@@ -186,10 +286,16 @@ public class TableHomeFrame extends JTable {
         improvingGradesLabel.setFont(new Font("Arial",Font.BOLD,13));
 
         //adding top panel
+        /**
+         * adding the top panel to the scroll pane.
+         */
         logger.info("adding the scroll pane..");
         panelTop.add(pane);
 
         //setting relevant components in the relevant panels
+        /**
+         * adding all the relevant components to their panels.
+         */
         logger.info("setting up the components in the relevant panels..");
         currentGpaPanel.add(addDeleteBtnPanel);
         currentGpaPanel.add(GPALabel);
@@ -212,19 +318,33 @@ public class TableHomeFrame extends JTable {
         panelMiddle.add(btnPanel);
         panelBottom.add(updatedGpaPanel);
 
-        //creating container to handle the frame content pane
+        //creating the container
+        /**
+         * creating the container to handle the frame content pane.
+         */
         logger.info("creating the container..");
         Container container = frame.getContentPane();
+
         //setting container layout
+        /**
+         * setting the container layout
+         */
         logger.info("setting up the container layout..");
         container.setLayout(new BorderLayout());
+
         //attaching relevant panels to the container
+        /**
+         * adding the panels to the container.
+         */
         logger.info("adding the panels to the container..");
         container.add(panelTop,BorderLayout.NORTH);
         container.add(panelMiddle,BorderLayout.CENTER);
         container.add(panelBottom,BorderLayout.SOUTH);
 
         //frame properties
+        /**
+         * setting up the frame properties.
+         */
         logger.info("setting up the frame properties..");
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -232,9 +352,16 @@ public class TableHomeFrame extends JTable {
         frame.setLocationRelativeTo(null);
 
         //listener for add grade button
+        /**
+         * creating the action listener for the "btnAddGrade" button.
+         */
         logger.info("setting up the add button listener..");
         btnAddGrade.addActionListener(e -> screen = new AddGradeScreen(this));
+
         //listener for delete grade button
+        /**
+         * creating the action listener for the "btnDeleteGrade" button.
+         */
         logger.info("setting up the delete button listener..");
         btnDeleteGrade.addActionListener(e -> simpleActions.deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString()));
         simpleActions.deleteGrade("updateTable");

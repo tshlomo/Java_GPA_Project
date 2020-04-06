@@ -15,8 +15,15 @@ import java.util.logging.Logger;
  */
 
 public class AddGradeScreen extends JFrame {
-
+    /**
+     * creating a logger object to log messages for
+     * our application components.
+     */
     private Logger logger= Logger.getLogger(AddGradeScreen.class.getName());
+
+    /**
+     * courses array is the array that holds all the courses.
+     */
 
     private static final String[] courses = {"Linear algebra", "Infinitesimal calculus 1", "Computer science Introduction", "Introduction to discrete math","Java Basics"
             , "Probability", "Infinitesimal calculus 2", "Computer structure and switching theory", "Data Structures", "Advanced Programming Workshop","C#"
@@ -25,6 +32,12 @@ public class AddGradeScreen extends JFrame {
             , "Computational and Computational Algorithms", "Mathematical tools", "Machine learning", "Programming in the Web Environment","Design patterns"
             , "DevOPS", "Development of server side systems in an open source environment", "Developing a client side in an Android environment", "Compilation Theory"
             , "Involvement in the Israeli society", "Yoga", "Basketball team", "Football team", "Information Society","Developing a client side in an Android environment 2"};
+
+    /**
+     * credits array is the array that holds all the credits
+     * points, their location in the array matches the courses array.
+     */
+
     private static final Object[] credits = {5, 6.5, 5, 5,4,
             3.5, 5, 4, 4, 3,3,
             2.5, 4, 3.5, 3.5, 5,4,
@@ -32,40 +45,77 @@ public class AddGradeScreen extends JFrame {
             4, 5, 3, 3,4,
             3, 3, 3.5, 3.5,
             4, 1, 1, 1, 2,3};
+    /**
+     * year array is the array that holds all the years
+     * that a computer science student is studying.
+     */
+
     private static final String[] year = {"First Year", "Second Year", "Third Year"};
+
+    /**
+     * semester array is the array that holds all the semesters.
+     */
+
     private static final String[] semester = {"First Semester", "Second Semester", "Third Semester"};
+
+    /**
+     * NUM_OF_SEMESTERS is a constant variable that holds the number of
+     * semesters in a student year.
+     */
+
     private static final Integer NUM_OF_SEMESTERS = 3;
-
+    /**
+     * creating the frame object.
+     */
     private static JFrame frame;
+    /**
+     * creating all the required panels.
+     */
     private static JPanel yearPanel, semesterPanel, coursePanel, quizPanel, testPanel, creditsPanel, addBtnPanel;
-    private static JLabel courseLabel;
-    private static JLabel quizLabel;
-    private static JLabel finalTestLabel;
-    private static JLabel creditsLabel;
-    private static JLabel percentageSign;
-    private static JLabel percentageSign2;
-    private static JLabel yearLabel;
-    private static JLabel semesterLabel;
-    private static JComboBox courseComboBox;
-    private static JComboBox yearComboBox;
-    private static JComboBox semesterComboBox;
-    private static JTextField textQuiz;
-    private static JTextField textFinalTest;
-    private static JTextField textCredits;
-    private static JTextField quizPrecentage;
-    private static JTextField testPrecentage;
+    /**
+     * creating all the required labels.
+     */
+    private static JLabel courseLabel,quizLabel,finalTestLabel,creditsLabel,percentageSign,percentageSign2,yearLabel,semesterLabel;
+    /**
+     * creating all the combo boxes.
+     */
+    private static JComboBox courseComboBox,yearComboBox,semesterComboBox;
+    /**
+     * creating all the text fields.
+     */
+    private static JTextField textQuiz,textFinalTest,textCredits,quizPercentage,testPercentage;
+    /**
+     * creating the add button.
+     */
     private static JButton btnAdd;
-
+    /**
+     * creating the CourseDetails object that holds all the course information.
+     */
     private CourseDetails courseDetails;
+    /**
+     * creating the Calculations object that performs all the GPA calculations.
+     */
     private Calculations calculations;
+    /**
+     * creating the TableHomeFrame class object.
+     */
     private TableHomeFrame tableHomeFrame;
 
-
+    /**
+     * The class constructor that creates an AddGradeScreen
+     * and initializes an TableHomeFrame object.
+     *
+     * @param tableHomeFrame This class holds the components of the main screen
+     * hence providing the interaction between the user and the application.
+     */
     public AddGradeScreen(TableHomeFrame tableHomeFrame) {
         //should we use swing utilities here?
         SwingUtilities.invokeLater(() -> {
             this.tableHomeFrame=tableHomeFrame;
-            //creating labels
+            //instantiating the labels
+            /**
+             * instantiating all the label objects.
+             */
             logger.info("creating the labels...");
             courseLabel = new JLabel("Course");
             quizLabel = new JLabel("HW/Quiz grade");
@@ -77,20 +127,29 @@ public class AddGradeScreen extends JFrame {
             semesterLabel = new JLabel("Semester");
 
 
-            //creating text fields
+            //Instantiating text fields
+            /**
+             * instantiating all the text field objects.
+             */
             logger.info("creating the text fields...");
             textQuiz = new JTextField(3);
             textFinalTest = new JTextField(3);
             textCredits = new JTextField(3);
-            quizPrecentage = new JTextField(2);
-            testPrecentage = new JTextField(2);
+            quizPercentage = new JTextField(2);
+            testPercentage = new JTextField(2);
             textCredits.setEditable(false);
 
-            //creating buttons
+            //Instantiating buttons
+            /**
+             * instantiating all the button objects.
+             */
             logger.info("creating a button...");
             btnAdd = new JButton("Add");
 
-            //creating panels
+            //Instantiating panels
+            /**
+             * instantiating all the panel objects.
+             */
             logger.info("creating the panels...");
             yearPanel = new JPanel();
             semesterPanel = new JPanel();
@@ -100,32 +159,47 @@ public class AddGradeScreen extends JFrame {
             creditsPanel = new JPanel();
             addBtnPanel = new JPanel();
 
-            //creating frame
+            //Instantiating frame
+            /**
+             * instantiating the frame object.
+             */
             logger.info("creating the frame...");
             frame = new JFrame("Add Grade");
 
             courseDetails=null;
+            /**
+             * instantiating the Calculations object.
+             */
             calculations = new Calculations();
             textCredits.setEditable(false);
 
-            //Creating ComboBox
+            //Instantiating ComboBoxes
+            /**
+             * instantiating all the combo box objects.
+             */
             logger.info("creating the combo boxes...");
             courseComboBox = new JComboBox(courses);
             yearComboBox = new JComboBox(year);
             semesterComboBox = new JComboBox(semester);
 
-            //button action listener
+            //"Add" button action listener
+            /**
+             * creating an action listener for the "Add" button
+             */
             btnAdd.addActionListener(e -> {
                 courseDetails = new CourseDetails(courseComboBox.getSelectedItem().toString(), yearComboBox.getSelectedIndex() + 1, semesterComboBox.getSelectedIndex() + 1
                         , Integer.valueOf(textFinalTest.getText()), Double.parseDouble(textCredits.getText())
-                        , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPrecentage.getText())
-                        ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPrecentage.getText())));
+                        , calculations.calculate_Final_Grade(Double.valueOf(textFinalTest.getText()),Double.valueOf(testPercentage.getText())
+                        ,Double.valueOf(textQuiz.getText()),Double.valueOf(quizPercentage.getText())));
                 logger.info("adding a grade to the table...");
                 tableHomeFrame.addGrade(courseDetails);
                 frame.dispose();
             });
 
-            //text quiz action listener
+            //"textQuiz" key listener
+            /**
+             * creating a key listener for the "textQuiz" text field.
+             */
             textQuiz.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
@@ -154,7 +228,10 @@ public class AddGradeScreen extends JFrame {
                 }
             });
 
-            //text final quiz action listener
+            //"textFinalTest" key listener
+            /**
+             * creating a key listener for the "textFinalTest" text field.
+             */
             textFinalTest.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
@@ -183,12 +260,15 @@ public class AddGradeScreen extends JFrame {
                 }
             });
 
-            //quiz percentage action listener
-            quizPrecentage.addKeyListener(new KeyAdapter() {
+            //"quizPercentage" key listener
+            /**
+             * creating a key listener for the "quizPercentage" text field.
+             */
+            quizPercentage.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
                     char c = ke.getKeyChar();
-                    String data = quizPrecentage.getText();
+                    String data = quizPercentage.getText();
                     Integer val = -1;
                     try {
                         if(c>='0' && c<='9')
@@ -198,8 +278,8 @@ public class AddGradeScreen extends JFrame {
                         else
                             val = 0;
                         if (val >= 100) {
-                            quizPrecentage.setText("100");
-                            testPrecentage.setText("0");
+                            quizPercentage.setText("100");
+                            testPercentage.setText("0");
                         }
                     } catch (Exception e) { e.printStackTrace();}
                     if(val >= 100) {
@@ -209,7 +289,7 @@ public class AddGradeScreen extends JFrame {
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
-                        testPrecentage.setText(String.valueOf(100-val));
+                        testPercentage.setText(String.valueOf(100-val));
                     }
                     else {
                         ke.consume();
@@ -217,12 +297,15 @@ public class AddGradeScreen extends JFrame {
                     }
                 }
             });
-            //test percentage action listener
-            testPrecentage.addKeyListener(new KeyAdapter() {
+            //"testPercentage" key listener
+            /**
+             * creating a key listener for the "testPercentage" text field.
+             */
+            testPercentage.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent ke) {
                     char c = ke.getKeyChar();
-                    String data = testPrecentage.getText();
+                    String data = testPercentage.getText();
                     Integer val = -1;
                     try {
                         if(c>='0' && c<='9')
@@ -232,8 +315,8 @@ public class AddGradeScreen extends JFrame {
                         else
                             val = 0;
                         if (val >= 100) {
-                            testPrecentage.setText("100");
-                            quizPrecentage.setText("0");
+                            testPercentage.setText("100");
+                            quizPercentage.setText("0");
                         }
                     } catch (Exception e) { e.printStackTrace();}
                     if(val >= 100) {
@@ -243,7 +326,7 @@ public class AddGradeScreen extends JFrame {
                     }
                     else if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
                         //textFinalTest.setText("");
-                        quizPrecentage.setText(String.valueOf(100-val));
+                        quizPercentage.setText(String.valueOf(100-val));
                     }
                     else {
                         ke.consume();
@@ -253,6 +336,9 @@ public class AddGradeScreen extends JFrame {
             });
 
             //setting panels layouts
+            /**
+             * setting the layouts for the panels.
+             */
             logger.info("setting the panels layouts");
             yearPanel.setLayout(new FlowLayout());
             semesterPanel.setLayout(new FlowLayout());
@@ -263,18 +349,21 @@ public class AddGradeScreen extends JFrame {
             addBtnPanel.setLayout(new FlowLayout());
 
             //Adding components to the relevant panels
+            /**
+             * Adding components to the panels.
+             */
             logger.info("adding components to the panels");
             coursePanel.add(courseLabel);
             coursePanel.add(courseComboBox);
 
             quizPanel.add(quizLabel);
             quizPanel.add(textQuiz);
-            quizPanel.add(quizPrecentage);
+            quizPanel.add(quizPercentage);
             quizPanel.add(percentageSign);
 
             testPanel.add(finalTestLabel);
             testPanel.add(textFinalTest);
-            testPanel.add(testPrecentage);
+            testPanel.add(testPercentage);
             testPanel.add(percentageSign2);
 
             creditsPanel.add(creditsLabel);
@@ -290,8 +379,14 @@ public class AddGradeScreen extends JFrame {
 
             Container container = frame.getContentPane();
             //setting container layout
+            /**
+             * setting up the container layout.
+             */
             container.setLayout(new GridLayout(8, 1, 5, 5));
-            //attaching panels to the main frame
+            //adding panels to container
+            /**
+             * Adding the panels to the container.
+             */
             logger.info("adding panels to the mainframe");
             container.add(yearPanel);
             container.add(semesterPanel);
@@ -301,11 +396,13 @@ public class AddGradeScreen extends JFrame {
             container.add(creditsPanel);
             container.add(addBtnPanel);
 
-            //setting combobox action listener to change credits points by the course change
+            //setting combo box action listener to change credits points by the course change
             courseComboBox.addActionListener(e -> textCredits.setText(credits[courseComboBox.getSelectedIndex()].toString()));
 
             //setting the frame visible
-            //frame.setSize(500,500);
+            /**
+             * setting up the frame properties.
+             */
             logger.info("defining the frame properties");
             frame.pack();
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
