@@ -88,6 +88,8 @@ public class TableHomeFrame implements IViewSimpleActions {
 
     /**
      * creating the constructor for the TableHomeFrame class.
+     *
+     * @throws DBActionsException in case of an sql error
      */
 
     public TableHomeFrame() throws DBActionsException {

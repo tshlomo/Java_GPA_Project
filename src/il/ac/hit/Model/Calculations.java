@@ -58,7 +58,7 @@ public class Calculations implements ICalcGPA {
      * it calculates the sum of all the final grades multiplied by their specific credits value
      * than the sum is divided by the sum of the credits in total(hence the credit_sum param)
      *
-     * @throws DBActionsException
+     * @throws DBActionsException in case of an sql error
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
      * @return  calculated total grade gpa
      */
@@ -95,7 +95,7 @@ public class Calculations implements ICalcGPA {
      *
      * @param courseName correct name of the course that its grade would be replaced
      * @param newGrade new grade entered by the user to replace the precent grade in the calculation
-     * @throws DBActionsException
+     * @throws DBActionsException in case of an sql error
      * @see  Model#getCourse(String)  uses this method to retrieve the details of the course we want to change
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
      * @return  calculated total grade gpa

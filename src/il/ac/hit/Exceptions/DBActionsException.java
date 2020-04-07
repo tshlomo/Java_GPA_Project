@@ -23,7 +23,7 @@ public class DBActionsException extends SQLException {
     /**
      * DBActionsException constructor gets the cause written message
      *
-     * @param message - message that was passed from the throw and the
+     * @param message  message that was passed from the throw and the
      */
 
     public DBActionsException(String message) {
@@ -33,8 +33,8 @@ public class DBActionsException extends SQLException {
     /**
      * DBActionsException constructor gets the cause written message and the root cause
      *
-     * @param message - message that was passed from the throw and the
-     * @param cause -root cause
+     * @param message message that was passed from the throw and the
+     * @param cause root cause
      */
 
     public DBActionsException(String message, Throwable cause) {
