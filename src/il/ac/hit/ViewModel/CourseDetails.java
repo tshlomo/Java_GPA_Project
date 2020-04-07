@@ -156,6 +156,7 @@ public class CourseDetails {
      * compares two <code>CourseDetails</code> objects
      * checks if all the variables in the object are equal
      *
+     * @param courseDetails instantiated CourseDetails object
      * @return true/false
      */
 
