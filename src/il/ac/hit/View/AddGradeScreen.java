@@ -397,29 +397,23 @@ public class AddGradeScreen {
          */
         logger.info("adding components to the panels");
         //Adding components to the relevant panels
+
         coursePanel.add(courseLabel);
         coursePanel.add(courseComboBox);
-
         quizPanel.add(quizLabel);
         quizPanel.add(textQuiz);
         quizPanel.add(quizPercentage);
         quizPanel.add(percentageSign);
-
         testPanel.add(finalTestLabel);
         testPanel.add(textFinalTest);
         testPanel.add(testPercentage);
         testPanel.add(percentageSign2);
-
         creditsPanel.add(creditsLabel);
         creditsPanel.add(textCredits);
-
         addBtnPanel.add(btnAdd);
-
         inputErrPanel.add(inputErrLabel);
-
         yearPanel.add(yearLabel);
         yearPanel.add(yearComboBox);
-
         semesterPanel.add(semesterLabel);
         semesterPanel.add(semesterComboBox);
 

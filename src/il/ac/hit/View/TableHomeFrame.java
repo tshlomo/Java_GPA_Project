@@ -87,7 +87,7 @@ public class TableHomeFrame implements IViewSimpleActions {
     private static final String[] columns = {"Course", "Year", "Semester", "Test", "Credits", "Final Grade"};
 
     /**
-     * creating the constructor for the TableHomeFrame class.
+     * constructor for class TableHomeFrame
      *
      * @throws DBActionsException in case of an sql error
      */
