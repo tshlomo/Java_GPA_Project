@@ -11,21 +11,21 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * This class holds the methods which will be interacting with the db
- * giving the program the ability to retrieve/update information in the db
+ * This class holds the methods which will be interacting with the DB
+ * giving the program the ability to retrieve/update information in the DB and do the "heavy" work
+ * @see IDBSimpleActions the interface implemented within this class
  */
-
 public class Model implements IDBSimpleActions {
 
-    private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
-    private ResultSet rs;//same as statement
+    //announcing the class fields
+    private Statement statement;
+    private ResultSet rs;
     private Connection conn;
     private Logger logger;
 
     /**
-     * constructor for the Model class instantiates class variables
+     * the constructor for this class - sets all it's fields to null and instantiating the logger
      */
-
     public Model() {
         statement = null;
         rs = null;
@@ -43,7 +43,6 @@ public class Model implements IDBSimpleActions {
      * @throws DBActionsException if an sql exception occurred
      * @see  DBconnection#getDBConnection() uses this method to connect to db
      */
-
     //this func receives all of the params of the course and and updates it with insert statement
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {

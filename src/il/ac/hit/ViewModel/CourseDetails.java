@@ -2,8 +2,6 @@ package il.ac.hit.ViewModel;
 
 public class CourseDetails {
 
-    private static final Integer NUM_OF_SEMESTERS=3;
-
     private String courseName;
     private Integer year;
     private Integer semester;
@@ -51,7 +49,7 @@ public class CourseDetails {
     }
 
     public Integer getSemester() {
-        return semester % NUM_OF_SEMESTERS;
+        return semester;
     }
 
     public Integer getTestGrade() {
