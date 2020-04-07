@@ -22,7 +22,7 @@ public interface IViewSimpleActions extends ISimpleActions {
     void updateGradesTable(List<CourseDetails> courseDetails);
 
     /**
-     * <cod>updateGPA</cod> function updates the user UI with the <code>newGPA</code> calculated after an
+     * <code>updateGPA</code> function updates the user UI with the <code>newGPA</code> calculated after an
      * action performed by the user
      * @param newGPA    the new GPA after the formula
      */

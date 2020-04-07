@@ -12,7 +12,7 @@ import il.ac.hit.ViewModel.ViewModel;
 public interface IFindNewGPA extends ISimpleActions {
     /**
      * <code>newGPA</code> function is used to get a newly calculated GPA after replacing the relevant <code>courseName</code> current grade with the <code>newGrade</code> inserted by the user
-     * @param courseName    the key->value <code>courseName</code> that his grade should be replaced with
+     * @param courseName    the key-value <code>courseName</code> that his grade should be replaced with
      * @param newGrade  the new grade to be replaced with the current one
      * @return the newly calculated GPA
      * @throws DBActionsException in case of an SQL error

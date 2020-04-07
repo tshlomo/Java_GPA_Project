@@ -23,7 +23,7 @@ public interface ISimpleActions {
     void addGrade(CourseDetails courseDetails) throws DBActionsException;
 
     /**
-     * <code>deleteGrade</code> function is used by the user to delete a grade give the key-><code>courseName</code>
+     * <code>deleteGrade</code> function is used by the user to delete a grade give the key-<code>courseName</code>
      * @param courseName    the key-value for the database to select the relevant course
      * @throws DBActionsException in case of an SQL error
      */

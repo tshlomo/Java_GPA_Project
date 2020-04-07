@@ -22,7 +22,7 @@ public interface IDBSimpleActions extends ISimpleActions {
     List<CourseDetails> getGradeTable() throws DBActionsException;
 
     /**
-     * <code>getCourse</code> function is used to get a course based on the key->value <code>courseName</code>
+     * <code>getCourse</code> function is used to get a course based on the key-value <code>courseName</code>
      * @param courseName the course name to be pulled from the database
      * @return a <code>CourseDetails</code> object with the relevant details
      * @throws DBActionsException in case of an SQL error

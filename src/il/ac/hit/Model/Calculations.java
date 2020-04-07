@@ -61,7 +61,7 @@ public class Calculations implements ICalcGPA {
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
      * @see CourseDetails
      * @see List
-     * @return  calculated total grade GPA <code<Double</code> type
+     * @return  calculated total grade GPA <code>Double</code> type
      */
     //Func calculates gpa of the grades table in db
     @Override
