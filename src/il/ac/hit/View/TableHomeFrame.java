@@ -1,9 +1,9 @@
 package il.ac.hit.View;
-import il.ac.hit.Interfaces.IDBSimpleActions;
-import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.Exceptions.DBActionsException;
+import il.ac.hit.Interfaces.IFindNewGPA;
 import il.ac.hit.Interfaces.IViewSimpleActions;
-import il.ac.hit.ViewModel.*;
+import il.ac.hit.ViewModel.CourseDetails;
+import il.ac.hit.ViewModel.ViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableColumnModel;
@@ -229,6 +229,7 @@ public class TableHomeFrame implements IViewSimpleActions {
                 try {
                     textUpdatedGrade.setText(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText())).toString());
                 } catch (DBActionsException e1) {
+                    logger.warning("Couldn't pull table grades...");
                     e1.printStackTrace();
                 }
             }
@@ -352,6 +353,7 @@ public class TableHomeFrame implements IViewSimpleActions {
             try {
                 deleteGrade(table.getValueAt(table.getSelectedRow(),0).toString());
             } catch (DBActionsException e1) {
+                logger.warning("Couldn't delete this grade from GPA table...");
                 e1.printStackTrace();
             }
         });
@@ -435,6 +437,7 @@ public class TableHomeFrame implements IViewSimpleActions {
      * The grade components are then displayed to the user inside the table.
      *
      * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
+     * @throws DBActionsException triggered if there's and SQL exception
      */
     //The function trying to add a grade based on the values inside the courseDetails var
     @Override
@@ -442,6 +445,14 @@ public class TableHomeFrame implements IViewSimpleActions {
         simpleAndGPAActions.addGrade(courseDetails);
     }
 
+    /**
+     * This method is triggered once the "Delete Grade" button is pressed by the user.
+     * It deletes the CourseDetails object from the table and
+     * the grade components are then removed from the table.
+     *
+     * @param courseName the string that holds the name of the course
+     * @throws DBActionsException triggered if there's and SQL exception
+     */
     //The function trying to delete a grade based on the course name
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
@@ -449,6 +460,15 @@ public class TableHomeFrame implements IViewSimpleActions {
     }
 
     //The function trying to edit a grade based on the values inside the courseDetails var
+
+    /**
+     * This method is triggered once the user is trying to add
+     * the same course to the table, a message will be displayed to the
+     * screen asking the user if he confirms the change of the same grade.
+     *
+     * @param courseDetails the objects that holds all the course details
+     * @throws DBActionsException triggered if there's and SQL exception
+     */
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException{
         int dialogResult = JOptionPane.showConfirmDialog (null, "You've already got grade on "+courseDetails.getCourseName()+"\nWould you like to update your grades?","Warning",JOptionPane.YES_NO_OPTION);
@@ -470,6 +490,13 @@ public class TableHomeFrame implements IViewSimpleActions {
     }
 
     //updating to course combobox to the current courses
+
+    /**
+     * This method updated the "CourseComboBox" with the list
+     * of all the course names.
+     *
+     * @param gradeTable a list that holds all the CourseDetails objects
+     */
     public void updateCourseComboBox(List<CourseDetails> gradeTable) {
         courseComboBox.removeAllItems();
         for (CourseDetails c: gradeTable){

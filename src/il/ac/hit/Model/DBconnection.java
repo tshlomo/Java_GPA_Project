@@ -46,16 +46,19 @@ public class DBconnection {
                             logger.info("A table has been created");
                         }
                     } catch (SQLException e) {
+                        logger.warning("Problem establishing a connection to db and finding 'gpa' table..");
                        throw new DBActionsException("error, problem establishing a connection to db and finding 'gpa' table",e);
                    } finally {
                        if (statement != null) try {
                             statement.close();
                        } catch (SQLException e) {
+                           logger.warning("Problem closing statement..");
                            e.printStackTrace();
                         }
                        if (rs != null) try {
                             rs.close();
                         } catch (SQLException e) {
+                           logger.warning("Problem closing ResultSet..");
                             e.printStackTrace();
                         }
                     }

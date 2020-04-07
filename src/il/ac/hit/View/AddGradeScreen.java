@@ -1,15 +1,15 @@
 package il.ac.hit.View;
 
+import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Interfaces.ISimpleActions;
 import il.ac.hit.Model.Calculations;
-import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.ViewModel.CourseDetails;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.logging.Logger;
 
 /**
  * This class holds the components of the add grade screen
@@ -206,7 +206,6 @@ public class AddGradeScreen {
                     tableHomeFrame.addGrade(courseDetails);
                     logger.info("added a grade to the table...");
                 } catch (DBActionsException ex) {
-
                     logger.info("asking the user if he would like to edit a grade from the table...");
                     ex.printStackTrace();
                 }

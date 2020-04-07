@@ -46,6 +46,7 @@ public class ViewModel implements IFindNewGPA {
         try {
             dbActions.addGrade(courseDetails);
         } catch (DBActionsException e) {
+            //logger message
             tableHomeFrame.editGrade(courseDetails);
         } finally {
             updateTable();

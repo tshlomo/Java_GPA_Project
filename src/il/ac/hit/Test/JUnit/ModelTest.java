@@ -5,7 +5,6 @@ import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Model.DBconnection;
 import il.ac.hit.ViewModel.CourseDetails;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
