@@ -6,11 +6,23 @@ import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.View.TableHomeFrame;
 
+/**
+ * in charge of communication between the methods in the view and the methods in the model
+ */
+
+
 public class ViewModel implements IFindNewGPA {
 
     private IDBSimpleActions dbActions;
     private IViewSimpleActions tableHomeFrame;
     private ICalcGPA calculations;
+
+    /**
+     * constructor for the ViewModel class
+     * instantiates new Model and Calculations for db and calculation purposes
+     *
+     * @param tableHomeFrame gets the frame
+     */
 
     public ViewModel(TableHomeFrame tableHomeFrame){
         dbActions = new Model();
@@ -18,22 +30,31 @@ public class ViewModel implements IFindNewGPA {
         calculations = new Calculations();
     }
 
+    /**
+     * sends the new calculated gpa value to the view
+     *
+     * @param calculate_gpa calculated gpa value
+     */
+
     //The func is sending to the view the new GPA value to update
     private void updateGPA(Double calculate_gpa) {
         tableHomeFrame.updateGPA(calculate_gpa);
     }
 
-    //this func receives all of the params of the db table and and updates it
+    /**
+     * gets all the values from the db and updates it
+     */
+
+    //this func receives all of the params of the db table and and updates it with insert statement
     public void updateTable() throws DBActionsException {
         updateGPA(calculations.calculate_GPA());
         tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
     }
 
     /**
-     * adds CourseDetails object's values to the gpa table in the db.
-     * The CourseDetails argument was instantiated before and must hold all correct (not null) values.
-     * <p>
-     * This method inserts object values via insert statement.
+     * calls the addGrade method from the Model
+     * edits grade in case of duplication.
+     * updates the table at the end of the action
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
@@ -53,11 +74,8 @@ public class ViewModel implements IFindNewGPA {
     }
 
     /**
-     * deletes specific course from db table
-     * The String coursename must hold a correct name of the specific course we intend to delete.
-     * <p>
-     * func establishes connection to db
-     * func deletes row from table via executeUpdate statement
+     * calls the delet method from the Model
+     *updates the table at the end of the action
      *
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
@@ -75,11 +93,8 @@ public class ViewModel implements IFindNewGPA {
     }
 
     /**
-     * updates grades of a specific course in table
-     * The CourseDetails argument was instantiated before and must hold all correct (not null) values.
-     * <p>
-     * func establishes connection to db
-     * func updates a specific course grades from table with new values via executeUpdate statement
+     * calls the editGrade method from the Model
+     * updates the table
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
@@ -92,17 +107,8 @@ public class ViewModel implements IFindNewGPA {
     }
 
     /**
-     * calculates and returns updated gpa after changing a specific grade.
-     * func receives name of the course which its final grade will be changed and the new grade
-     * courseName needs to be correct name of the course and grade between 0-100(this is final grade already)
-     * this func gives the user the opportunity to check how his gpa will change by entering a different grade
-     * <p>
-     * func gets the details list of the table via the getGradeTable method.
-     * func get details of the specific course it needs to change via the getCourse method
-     * it calculates the sum of all the final grades multiplied by their specific credits value
-     * it subtracts the present course grade multiplied by its credits and than adds the new course grade multiplied by the same credits
-     * than the sum is divided by the sum of the credits in total(hence the credit_sum param)
-     *
+     * calls the gpaByGrade method from the Calculations
+
      * @param courseName correct name of the course that its grade would be replaced
      * @param newGrade new grade entered by the user to replace the precent grade in the calculation
      * @throws DBActionsException if an sql exception occurred
