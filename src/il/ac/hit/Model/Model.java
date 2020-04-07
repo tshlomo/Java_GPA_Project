@@ -34,14 +34,15 @@ public class Model implements IDBSimpleActions {
     }
 
     /**
-     * adds CourseDetails object's values to the gpa table in the db.
-     * The CourseDetails argument was instantiated before and must hold all correct (not null) values.
+     * adds <code>CourseDetails</code> object's values to the gpa table in the db.
+     * The <code>CourseDetails</code> argument was instantiated before and must hold all correct (not null) values.
      * <p>
      * This method inserts object values via insert statement.
      *
-     * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
+     * @param  courseDetails  an instantiated <code>CourseDetails</code> object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
      * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see CourseDetails
      */
     //this func receives all of the params of the course and and updates it with insert statement
     @Override
@@ -68,18 +69,17 @@ public class Model implements IDBSimpleActions {
         }
     }
 
-        /**
-         * deletes specific course from db table
-         * The String coursename must hold a correct name of the specific course we intend to delete.
-         * <p>
-         * func establishes connection to db
-         * func deletes row from table via executeUpdate statement
-         *
-         * @param  courseName  correct name of the course that would be deleted
-         * @throws DBActionsException if an sql exception occurred
-         * @see  DBconnection#getDBConnection() uses this method to connect to db
-         */
-
+    /**
+     * deletes specific course from db table
+     * The <code>String</code> <code>courseName</code> must hold a correct name of the specific course we intend to delete.
+     * <p>
+     * func establishes connection to db
+     * func deletes row from table via executeUpdate statement
+     *
+     * @param  courseName  correct name of the course that would be deleted
+     * @throws DBActionsException if an sql exception occurred
+     * @see  DBconnection#getDBConnection() uses this method to connect to db
+     */
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
@@ -99,16 +99,16 @@ public class Model implements IDBSimpleActions {
 
     /**
      * updates grades of a specific course in table
-     * The CourseDetails argument was instantiated before and must hold all correct (not null) values.
+     * The <code>CourseDetails</code> argument was instantiated before and must hold all correct (not null) values.
      * <p>
      * func establishes connection to db
-     * func updates a specific course grades from table with new values via executeUpdate statement
+     * func updates a specific course grades from table with new values via <code>executeUpdate</code> statement
      *
-     * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
+     * @param  courseDetails  an instantiated <code>CourseDetails</code> object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
      * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see CourseDetails
      */
-
     //func receives all of the course params and updates the row which corresponds with the key value->course
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException {
@@ -132,14 +132,16 @@ public class Model implements IDBSimpleActions {
     }
 
     /**
-     * returns a CourseDetails type list of all courses in table.
+     * returns a <code>CourseDetails</code> type list of all courses in table.
      * <p>
      * func establishes connection to db
-     * retrieves course values from table via query into the CourseDetails object instantiation in the loop
+     * retrieves course values from table via query into the <code>CourseDetails</code> object instantiation in the loop
      *
      * @throws DBActionsException if an sql exception occurred
      * @see  DBconnection#getDBConnection() uses this method to connect to db
-     * @return list of all courses values
+     * @see CourseDetails
+     * @see List
+     * @return a <code>List</code> of all courses values
      */
     //The function returns a list of courseDetails with all the courses and parameters that the db holds
     @Override
@@ -166,7 +168,7 @@ public class Model implements IDBSimpleActions {
 
     /**
      * returns a specific course from db table
-     * The String coursename must hold a correct name of the specific course we intend to retrieve.
+     * The <code>String</code> <code>courseName</code> must hold a correct name of the specific course we intend to retrieve.
      * <p>
      * func establishes connection to db
      * func retrieves a row from table via query with the corresponding courseName and
@@ -175,6 +177,7 @@ public class Model implements IDBSimpleActions {
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
      * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see CourseDetails
      * @return values of a specific course
      */
     //func returns a specific course from table by the courseName it gets
@@ -201,11 +204,10 @@ public class Model implements IDBSimpleActions {
 
 
     /**
-     * closes all params which are used to connect and work with db.
-     * this func is called at the end of any method which connects to db
+     * closes all params which are used to connect and work with DB and sets them to null.
+     * this func is called at the end of any method which connects to DB
      *
      */
-
     //Private func - closes all the connection params(we use it at the end of any method which is in this class)
     private void resetStatementAndRS() {
         if (statement != null) try {

@@ -1,10 +1,10 @@
 package il.ac.hit.ViewModel;
 
 /**
- *  holds the values of every course
+ * This class is used to
+ * hold the values of every course with ease
  *
  */
-
 public class CourseDetails {
 
     private String courseName;
@@ -15,7 +15,7 @@ public class CourseDetails {
     private Integer finalGrade;
 
     /**
-     * constructor for the CourseDetails class instantiates class variables
+     * constructor for the <code>CourseDetails</code> class instantiates class variables
      *
      * @param courseName name of the course
      * @param year year of course
@@ -153,7 +153,7 @@ public class CourseDetails {
     }
 
     /**
-     * compares two CourseDetails objects
+     * compares two <code>CourseDetails</code> objects
      * checks if all the variables in the object are equal
      *
      * @return true/false

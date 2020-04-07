@@ -59,6 +59,8 @@ public class Calculations implements ICalcGPA {
      *
      * @throws DBActionsException in case of an sql error
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
+     * @see CourseDetails
+     * @see List
      * @return  calculated total grade GPA <code<Double</code> type
      */
     //Func calculates gpa of the grades table in db
@@ -95,6 +97,7 @@ public class Calculations implements ICalcGPA {
      * @throws DBActionsException in case of an sql error
      * @see  Model#getCourse(String)  uses this method to retrieve the details of the course we want to change
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
+     * @see CourseDetails
      * @return  calculated total grade gpa
      */
     //Calculates new gpa by replacing one of the grades with a new one entered by the user func receives the name of the course and the new grade

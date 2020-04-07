@@ -23,7 +23,7 @@ public class ViewModel implements IFindNewGPA {
         tableHomeFrame.updateGPA(calculate_gpa);
     }
 
-    //The function trying to add a grade based on the values inside the courseDetails var
+    //this func receives all of the params of the db table and and updates it
     public void updateTable() throws DBActionsException {
         updateGPA(calculations.calculate_GPA());
         tableHomeFrame.updateGradesTable(dbActions.getGradeTable());
@@ -39,7 +39,7 @@ public class ViewModel implements IFindNewGPA {
      * @throws DBActionsException if an sql exception occurred
      */
 
-    //this func receives all of the params of the db table and and updates it with insert statement
+    //The function trying to add a grade based on the values inside the courseDetails var
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException
     {
