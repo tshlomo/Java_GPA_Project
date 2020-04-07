@@ -73,7 +73,7 @@ public class Model implements IDBSimpleActions {
          * func establishes connection to db
          * func deletes row from table via executeUpdate statement
          *
-         * @param  coursename  correct name of the course that would be deleted
+         * @param  courseName  correct name of the course that would be deleted
          * @throws DBActionsException if an sql exception occurred
          * @see  DBconnection#getDBConnection() uses this method to connect to db
          */
