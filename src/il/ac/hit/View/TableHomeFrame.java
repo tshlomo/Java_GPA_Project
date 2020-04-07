@@ -65,7 +65,7 @@ public class TableHomeFrame implements IViewSimpleActions {
     /**
      * creating all the text field objects.
      */
-    private JTextField textGPA,textDesiredGrade,textUpdatedGrade;
+    private JTextField textGPA,textDesiredGrade, textUpdatedGpa;
     /**
      * creating all the button objects.
      */
@@ -155,8 +155,8 @@ public class TableHomeFrame implements IViewSimpleActions {
         logger.info("creating the text fields..");
         textGPA = new JTextField(4);
         textGPA.setEditable(false);
-        textUpdatedGrade = new JTextField(3);
-        textUpdatedGrade.setEditable(false);
+        textUpdatedGpa = new JTextField(4);
+        textUpdatedGpa.setEditable(false);
         textDesiredGrade = new JTextField(3);
 
         //instantiating the button objects
@@ -227,7 +227,7 @@ public class TableHomeFrame implements IViewSimpleActions {
                 JOptionPane.showMessageDialog(null, "Please input desired grade");
             } else {
                 try {
-                    textUpdatedGrade.setText(new DecimalFormat("##.##").format(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText()))));
+                    textUpdatedGpa.setText(new DecimalFormat("##.##").format(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText()))));
                 } catch (DBActionsException e1) {
                     logger.warning("Couldn't pull table grades...");
                     e1.printStackTrace();
@@ -294,7 +294,7 @@ public class TableHomeFrame implements IViewSimpleActions {
         desiredGradePanel.add(textDesiredGrade);
 
         updatedGpaPanel.add(updatedGPA);
-        updatedGpaPanel.add(textUpdatedGrade);
+        updatedGpaPanel.add(textUpdatedGpa);
 
         btnPanel.add(btnDesiredGradeUpdate);
 
