@@ -17,18 +17,18 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class TableHomeFrame implements IViewSimpleActions {
 /**
  * This class holds the components of the main screen
  * hence providing the interaction between the user and the application.
  */
+public class TableHomeFrame implements IViewSimpleActions {
+
 
 
     /**
      * creating a logger object to log messages for
      * our application components.
      */
-
     private Logger logger= Logger.getLogger(TableHomeFrame.class.getName());
 
     //Variables declarations
@@ -227,7 +227,7 @@ public class TableHomeFrame implements IViewSimpleActions {
                 JOptionPane.showMessageDialog(null, "Please input desired grade");
             } else {
                 try {
-                    textUpdatedGrade.setText(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText())).toString());
+                    textUpdatedGrade.setText(new DecimalFormat("##.##").format(simpleAndGPAActions.newGPA(String.valueOf(courseComboBox.getSelectedItem()), Integer.valueOf(textDesiredGrade.getText()))));
                 } catch (DBActionsException e1) {
                     logger.warning("Couldn't pull table grades...");
                     e1.printStackTrace();
