@@ -19,6 +19,11 @@ public class DBconnection {
     private static Logger logger=Logger.getLogger(DBconnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;
+
+    /**
+     * constructor of class DBconnection loads driver
+     */
+
     private DBconnection() throws ClassNotFoundException{
         //Instantiating the driver class will indirectly register
         //this driver as an available driver for DriverManager
@@ -30,7 +35,7 @@ public class DBconnection {
      * establishes connection to specific db and checks if the grade table exists, if not, creates one.
      * returns a Connection type object which will be used for all the other methods that need to work with the db.
      *
-     * @throws DBActionsException
+     * @throws DBActionsException if an sql exception occurred
      * @return Connection type object
      */
 

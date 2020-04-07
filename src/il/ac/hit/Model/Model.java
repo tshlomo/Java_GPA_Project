@@ -17,23 +17,9 @@ import java.util.logging.Logger;
 
 public class Model implements IDBSimpleActions {
 
-    /**
-     * Statement variable to use for executing commends on db
-     */
-
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
-    /**
-     * ResultSet variable to store query info
-     */
     private ResultSet rs;//same as statement
-    /**
-     * Connection variable for connection to db
-     */
     private Connection conn;
-    /**
-     * Logger variable for log massages
-     *
-     */
     private Logger logger;
 
     /**
