@@ -8,9 +8,9 @@ import il.ac.hit.View.TableHomeFrame;
 
 /**
  * in charge of communication between the methods in the view and the methods in the model
+ * implements the <code>IFindNewGPA</code> interface
+ * @see IFindNewGPA the interface used in this class
  */
-
-
 public class ViewModel implements IFindNewGPA {
 
     private IDBSimpleActions dbActions;
@@ -21,7 +21,7 @@ public class ViewModel implements IFindNewGPA {
      * constructor for the ViewModel class
      * instantiates new Model and Calculations for db and calculation purposes
      *
-     * @param tableHomeFrame gets the frame
+     * @param tableHomeFrame gets the frame using the interface <code>IViewSimpleActions</code>
      */
 
     public ViewModel(TableHomeFrame tableHomeFrame){
@@ -52,12 +52,13 @@ public class ViewModel implements IFindNewGPA {
     }
 
     /**
-     * calls the addGrade method from the Model
-     * edits grade in case of duplication.
+     * calls the <code>addGrade</code> method from the <code>Model</code>
+     * edits grade in case of <b>duplication</b> of courses names.
      * updates the table at the end of the action
      *
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
+     * @see CourseDetails
      */
     //The function trying to add a grade based on the values inside the courseDetails var
     @Override
@@ -74,8 +75,8 @@ public class ViewModel implements IFindNewGPA {
     }
 
     /**
-     * calls the delet method from the Model
-     *updates the table at the end of the action
+     * calls the delete method from the <code>Model</code>
+     * updates the table at the end of the action
      *
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
@@ -99,6 +100,7 @@ public class ViewModel implements IFindNewGPA {
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
      * @see Model
+     * @see CourseDetails
      */
     //func receives all of the table params and updates the row which corresponds with the key value->course
     @Override
@@ -107,7 +109,7 @@ public class ViewModel implements IFindNewGPA {
     }
 
     /**
-     * calls the gpaByGrade method from the Calculations
+     * calls the <code>gpaByGrade</code> method from the <code>Calculations</code>
 
      * @param courseName correct name of the course that its grade would be replaced
      * @param newGrade new grade entered by the user to replace the precent grade in the calculation
@@ -115,7 +117,6 @@ public class ViewModel implements IFindNewGPA {
      * @see Calculations - class with the gpa calculation methods
      * @return  calculated total grade gpa
      */
-
     //func calculates new gpa by replacing one of the grades with a new one entered by the user func receives the name of the course and the new grade
     @Override
     public Double newGPA(String courseName, Integer newGrade) throws DBActionsException{
