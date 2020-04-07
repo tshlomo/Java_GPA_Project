@@ -236,7 +236,7 @@ public class AddGradeScreen {
                     else
                         //we deleted all values and therefore the new value is 0
                         val = 0;
-                if (val >= 100) {
+                if (val > 100) {
                     textQuiz.setText("100");
                     ke.consume();
                     logger.info("an attempt to add a grade with a higher score than 100 has been made");
@@ -276,7 +276,7 @@ public class AddGradeScreen {
                 else
                     //we deleted all values and therefore the new value is 0
                     val = 0;
-                if (val >= 100) {
+                if (val > 100) {
                     textFinalTest.setText("100");
                     ke.consume();
                     logger.info("an attempt to add a grade with a higher score than 100 has been made");

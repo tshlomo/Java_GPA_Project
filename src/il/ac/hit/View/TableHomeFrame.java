@@ -198,7 +198,7 @@ public class TableHomeFrame implements IViewSimpleActions {
                 else
                     //we deleted all values and therefore the new value is 0
                     val = 0;
-                if (val >= 100) {
+                if (val > 100) {
                     textDesiredGrade.setText("100");
                     ke.consume();
                     logger.info("an attempt to add a grade with a higher score than 100 has been made");
@@ -478,7 +478,7 @@ public class TableHomeFrame implements IViewSimpleActions {
     }
 
     /**
-     * Sets the updated GPA to be in a format of "##.##" i.e: "93.45".
+     * Sets the current GPA to be in a format of "##.##" i.e: "93.45".
      * This method is triggered once a new grade is added.
      *
      * @param calculate_gpa The outcome from the calculation of the GPA that is then formatted to "##.##" format.
@@ -492,7 +492,7 @@ public class TableHomeFrame implements IViewSimpleActions {
     //updating to course combobox to the current courses
 
     /**
-     * This method updated the "CourseComboBox" with the list
+     * This method updates the "CourseComboBox" with the list
      * of all the course names.
      *
      * @param gradeTable a list that holds all the CourseDetails objects
