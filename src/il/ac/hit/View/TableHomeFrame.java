@@ -1,3 +1,6 @@
+/**
+ * The package <code>View</code> is in charged on the user UI
+ */
 package il.ac.hit.View;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.Interfaces.IFindNewGPA;
