@@ -38,7 +38,6 @@ public class ViewModel implements IFindNewGPA {
      * @param  courseDetails  an instantiated CourseDetails object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
      */
-
     //The function trying to add a grade based on the values inside the courseDetails var
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException
@@ -64,7 +63,6 @@ public class ViewModel implements IFindNewGPA {
      * @throws DBActionsException if an sql exception occurred
      * @see Model
      */
-
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
@@ -87,7 +85,6 @@ public class ViewModel implements IFindNewGPA {
      * @throws DBActionsException if an sql exception occurred
      * @see Model
      */
-
     //func receives all of the table params and updates the row which corresponds with the key value->course
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException{

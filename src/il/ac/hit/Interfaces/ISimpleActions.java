@@ -11,6 +11,8 @@ import il.ac.hit.ViewModel.CourseDetails;
  *     by the <code>CourseDetails</code> param it receives
  * </p>
  * @see CourseDetails the object used to pass the course info
+ * @see IDBSimpleActions the interface that extends this interface
+ * @see IFindNewGPA the interface that extends this interface
  */
 public interface ISimpleActions {
     /**

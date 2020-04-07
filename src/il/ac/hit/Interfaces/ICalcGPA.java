@@ -6,6 +6,7 @@ import il.ac.hit.Model.Calculations;
 /**
  * This interface is intended to make it easier for us to get an object
  * that his solely purpose is to calculate the grades for us from inside the DB
+ * @see Calculations the class that implements this interface
  */
 public interface ICalcGPA {
     /**

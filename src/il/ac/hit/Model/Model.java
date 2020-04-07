@@ -41,14 +41,14 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseDetails  an instantiated <code>CourseDetails</code> object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see  DbConnection#getDBConnection() uses this method to connect to db
      * @see CourseDetails
      */
     //this func receives all of the params of the course and and updates it with insert statement
     @Override
     public void addGrade(CourseDetails courseDetails) throws DBActionsException {
         try {
-            conn = DBconnection.getDBConnection();
+            conn = DbConnection.getDBConnection();
 
             statement = conn.createStatement();
             logger.info("adding new grade...");
@@ -78,13 +78,13 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
-     * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see  DbConnection#getDBConnection() uses this method to connect to db
      */
     //func receives key_value ->course and deletes specific row which corresponds with this value
     @Override
     public void deleteGrade(String courseName) throws DBActionsException {
         try {
-            conn = DBconnection.getDBConnection();
+            conn = DbConnection.getDBConnection();
             statement = conn.createStatement();
             logger.info("deleting grade...");
             statement.executeUpdate("DELETE FROM GPA WHERE course =('" + courseName + "')");
@@ -106,14 +106,14 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseDetails  an instantiated <code>CourseDetails</code> object holding the values of a course
      * @throws DBActionsException if an sql exception occurred
-     * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see  DbConnection#getDBConnection() uses this method to connect to db
      * @see CourseDetails
      */
     //func receives all of the course params and updates the row which corresponds with the key value->course
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException {
         try {
-            conn = DBconnection.getDBConnection();
+            conn = DbConnection.getDBConnection();
             statement = conn.createStatement();
             logger.info("updating grade...");
             statement.executeUpdate("UPDATE GPA SET shana=" + courseDetails.getYear()
@@ -138,7 +138,7 @@ public class Model implements IDBSimpleActions {
      * retrieves course values from table via query into the <code>CourseDetails</code> object instantiation in the loop
      *
      * @throws DBActionsException if an sql exception occurred
-     * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see  DbConnection#getDBConnection() uses this method to connect to db
      * @see CourseDetails
      * @see List
      * @return a <code>List</code> of all courses values
@@ -148,7 +148,7 @@ public class Model implements IDBSimpleActions {
     public List<CourseDetails> getGradeTable () throws DBActionsException{
         List<CourseDetails> courseDetails=new ArrayList<>();
         try {
-            conn = DBconnection.getDBConnection();
+            conn = DbConnection.getDBConnection();
             statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             logger.info("retrieving grades table...");
@@ -176,14 +176,14 @@ public class Model implements IDBSimpleActions {
      *
      * @param  courseName  correct name of the course that would be deleted
      * @throws DBActionsException if an sql exception occurred
-     * @see  DBconnection#getDBConnection() uses this method to connect to db
+     * @see  DbConnection#getDBConnection() uses this method to connect to db
      * @see CourseDetails
      * @return values of a specific course
      */
     //func returns a specific course from table by the courseName it gets
     public CourseDetails getCourse (String courseName) throws DBActionsException{
         try {
-            conn = DBconnection.getDBConnection();
+            conn = DbConnection.getDBConnection();
             statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             logger.info("retrieving course...");

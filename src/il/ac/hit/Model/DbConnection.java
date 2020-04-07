@@ -12,18 +12,18 @@ import java.util.logging.Logger;
  * This class is a Singleton pattern and is in charge of the connection to the DB
  * it's only method is used throughout every action which interacts with the DB and get the connection
  */
-public class DBconnection {
+public class DbConnection {
     private static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static final String protocol = "jdbc:derby:gpaDB;create=true";
-    private static Logger logger=Logger.getLogger(DBconnection.class.getName());
+    private static Logger logger=Logger.getLogger(DbConnection.class.getName());
     //eager-instantiating conn var which will connect with the db
     private static Connection conn = null;
 
     /**
-     * private constructor of class DBconnection loads driver
+     * private constructor of class DbConnection loads driver
      */
     //private constructor not to be used outside the class
-    private DBconnection() throws ClassNotFoundException{
+    private DbConnection() throws ClassNotFoundException{
         //Instantiating the driver class will indirectly register
         //this driver as an available driver for DriverManager
         Class.forName(driver);
@@ -47,7 +47,7 @@ public class DBconnection {
         ResultSet rs = null;
 
         if(conn==null) {
-            synchronized (DBconnection.class)
+            synchronized (DbConnection.class)
             {
                 if(conn == null)
                 {

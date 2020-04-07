@@ -1,9 +1,9 @@
 package il.ac.hit.Test.JUnit;
 
 import il.ac.hit.Interfaces.IDBSimpleActions;
+import il.ac.hit.Model.DbConnection;
 import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
-import il.ac.hit.Model.DBconnection;
 import il.ac.hit.ViewModel.CourseDetails;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ class ModelTest {
 
     @BeforeEach
     void beforeEach() throws DBActionsException {
-        conn = DBconnection.getDBConnection();
+        conn = DbConnection.getDBConnection();
         dbAct = new Model();
     }
 

@@ -1,11 +1,13 @@
 package il.ac.hit.Interfaces;
 
 import il.ac.hit.Exceptions.DBActionsException;
+import il.ac.hit.ViewModel.ViewModel;
 
 /**
  * <code>IFindNewGPA</code> interface in an extension for <code>ISimpleActions</code> interface and is adding up
  * upon it another function to handle a new GPA calculation based on an imaginary grade
  * @see ISimpleActions
+ * @see ViewModel the class that implements this interface
  */
 public interface IFindNewGPA extends ISimpleActions {
     /**

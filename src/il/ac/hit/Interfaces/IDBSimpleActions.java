@@ -1,6 +1,7 @@
 package il.ac.hit.Interfaces;
 
 import il.ac.hit.Exceptions.DBActionsException;
+import il.ac.hit.Model.Model;
 import il.ac.hit.ViewModel.CourseDetails;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * <code>IDBSimpleActions</code> interface in an extension for <code>ISimpleActions</code> interface and is adding up
  * upon it another functions to get all the courses table from the database or a specific course
  * @see ISimpleActions
+ * @see Model the class that implements this interface
  */
 public interface IDBSimpleActions extends ISimpleActions {
     /**

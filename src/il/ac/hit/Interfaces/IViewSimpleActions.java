@@ -1,6 +1,7 @@
 package il.ac.hit.Interfaces;
 
 import il.ac.hit.ViewModel.CourseDetails;
+import il.ac.hit.View.TableHomeFrame;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
  * <code>IViewSimpleActions</code> interface in an extension for <code>ISimpleActions</code> interface and is adding up
  * upon it another functions to update the course table and the GPA label within the user UI
  * @see ISimpleActions
+ * @see TableHomeFrame the class that implements this interface
  */
 public interface IViewSimpleActions extends ISimpleActions {
     /**
