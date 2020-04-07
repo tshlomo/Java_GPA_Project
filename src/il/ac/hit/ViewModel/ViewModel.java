@@ -6,6 +6,11 @@ import il.ac.hit.Model.Model;
 import il.ac.hit.Exceptions.DBActionsException;
 import il.ac.hit.View.TableHomeFrame;
 
+/**
+ * in charge of communication between the methods in the view and the methods in the model
+ */
+
+
 public class ViewModel implements IFindNewGPA {
 
     private IDBSimpleActions dbActions;
