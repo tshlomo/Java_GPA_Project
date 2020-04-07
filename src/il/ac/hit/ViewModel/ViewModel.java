@@ -43,6 +43,8 @@ public class ViewModel implements IFindNewGPA {
 
     /**
      * gets all the values from the db and updates it
+     *
+     * @throws DBActionsException if an sql exception occurred
      */
 
     //this func receives all of the params of the db table and and updates it with insert statement
