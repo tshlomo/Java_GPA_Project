@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * This class holds the methods which will be used to calculate final grades and gpa
+ * This class holds the methods which will be used to do the basic calculations such as
+ * calculate final grades and GPA, implements the <code>ICalcGPA</code> interface
+ * @see ICalcGPA
  */
-
-
 public class Calculations implements ICalcGPA {
 
     //Setting the logger for this class
@@ -21,9 +21,9 @@ public class Calculations implements ICalcGPA {
 
     /**
      * constructor for the Calculations class
-     * instantiates new Model object for its calculation purposes
+     * instantiates the <code>dbActions</code> object from type <code>IDBSimpleActions</code>
+     * to new <code>Model</code> object for its calculation purposes
      */
-
     public Calculations(){
         dbActions = new Model();
     }
@@ -40,9 +40,8 @@ public class Calculations implements ICalcGPA {
      * @param testPercent final test percentage
      * @param hwGrade     hw/mid-test score
      * @param hwPercent   hw/mid-test percentage
-     * @return  final grade
+     * @return  final grade <code>Integer</code> value
      */
-
     //Func calculates and returns final grade based on final test score and percentage + hw score and percentage
     public Integer calculate_Final_Grade(Double testGrade, Double testPercent, Double hwGrade, Double hwPercent){
         logger.info("calculating final grade based on test and hw percentage...");
@@ -60,10 +59,10 @@ public class Calculations implements ICalcGPA {
      *
      * @throws DBActionsException in case of an sql error
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
-     * @return  calculated total grade gpa
+     * @see CourseDetails
+     * @see List
+     * @return  calculated total grade GPA <code<Double</code> type
      */
-
-
     //Func calculates gpa of the grades table in db
     @Override
     public Double calculate_GPA() throws DBActionsException {
@@ -98,9 +97,9 @@ public class Calculations implements ICalcGPA {
      * @throws DBActionsException in case of an sql error
      * @see  Model#getCourse(String)  uses this method to retrieve the details of the course we want to change
      * @see  Model#getGradeTable()  uses this method to retrieve the values of all the courses in order to calculate the gpa
+     * @see CourseDetails
      * @return  calculated total grade gpa
      */
-
     //Calculates new gpa by replacing one of the grades with a new one entered by the user func receives the name of the course and the new grade
     @Override
     public Double gpaByGrade(String courseName,Integer newGrade) throws  DBActionsException {

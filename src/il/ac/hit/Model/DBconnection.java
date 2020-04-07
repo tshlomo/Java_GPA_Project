@@ -9,10 +9,9 @@ import java.sql.ResultSet;
 import java.util.logging.Logger;
 
 /**
- * This class is in charge of connection to the db
- * it's only method is used throughout every action which interacts with the db
+ * This class is a Singleton pattern and is in charge of the connection to the DB
+ * it's only method is used throughout every action which interacts with the DB and get the connection
  */
-
 public class DBconnection {
     private static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static final String protocol = "jdbc:derby:gpaDB;create=true";
@@ -21,9 +20,9 @@ public class DBconnection {
     private static Connection conn = null;
 
     /**
-     * constructor of class DBconnection loads driver
+     * private constructor of class DBconnection loads driver
      */
-
+    //private constructor not to be used outside the class
     private DBconnection() throws ClassNotFoundException{
         //Instantiating the driver class will indirectly register
         //this driver as an available driver for DriverManager
@@ -31,17 +30,18 @@ public class DBconnection {
     }
 
     /**
-     * checks if there is a proper db and if not creats one.
+     * a static method - checks if there is a proper DB and if not creates one.
      * establishes connection to specific db and checks if the grade table exists, if not, creates one.
      * returns a Connection type object which will be used for all the other methods that need to work with the db.
+     * <p>
+     *     synchronizes with multiple threads trying to access the object
+     * </p>
      *
      * @throws DBActionsException if an sql exception occurred
      * @return Connection type object
      */
-
     //the getDBConnection function is basically the getInstance function for regular singleton pattern.
     //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
-
     public static Connection getDBConnection() throws DBActionsException {
         Statement statement = null;
         ResultSet rs = null;

@@ -20,6 +20,9 @@ import java.util.logging.Logger;
 /**
  * This class holds the components of the main screen
  * hence providing the interaction between the user and the application.
+ * The class implements the <code>IViewSimpleActions</code> interface for easier use of the interface functions
+ *
+ * @see IViewSimpleActions
  */
 public class TableHomeFrame implements IViewSimpleActions {
 
@@ -41,6 +44,7 @@ public class TableHomeFrame implements IViewSimpleActions {
      * creating the ISimpleAction interface.
      */
 
+    //the object that will help us connect the model with the view via the viewModel
     private IFindNewGPA simpleAndGPAActions;
     /**
      * creating the frame object.
@@ -87,11 +91,10 @@ public class TableHomeFrame implements IViewSimpleActions {
     private static final String[] columns = {"Course", "Year", "Semester", "Test", "Credits", "Final Grade"};
 
     /**
-     * constructor for class TableHomeFrame
+     * constructor for class TableHomeFrame - creates the main frame
      *
      * @throws DBActionsException in case of an sql error
      */
-
     public TableHomeFrame() throws DBActionsException {
         logger.info("instantiating all the class components");
 
@@ -365,12 +368,13 @@ public class TableHomeFrame implements IViewSimpleActions {
     }
 
     /**
-     * Updates the table with an ArrayList of CourseDetails Objects.
-     * Each CourseDetails object is then displayed to the user inside the table.
+     * Updates the table with a <code>List</code> of <code>CourseDetails</code> Objects.
+     * Each <code>CourseDetails</code> object is then displayed to the user inside the table.
      *
-     * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
+     * @param courseDetails The <code>CourseDetails</code> Class object holds all the components that assemble the grade.
+     * @see CourseDetails
+     * @see List
      */
-
     //updating the view table basing on the list of course details that it receives
     @Override
     public void updateGradesTable(List<CourseDetails> courseDetails){
@@ -414,12 +418,13 @@ public class TableHomeFrame implements IViewSimpleActions {
         for (int i = 0; i < table.getColumnCount(); i++) {
             DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
             TableColumn col = colModel.getColumn(i);
-            int width = 0;
+            Integer width = 0;
             TableCellRenderer renderer;
             for (int r = 0; r < table.getRowCount(); r++) {
                 renderer = table.getCellRenderer(r, i);
                 Component comp = renderer.getTableCellRendererComponent(table, table.getValueAt(r, i),
                         false, false, r, i);
+                //comparing the current column size with out current maximum
                 width = Math.max(width, comp.getPreferredSize().width);
             }
             //comparing the width of the value in the column to the width of the title of the column
@@ -440,6 +445,9 @@ public class TableHomeFrame implements IViewSimpleActions {
      *
      * @param courseDetails The CourseDetails Class object holds all the components that assemble the grade.
      * @throws DBActionsException triggered if there's and SQL exception
+     * @see IFindNewGPA#addGrade(CourseDetails)
+     * @see ViewModel#addGrade(CourseDetails)
+     * @see CourseDetails
      */
     //The function trying to add a grade based on the values inside the courseDetails var
     @Override
@@ -454,6 +462,8 @@ public class TableHomeFrame implements IViewSimpleActions {
      *
      * @param courseName the string that holds the name of the course
      * @throws DBActionsException triggered if there's and SQL exception
+     * @see IFindNewGPA#deleteGrade(String)
+     * @see ViewModel#deleteGrade(String)
      */
     //The function trying to delete a grade based on the course name
     @Override
@@ -470,6 +480,9 @@ public class TableHomeFrame implements IViewSimpleActions {
      *
      * @param courseDetails the objects that holds all the course details
      * @throws DBActionsException triggered if there's and SQL exception
+     * @see CourseDetails
+     * @see IFindNewGPA#editGrade(CourseDetails)
+     * @see ViewModel#editGrade(CourseDetails)
      */
     @Override
     public void editGrade(CourseDetails courseDetails) throws DBActionsException{
@@ -498,6 +511,8 @@ public class TableHomeFrame implements IViewSimpleActions {
      * of all the course names.
      *
      * @param gradeTable a list that holds all the CourseDetails objects
+     * @see List
+     * @see CourseDetails
      */
     public void updateCourseComboBox(List<CourseDetails> gradeTable) {
         courseComboBox.removeAllItems();

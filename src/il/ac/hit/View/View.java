@@ -1,5 +1,7 @@
 package il.ac.hit.View;
 
+import il.ac.hit.Exceptions.DBActionsException;
+
 import javax.swing.*;
 
 public class View {
@@ -7,7 +9,11 @@ public class View {
         SwingUtilities.invokeLater(() -> {
             try {
                 TableHomeFrame window = new TableHomeFrame();
-            } catch (Exception e) {
+            } catch (DBActionsException e) {
+                e.printStackTrace();
+            }
+            //in case there is an exception we haven't encountered.
+            catch (Exception e) {
                 e.printStackTrace();
             }
         });
