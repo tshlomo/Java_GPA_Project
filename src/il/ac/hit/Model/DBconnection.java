@@ -8,6 +8,10 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.logging.Logger;
 
+/**
+ * This class is in charge of connection to the db
+ * it's only method is used throughout every action which interacts with the db
+ */
 
 public class DBconnection {
     private static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -21,8 +25,18 @@ public class DBconnection {
         Class.forName(driver);
     }
 
+    /**
+     * checks if there is a proper db and if not creats one.
+     * establishes connection to specific db and checks if the grade table exists, if not, creates one.
+     * returns a Connection type object which will be used for all the other methods that need to work with the db.
+     *
+     * @throws DBActionsException
+     * @return Connection type object
+     */
+
     //the getDBConnection function is basically the getInstance function for regular singleton pattern.
     //using here double buffering singleton just to make sure we won't duplicate the instantiation of conn var
+
     public static Connection getDBConnection() throws DBActionsException {
         Statement statement = null;
         ResultSet rs = null;

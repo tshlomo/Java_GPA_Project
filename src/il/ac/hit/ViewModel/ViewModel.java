@@ -108,8 +108,8 @@ public class ViewModel implements IFindNewGPA {
      *
      * @param courseName correct name of the course that its grade would be replaced
      * @param newGrade new grade entered by the user to replace the precent grade in the calculation
-     * @throws DBActionsException
-     * @see Calculations
+     * @throws DBActionsException if an sql exception occurred
+     * @see Calculations - class with the gpa calculation methods
      * @return  calculated total grade gpa
      */
 

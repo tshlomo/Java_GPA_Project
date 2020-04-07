@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"il.ac.hit.Exceptions"},{"l":"il.ac.hit.Interfaces"},{"l":"il.ac.hit.Model"},{"l":"il.ac.hit.View"},{"l":"il.ac.hit.ViewModel"}]

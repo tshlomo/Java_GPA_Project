@@ -10,19 +10,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * This class holds the methods which will be interacting with the db
+ * giving the program the ability to retrieve/update information in the db
+ */
+
 public class Model implements IDBSimpleActions {
 
     /**
-     * declaring class params which will be used to connecet and work with the db
-     * each one of those params will be closed and nulled at the end of each method
-     * +logger
+     * Statement variable to use for executing commends on db
      */
 
     private Statement statement;//eager-instantiation since we will need it null anyways since we build the statement up.
+    /**
+     * ResultSet variable to store query info
+     */
     private ResultSet rs;//same as statement
+    /**
+     * Connection variable for connection to db
+     */
     private Connection conn;
+    /**
+     * Logger variable for log massages
+     *
+     */
     private Logger logger;
 
+    /**
+     * constructor for the Model class instantiates class variables
+     */
 
     public Model() {
         statement = null;

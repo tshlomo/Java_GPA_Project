@@ -8,11 +8,21 @@ import il.ac.hit.ViewModel.CourseDetails;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * This class holds the methods which will be used to calculate final grades and gpa
+ */
+
+
 public class Calculations implements ICalcGPA {
 
     //Setting the logger for this class
     private Logger logger= Logger.getLogger(Calculations.class.getName());
     private IDBSimpleActions dbActions;
+
+    /**
+     * constructor for the Calculations class
+     * instantiates new Model object for its calculation purposes
+     */
 
     public Calculations(){
         dbActions = new Model();
